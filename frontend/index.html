@@ -1,114 +1,2148 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>EcoExtract – AI E-Waste Gateway & Analytics Portal</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EcoExtract – AI E-Waste Hub</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        :root {
+            --bg: #f5f7f2;
+            --card: #ffffff;
+            --ink: #14261e;
+            --mute: #5a6b62;
+            --green: #0f4a36;
+            --cu: #b4622f;
+            --line: #d9e0d8;
+            --on: #f5f7f2;
+            --terminal: #050b08;
+            --terminal-ink: #5fe0a0;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0c1a14;
+                --card: #12251c;
+                --ink: #e8f0ea;
+                --mute: #98aaa0;
+                --green: #5fcf9d;
+                --cu: #e08a55;
+                --line: #24392e;
+                --on: #0c1a14;
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font: 17px/1.6 "Source Sans 3", system-ui, sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: "Bricolage Grotesque", system-ui, sans-serif;
+            line-height: 1.1;
+            margin: 0 0 0.5em;
+        }
+
+        .wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* =========================
+           AUTHENTICATION
+        ========================= */
+
+        .auth-wrapper {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .auth-panel {
+            background: var(--card);
+            border: 1px solid var(--line);
+            padding: 35px;
+            border-radius: 14px;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .auth-panel h2 {
+            font-size: 30px;
+        }
+
+        .auth-panel p {
+            color: var(--mute);
+        }
+
+        .auth-panel label {
+            display: block;
+            margin-top: 12px;
+            font-weight: 600;
+        }
+
+        .auth-panel input,
+        .auth-panel select {
+            width: 100%;
+            padding: 12px;
+            margin: 6px 0 16px;
+            background: var(--bg);
+            border: 1px solid var(--line);
+            color: var(--ink);
+            border-radius: 7px;
+            font: inherit;
+        }
+
+        .auth-panel button {
+            width: 100%;
+            padding: 14px;
+            background: var(--green);
+            color: var(--on);
+            border: none;
+            border-radius: 7px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .auth-panel button:hover {
+            opacity: 0.9;
+        }
+
+        /* =========================
+           NAVIGATION
+        ========================= */
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--line);
+            gap: 15px;
+        }
+
+        nav b {
+            font: 800 22px "Bricolage Grotesque", sans-serif;
+            color: var(--green);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .profile-badge {
+            font-size: 14px;
+            background: var(--card);
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: 1px solid var(--line);
+        }
+
+        .btn-exit {
+            background: none;
+            border: 1px solid var(--cu);
+            color: var(--cu);
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            padding: 30px 0 10px;
+            max-width: 760px;
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 5vw, 50px);
+            font-weight: 800;
+        }
+
+        .hero p {
+            color: var(--mute);
+            font-size: 18px;
+        }
+
+        /* =========================
+           STATISTICS
+        ========================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            padding: 12px 0 20px;
+        }
+
+        .stat {
+            border-left: 4px solid var(--cu);
+            padding: 4px 16px;
+        }
+
+        .stat strong {
+            display: block;
+            font: 800 34px "Bricolage Grotesque", sans-serif;
+        }
+
+        .stat span {
+            color: var(--mute);
+        }
+
+        /* =========================
+           WORKSPACE
+        ========================= */
+
+        .workspace-grid {
+            display: grid;
+            grid-template-columns: 1.25fr 0.75fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .panel-column {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .box {
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .sim {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        /* =========================
+           INPUTS
+        ========================= */
+
+        input[type="text"],
+        input[type="number"],
+        input[type="search"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: var(--card);
+            color: var(--ink);
+            font: inherit;
+        }
+
+        /* =========================
+           WASTE TYPES
+        ========================= */
+
+        .types {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .types label {
+            margin: 0;
+            font-weight: 400;
+        }
+
+        .types input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .types span {
+            display: block;
+            padding: 8px 12px;
+            border: 2px solid var(--line);
+            border-radius: 8px;
+            cursor: pointer;
+            background: var(--card);
+        }
+
+        .types input:checked + span {
+            border-color: var(--cu);
+            background: var(--cu);
+            color: #ffffff;
+        }
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        button.action-btn {
+            font: 600 16px sans-serif;
+            cursor: pointer;
+            border-radius: 8px;
+            padding: 11px 20px;
+            border: 2px solid var(--green);
+            background: var(--green);
+            color: var(--on);
+            margin: 14px 10px 0 0;
+        }
+
+        button.action-btn:hover {
+            opacity: 0.9;
+        }
+
+        button.alt {
+            background: none;
+            color: var(--green);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: wait;
+        }
+
+        /* =========================
+           CAMERA
+        ========================= */
+
+        .cam {
+            position: relative;
+            height: 120px;
+            border-radius: 10px;
+            background: #0b1712;
+            overflow: hidden;
+            display: grid;
+            place-items: center;
+            color: #cfe9da;
+            font: 600 18px "Bricolage Grotesque", sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .laser {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #5fe0a0;
+            box-shadow: 0 0 14px #5fe0a0;
+            top: -5px;
+            opacity: 0;
+        }
+
+        .cam.on .laser {
+            opacity: 1;
+            animation: scan 1.3s ease-in-out;
+        }
+
+        .cam.on #iname {
+            animation: pulse 0.6s 2;
+        }
+
+        @keyframes scan {
+            0% {
+                top: 0%;
+            }
+
+            50% {
+                top: 100%;
+            }
+
+            100% {
+                top: 0%;
+            }
+        }
+
+        @keyframes pulse {
+            50% {
+                opacity: 0.4;
+            }
+        }
+
+        #det {
+            margin: 10px 0;
+            color: var(--mute);
+            min-height: 1.6em;
+            font-size: 14px;
+        }
+
+        /* =========================
+           SORTING BINS
+        ========================= */
+
+        .bins {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .bin {
+            border: 2px solid var(--line);
+            border-radius: 7px;
+            padding: 10px;
+            text-align: center;
+            font-size: 13px;
+            position: relative;
+        }
+
+        .lid {
+            height: 8px;
+            background: var(--cu);
+            border-radius: 3px;
+            transform-origin: left;
+            transition: transform 0.5s;
+            margin-bottom: 8px;
+        }
+
+        .bin.open .lid {
+            transform: rotate(-60deg);
+        }
+
+        .bar {
+            height: 10px;
+            background: var(--line);
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 6px 0;
+        }
+
+        .bar i {
+            display: block;
+            height: 100%;
+            width: 0;
+            background: var(--cu);
+            transition: width 0.8s;
+        }
+
+        /* =========================
+           FEED
+        ========================= */
+
+        #feed {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font: 13px monospace;
+            max-height: 180px;
+            overflow-y: auto;
+        }
+
+        #feed li {
+            padding: 6px 0;
+            border-bottom: 1px dotted var(--line);
+        }
+
+        /* =========================
+           TABLE
+        ========================= */
+
+        .table-wrap {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            background: var(--card);
+        }
+
+        th,
+        td {
+            padding: 8px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--line);
+        }
+
+        /* =========================
+           ACCORDION
+        ========================= */
+
+        .accordion-block {
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .accordion-toggle {
+            width: 100%;
+            text-align: left;
+            background: var(--bg);
+            color: var(--ink);
+            border: none;
+            padding: 14px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .accordion-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.25s ease-out;
+            padding: 0 14px;
+            color: var(--mute);
+            font-size: 14px;
+        }
+
+        .accordion-block.active .accordion-body {
+            max-height: 300px;
+            padding: 14px;
+            background: var(--card);
+            border-top: 1px solid var(--line);
+        }
+
+        /* =========================
+           TERMINAL
+        ========================= */
+
+        .hacker-terminal {
+            background: var(--terminal);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 14px;
+            font-family: monospace;
+            overflow-y: auto;
+            color: var(--terminal-ink);
+            height: 490px;
+        }
+
+        .terminal-line {
+            font-size: 12px;
+            margin-bottom: 6px;
+            word-break: break-all;
+            border-bottom: 1px solid #14281f;
+            padding-bottom: 4px;
+        }
+
+        /* =========================
+           TOAST
+        ========================= */
+
+        #toast {
+            position: fixed;
+            left: 50%;
+            bottom: 24px;
+            transform: translateX(-50%) translateY(120px);
+            background: var(--green);
+            color: var(--on);
+            padding: 12px 20px;
+            border-radius: 8px;
+            transition: transform 0.4s;
+            z-index: 999;
+            text-align: center;
+        }
+
+        #toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            text-align: center;
+            color: var(--mute);
+            padding: 30px 0;
+            font-size: 13px;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .workspace-grid,
+            .sim,
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            nav {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .bins {
+                grid-template-columns: 1fr;
+            }
+
+            .panel-column {
+                padding: 16px;
+            }
+
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            .nav-right {
+                width: 100%;
+            }
+
+        }
+
+    </style>
 </head>
+
 <body>
-    <!-- 🔐 OPERATOR SECURE ENTRY SYSTEM -->
+
+    <!-- ==========================================
+         SECURE LOGIN GATE
+    =========================================== -->
+
     <div id="auth-gate" class="auth-wrapper">
+
         <div class="auth-panel">
+
             <h2>EcoExtract Hub Login</h2>
-            <p>Authorization required to initialize the local recycling dashboard.</p>
-            
-            <label for="auth-email">Operator Email Signature</label>
-            <input type="email" id="auth-email" placeholder="operator@ecoextract.org">
-            
-            <label for="auth-pass">System Access Token</label>
-            <input type="password" id="auth-pass" placeholder="••••••••">
-            
-            <label for="auth-role">Operational Management Profile</label>
+
+            <p>
+                Access authorization matrix framework gateway.
+            </p>
+
+            <label for="auth-email">
+                Operator Domain Email
+            </label>
+
+            <input
+                type="email"
+                id="auth-email"
+                placeholder="operator@ecoextract.org"
+                value="admin@ecoextract.org"
+            >
+
+            <label for="auth-pass">
+                Security Access Key Token
+            </label>
+
+            <input
+                type="password"
+                id="auth-pass"
+                placeholder="••••••••"
+                value="password"
+            >
+
+            <label for="auth-role">
+                Operational Profile Access Clearance
+            </label>
+
             <select id="auth-role">
-                <option value="contributor">Community Contributor</option>
-                <option value="admin">System Administrator</option>
+
+                <option value="admin">
+                    System Administrator
+                </option>
+
+                <option value="contributor">
+                    Community Contributor
+                </option>
+
             </select>
-            
-            <button id="btn-enter" onclick="handleAuth()">Enter Kiosk Portal</button>
+
+            <button onclick="handleAuth()">
+                Enter Kiosk Portal
+            </button>
+
         </div>
+
     </div>
 
-    <!-- 📊 PRIMARY REAL-TIME DUAL COLUMN LOGS CONSOLE Workspace -->
-    <div id="app-workspace" class="workspace container hidden">
-        <nav class="nav-bar">
-            <span class="brand-logo">EcoExtract ⚙️</span>
-            <div class="profile-badge">🟢 Connected Node: <span id="op-name">Loading...</span> [<span id="op-role">Role</span>]</div>
-            <button class="btn-exit" onclick="handleLogout()">Disconnect Session</button>
-        </nav>
 
-        <main class="workspace-grid">
-            <!-- LEFT SCREEN BLOCK: MANAGEMENT & FORMULAS -->
-            <div class="panel-column left-main">
-                <section class="live-counter-strip">
-                    <div class="counter-widget">
-                        <span>Active Cloud Nodes</span>
-                        <strong id="stat-nodes">1</strong>
-                    </div>
-                    <div class="counter-widget">
-                        <span>Real-Time Events Processed</span>
-                        <strong id="stat-ops">0</strong>
-                    </div>
-                </section>
+    <!-- ==========================================
+         MAIN DASHBOARD
+    =========================================== -->
 
-                <!-- GRANULAR NESTED TECHNICAL ACCORDIONS -->
-                <section class="accordion-framework">
-                    <h3>Localized Micro-Segregation Processing Standards</h3>
-                    
-                    <div class="accordion-block">
-                        <button class="accordion-toggle" onclick="toggleAccordion(this)">1. Drop & AI Vision Detection Hub</button>
-                        <div class="accordion-body">
-                            <p>An integrated high-resolution camera layer scans the arrival deck. Frame sequences route directly down an OpenCV-powered matrix edge-matching classification script.</p>
-                            <div class="nested-specs">
-                                <strong>Target Matrix: Printed Circuit Boards (PCBs)</strong>
-                                <p>Identifies multi-layer tracing lines, precious gold electroplating surface areas, and specific configurations of tantalum surface-mount capacitors.</p>
-                            </div>
-                        </div>
-                    </div>
+    <div id="app-workspace" class="hidden">
 
-                    <div class="accordion-block">
-                        <button class="accordion-toggle" onclick="toggleAccordion(this)">2. Automated Mechanical Micro-Segregation</button>
-                        <div class="accordion-body">
-                            <p>Upon verification, digital binary outputs route through local GPIO output registers, managing physical servo-motor motor gates.</p>
-                            <div class="nested-specs">
-                                <strong>Target Matrix: Lithium-Ion Battery Compartment</strong>
-                                <p>Isolates voltage cells instantly into secure thermal safe-boxes, separating them from metallic copper lines to block ignition risks.</p>
-                            </div>
-                        </div>
-                    </div>
+        <div class="wrap">
 
-                    <div class="accordion-block">
-                        <button class="accordion-toggle" onclick="toggleAccordion(this)">3. Green Ambient Chemical Hydro-Leaching</button>
-                        <div class="accordion-body">
-                            <p>Replaces dangerous furnace smelting with a non-toxic room temperature wet chemistry bath.</p>
-                            <div class="math-code-box">
-                                <code>Chemical Paths: C₆H₈O₇ (Citric Acid) + CH₃COOH (Acetic) + H₂O₂ + Cu → Non-Toxic Reclaimed Copper Matrix</code>
-                            </div>
-                        </div>
-                    </div>
+            <!-- NAVIGATION -->
 
-                    <div class="accordion-block">
-                        <button class="accordion-toggle" onclick="toggleAccordion(this)">4. Cloud Data Serialization Metrics</button>
-                        <div class="accordion-body">
-                            <p>Weights are captured by internal telemetry units and converted via live cloud equations:</p>
-                            <div class="math-code-box">
-                                <code>Economic Return = Grams × Live Asset Spot Value per Gram</code><br>
-                                <code>CO₂ Displacement = Mass × (Base Mining Footprint - Recycling Factor)</code>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
+            <nav>
 
-            <!-- RIGHT SCREEN BLOCK: LIVE SYSTEM TERMINAL LOG STREAM -->
-            <div class="panel-column right-console">
-                <h3>Live Operations Telemetry Stream</h3>
-                <div id="live-terminal" class="hacker-terminal">
-                    <div class="terminal-line init-line">[SYS_INIT] Remote connection active. Awaiting operator authorization sequence packet...</div>
+                <b>
+                    EcoExtract 🔬
+                </b>
+
+                <div class="nav-right">
+
+                    <span class="profile-badge">
+
+                        🟢 Connected Node:
+
+                        <strong id="op-name">
+                            Admin
+                        </strong>
+
+                        [
+
+                        <span id="op-role">
+                            CLEARANCE
+                        </span>
+
+                        ]
+
+                    </span>
+
+                    <button
+                        class="btn-exit"
+                        onclick="handleLogout()"
+                    >
+                        Disconnect Session
+                    </button>
+
                 </div>
-            </div>
-        </main>
+
+            </nav>
+
+
+            <!-- HERO -->
+
+            <section class="hero">
+
+                <h1>
+                    Turn localized electronics into copper, not smoke.
+                </h1>
+
+                <p>
+                    Automated hardware categorization pipelines stream
+                    real-time environmental metadata metrics directly
+                    into the system database log matrix layers below.
+                </p>
+
+            </section>
+
+
+            <!-- STATISTICS -->
+
+            <section class="stats">
+
+                <div class="stat">
+
+                    <strong id="kg">
+                        45.6
+                    </strong>
+
+                    <span>
+                        kg e-waste kept out of landfill
+                    </span>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <strong id="val">
+                        ₹18,450
+                    </strong>
+
+                    <span>
+                        value of metals recovered
+                    </span>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <strong id="co2">
+                        78.2
+                    </strong>
+
+                    <span>
+                        kg CO₂ emissions avoided
+                    </span>
+
+                </div>
+
+            </section>
+
+
+            <!-- TWO COLUMN WORKSPACE -->
+
+            <section class="workspace-grid">
+
+
+                <!-- ==========================================
+                     LEFT COLUMN
+                =========================================== -->
+
+                <div class="panel-column">
+
+                    <h2>
+                        Virtual AI Sorting Hub Kiosk
+                    </h2>
+
+                    <p>
+                        Simulated AI-powered e-waste classification
+                        and automated sorting pipeline.
+                    </p>
+
+
+                    <!-- INPUT BOX -->
+
+                    <div class="box">
+
+                        <div class="sim">
+
+                            <div>
+
+                                <label for="nm">
+                                    User Signature / Institutional Sector
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="nm"
+                                    placeholder="e.g. Green Valley Public School"
+                                >
+
+                            </div>
+
+
+                            <div>
+
+                                <label for="w">
+                                    Telemetry Unit Mass Weight (grams)
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="w"
+                                    min="1"
+                                    max="5000"
+                                    value="250"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <br>
+
+
+                        <strong>
+                            Inbound Waste Classification
+                        </strong>
+
+
+                        <div
+                            class="types"
+                            id="types"
+                        ></div>
+
+
+                        <button
+                            id="drop"
+                            class="action-btn"
+                        >
+                            Drop Item
+                        </button>
+
+
+                        <button
+                            id="auto"
+                            class="action-btn alt"
+                            aria-pressed="false"
+                        >
+                            Auto Run: Off
+                        </button>
+
+                    </div>
+
+
+                    <!-- AI CAMERA -->
+
+                    <div class="box">
+
+                        <h3>
+                            AI Vision Detection
+                        </h3>
+
+                        <div
+                            class="cam"
+                            id="cam"
+                        >
+
+                            <div class="laser"></div>
+
+                            <span id="iname">
+                                Awaiting Inbound Payload Block
+                            </span>
+
+                        </div>
+
+                        <div id="det">
+                            Sensor system online. Ready.
+                        </div>
+
+                    </div>
+
+
+                    <!-- SORTING BINS -->
+
+                    <div class="box">
+
+                        <h3>
+                            Automated Sorting Compartments
+                        </h3>
+
+                        <div
+                            class="bins"
+                            id="bins"
+                        ></div>
+
+                    </div>
+
+
+                    <!-- LIVE FEED -->
+
+                    <div class="box">
+
+                        <h3>
+                            Live Drop Processing Feed
+                        </h3>
+
+                        <ul id="feed"></ul>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==========================================
+                     RIGHT COLUMN
+                =========================================== -->
+
+                <div class="panel-column">
+
+
+                    <!-- LEADERBOARD -->
+
+                    <div class="box">
+
+                        <h2>
+                            Civic Community Leaderboard
+                        </h2>
+
+                        <input
+                            type="search"
+                            id="q"
+                            placeholder="Search community..."
+                        >
+
+                        <div class="table-wrap">
+
+                            <table>
+
+                                <thead>
+
+                                    <tr>
+
+                                        <th>
+                                            Rank
+                                        </th>
+
+                                        <th>
+                                            Name
+                                        </th>
+
+                                        <th>
+                                            Diverted
+                                        </th>
+
+                                        <th>
+                                            Points
+                                        </th>
+
+                                        <th>
+                                            Badge
+                                        </th>
+
+                                    </tr>
+
+                                </thead>
+
+                                <tbody id="lb"></tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- RESET -->
+
+                    <div class="box">
+
+                        <button
+                            id="reset"
+                            class="action-btn"
+                        >
+                            Reset System Records
+                        </button>
+
+                    </div>
+
+
+                    <!-- TECHNICAL DETAILS -->
+
+                    <h2>
+                        Deep Mechanical & Hydro-Chemical Specifications
+                    </h2>
+
+
+                    <div class="accordion-block">
+
+                        <button
+                            class="accordion-toggle"
+                            onclick="toggleAcc(this)"
+                        >
+                            1. Drop & AI Vision Detection Hub Pipeline
+                        </button>
+
+                        <div class="accordion-body">
+
+                            OpenCV image frames calculate geometry
+                            arrays matching targeting parameters
+                            for modern multi-layered Printed Circuit
+                            Boards (PCBs).
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="accordion-block">
+
+                        <button
+                            class="accordion-toggle"
+                            onclick="toggleAcc(this)"
+                        >
+                            2. Automated Micro-Segregation Servos
+                        </button>
+
+                        <div class="accordion-body">
+
+                            GPIO binary triggers configure rotational
+                            sweeps isolating unstable Lithium chemistry
+                            systems away from core dry copper wiring bays.
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="accordion-block">
+
+                        <button
+                            class="accordion-toggle"
+                            onclick="toggleAcc(this)"
+                        >
+                            3. Green Hydrometallurgical Chemical Leaching
+                        </button>
+
+                        <div class="accordion-body">
+
+                            Ambient fluid processing extracts element
+                            metrics directly without incinerator smoke
+                            generation paths.
+
+                            <br><br>
+
+                            <strong>
+                                Reaction Matrix:
+                            </strong>
+
+                            <br>
+
+                            C₆H₈O₇ (Citric) + CH₃COOH (Acetic)
+                            + H₂O₂ + Cu → Pure Copper Recovery Salts
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- TELEMETRY -->
+
+                    <div class="box">
+
+                        <h2>
+                            Live Operations Telemetry Stream
+                        </h2>
+
+                        <p>
+                            Active Hardware Nodes:
+                            <strong>2</strong>
+                        </p>
+
+                        <p>
+                            Cloud Operations Log:
+                            <strong id="stat-ops">0</strong>
+                        </p>
+
+                        <div
+                            class="hacker-terminal"
+                            id="live-terminal"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <footer>
+
+                EcoExtract AI E-Waste Recovery Hub ·
+                Environmental Operations Console
+
+            </footer>
+
+        </div>
+
     </div>
-    <script src="app.js"></script>
+
+
+    <!-- TOAST -->
+
+    <div id="toast"></div>
+
+
+    <!-- ==========================================
+         JAVASCRIPT
+    =========================================== -->
+
+    <script>
+
+        let interactionCount = 0;
+
+        let autoInterval = null;
+
+
+        /* ==========================================
+           ITEM CONFIGURATION
+        =========================================== */
+
+        const itemsConfig = {
+
+            pcb: {
+                name: "Printed Circuit Board (PCB)",
+                bin: "pcb",
+                factor: 2.5,
+                valPerG: 0.45,
+                co2PerG: 1.2
+            },
+
+            cable: {
+                name: "Copper Wires & Cables",
+                bin: "copper",
+                factor: 1.8,
+                valPerG: 0.65,
+                co2PerG: 2.1
+            },
+
+            battery: {
+                name: "Lithium-Ion Battery",
+                bin: "battery",
+                factor: 3.0,
+                valPerG: 0.20,
+                co2PerG: 0.8
+            }
+
+        };
+
+
+        /* ==========================================
+           BIN CONFIGURATION
+        =========================================== */
+
+        const binsConfig = {
+
+            pcb: {
+                name: "PCB Safe-Box",
+                max: 5000,
+                current: 850
+            },
+
+            copper: {
+                name: "Copper Bin",
+                max: 4000,
+                current: 1200
+            },
+
+            battery: {
+                name: "Lithium Cell Box",
+                max: 2000,
+                current: 400
+            }
+
+        };
+
+
+        /* ==========================================
+           GLOBAL STATS
+        =========================================== */
+
+        let globalStats = {
+
+            totalKg: 45.6,
+
+            totalVal: 18450,
+
+            totalCo2: 78.2
+
+        };
+
+
+        /* ==========================================
+           COMMUNITY DATA
+        =========================================== */
+
+        let communityData = [
+
+            {
+                name: "Green Valley Public School",
+                weight: 24.5,
+                points: 580
+            },
+
+            {
+                name: "Bhopal Tech Institute",
+                weight: 14.2,
+                points: 340
+            },
+
+            {
+                name: "Eco Club Sector-6",
+                weight: 6.9,
+                points: 155
+            }
+
+        ];
+
+
+        /* ==========================================
+           TELEMETRY LOGGER
+        =========================================== */
+
+        function logTelemetry(evt, meta = {}) {
+
+            interactionCount++;
+
+            document.getElementById("stat-ops").innerText =
+                interactionCount;
+
+            const container =
+                document.getElementById("live-terminal");
+
+            const timestamp =
+                new Date().toISOString();
+
+            const eventData = {
+
+                timestamp: timestamp,
+
+                event_id: "EVT_" + Date.now(),
+
+                action: evt,
+
+                telemetry: meta
+
+            };
+
+            const logEntry =
+                document.createElement("div");
+
+            logEntry.className =
+                "terminal-line";
+
+            logEntry.innerText =
+                `[${timestamp}] ${JSON.stringify(eventData)}`;
+
+            container.insertBefore(
+                logEntry,
+                container.firstChild
+            );
+
+        }
+
+
+        /* ==========================================
+           LOGIN
+        =========================================== */
+
+        function handleAuth() {
+
+            const email =
+                document
+                    .getElementById("auth-email")
+                    .value
+                    .trim();
+
+            const role =
+                document
+                    .getElementById("auth-role")
+                    .value;
+
+
+            if (!email.includes("@")) {
+
+                alert(
+                    "Invalid entry validation credentials."
+                );
+
+                return;
+
+            }
+
+
+            document
+                .getElementById("auth-gate")
+                .classList
+                .add("hidden");
+
+
+            document
+                .getElementById("app-workspace")
+                .classList
+                .remove("hidden");
+
+
+            document.getElementById("op-name").innerText =
+                email.split("@")[0];
+
+
+            document.getElementById("op-role").innerText =
+                role.toUpperCase();
+
+
+            logTelemetry(
+                "PORTAL_ACCESS_AUTHORIZED",
+                {
+                    email: email,
+                    role: role,
+                    gateway_node: "GCP_BHOPAL_SERVER"
+                }
+            );
+
+
+            initDashboardComponents();
+
+        }
+
+
+        /* ==========================================
+           INITIALIZE DASHBOARD
+        =========================================== */
+
+        function initDashboardComponents() {
+
+            const container =
+                document.getElementById("types");
+
+            container.innerHTML = "";
+
+
+            Object.keys(itemsConfig).forEach(
+                (key, index) => {
+
+                    container.innerHTML += `
+
+                        <label>
+
+                            <input
+                                type="radio"
+                                name="itype"
+                                value="${key}"
+                                ${index === 0 ? "checked" : ""}
+                            >
+
+                            <span>
+                                ${itemsConfig[key].name}
+                            </span>
+
+                        </label>
+
+                    `;
+
+                }
+            );
+
+
+            renderBins();
+
+            renderStats();
+
+            renderLeaderboard();
+
+        }
+
+
+        /* ==========================================
+           RENDER BINS
+        =========================================== */
+
+        function renderBins() {
+
+            const container =
+                document.getElementById("bins");
+
+            container.innerHTML = "";
+
+
+            Object.keys(binsConfig).forEach(
+                key => {
+
+                    const bin =
+                        binsConfig[key];
+
+                    const pct =
+                        Math.min(
+                            100,
+                            Math.round(
+                                (bin.current / bin.max) * 100
+                            )
+                        );
+
+
+                    container.innerHTML += `
+
+                        <div
+                            class="bin"
+                            id="bin-${key}"
+                        >
+
+                            <div class="lid"></div>
+
+                            <strong>
+                                ${bin.name}
+                            </strong>
+
+                            <div class="bar">
+
+                                <i
+                                    style="width:${pct}%"
+                                ></i>
+
+                            </div>
+
+                            <span>
+                                ${pct}% full
+                            </span>
+
+                        </div>
+
+                    `;
+
+                }
+            );
+
+        }
+
+
+        /* ==========================================
+           RENDER STATISTICS
+        =========================================== */
+
+        function renderStats() {
+
+            document.getElementById("kg").innerText =
+                globalStats.totalKg.toFixed(1);
+
+
+            document.getElementById("val").innerText =
+                "₹" +
+                globalStats.totalVal.toLocaleString("en-IN");
+
+
+            document.getElementById("co2").innerText =
+                globalStats.totalCo2.toFixed(1);
+
+        }
+
+
+        /* ==========================================
+           RENDER LEADERBOARD
+        =========================================== */
+
+        function renderLeaderboard(q = "") {
+
+            const body =
+                document.getElementById("lb");
+
+            body.innerHTML = "";
+
+
+            communityData
+                .sort(
+                    (a, b) =>
+                        b.points - a.points
+                )
+                .forEach(
+                    (user, index) => {
+
+                        if (
+                            q &&
+                            !user.name
+                                .toLowerCase()
+                                .includes(
+                                    q.toLowerCase()
+                                )
+                        ) {
+
+                            return;
+
+                        }
+
+
+                        body.innerHTML += `
+
+                            <tr>
+
+                                <td>
+                                    <strong>
+                                        #${index + 1}
+                                    </strong>
+                                </td>
+
+                                <td>
+                                    ${user.name}
+                                </td>
+
+                                <td>
+                                    ${user.weight.toFixed(1)} kg
+                                </td>
+
+                                <td>
+                                    ${user.points} pts
+                                </td>
+
+                                <td>
+                                    🌱 Contributor
+                                </td>
+
+                            </tr>
+
+                        `;
+
+                    }
+                );
+
+        }
+
+
+        /* ==========================================
+           ACCORDION
+        =========================================== */
+
+        function toggleAcc(btn) {
+
+            btn.parentElement
+                .classList
+                .toggle("active");
+
+
+            logTelemetry(
+                "ACCORDION_TOGGLED",
+                {
+                    section: btn.innerText
+                }
+            );
+
+        }
+
+
+        /* ==========================================
+           TOAST
+        =========================================== */
+
+        function showToast(msg) {
+
+            const toast =
+                document.getElementById("toast");
+
+            toast.innerText =
+                msg;
+
+            toast.classList.add("show");
+
+
+            setTimeout(
+                () => {
+                    toast.classList.remove("show");
+                },
+                2500
+            );
+
+        }
+
+
+        /* ==========================================
+           PROCESS E-WASTE
+        =========================================== */
+
+        function runDeposit(
+            name,
+            typeKey,
+            grams
+        ) {
+
+            const item =
+                itemsConfig[typeKey];
+
+            const bin =
+                binsConfig[item.bin];
+
+
+            if (
+                !grams ||
+                grams <= 0 ||
+                !Number.isFinite(grams)
+            ) {
+
+                showToast(
+                    "Enter a valid weight."
+                );
+
+                return;
+
+            }
+
+
+            if (
+                bin.current + grams > bin.max
+            ) {
+
+                showToast(
+                    `${bin.name} Over-capacity limits!`
+                );
+
+                return;
+
+            }
+
+
+            const dropButton =
+                document.getElementById("drop");
+
+            dropButton.disabled = true;
+
+
+            document
+                .getElementById("cam")
+                .classList
+                .add("on");
+
+
+            document.getElementById("iname").innerText =
+                "Analyzing Payload...";
+
+
+            document.getElementById("det").innerText =
+                "Inference computing pipeline active...";
+
+
+            setTimeout(
+                () => {
+
+                    document
+                        .getElementById("cam")
+                        .classList
+                        .remove("on");
+
+
+                    dropButton.disabled = false;
+
+
+                    document.getElementById("iname").innerText =
+                        "Awaiting Inbound Payload Block";
+
+
+                    document.getElementById("det").innerText =
+                        `Target detected: [${item.name}]. Tripping GPIO actuator loop.`;
+
+
+                    const binElement =
+                        document.getElementById(
+                            `bin-${item.bin}`
+                        );
+
+
+                    binElement.classList.add("open");
+
+
+                    setTimeout(
+                        () => {
+
+                            binElement
+                                .classList
+                                .remove("open");
+
+
+                            const pts =
+                                Math.round(
+                                    (grams / 100) *
+                                    item.factor
+                                );
+
+
+                            const cash =
+                                Math.round(
+                                    grams *
+                                    item.valPerG
+                                );
+
+
+                            const carbon =
+                                (grams *
+                                    item.co2PerG) /
+                                1000;
+
+
+                            globalStats.totalKg +=
+                                grams / 1000;
+
+
+                            globalStats.totalVal +=
+                                cash;
+
+
+                            globalStats.totalCo2 +=
+                                carbon;
+
+
+                            bin.current +=
+                                grams;
+
+
+                            let user =
+                                communityData.find(
+                                    u =>
+                                        u.name
+                                            .toLowerCase() ===
+                                        (
+                                            name || ""
+                                        ).toLowerCase()
+                                );
+
+
+                            if (user) {
+
+                                user.weight +=
+                                    grams / 1000;
+
+                                user.points +=
+                                    pts;
+
+                            } else {
+
+                                communityData.push({
+
+                                    name:
+                                        name ||
+                                        "Anonymous Hub Node",
+
+                                    weight:
+                                        grams / 1000,
+
+                                    points:
+                                        pts
+
+                                });
+
+                            }
+
+
+                            renderStats();
+
+                            renderBins();
+
+                            renderLeaderboard();
+
+
+                            const li =
+                                document.createElement("li");
+
+
+                            li.innerText =
+                                `[${new Date().toLocaleTimeString()}] Processed ${grams}g from ${name || "Anon"} → +${pts} pts (Recovered ₹${cash})`;
+
+
+                            const feed =
+                                document.getElementById("feed");
+
+
+                            feed.insertBefore(
+                                li,
+                                feed.firstChild
+                            );
+
+
+                            logTelemetry(
+                                "AI_COMPARTMENT_MICRO_SEGREGATION_SUCCESS",
+                                {
+                                    item: typeKey,
+                                    weight_grams: grams,
+                                    user:
+                                        name ||
+                                        "Anonymous"
+                                }
+                            );
+
+
+                            showToast(
+                                `Successfully processed ${grams}g of ${item.name}`
+                            );
+
+
+                        },
+                        1000
+                    );
+
+                },
+                1400
+            );
+
+        }
+
+
+        /* ==========================================
+           DROP BUTTON
+        =========================================== */
+
+        document
+            .getElementById("drop")
+            .addEventListener(
+                "click",
+                () => {
+
+                    const name =
+                        document
+                            .getElementById("nm")
+                            .value
+                            .trim();
+
+
+                    const typeElement =
+                        document.querySelector(
+                            'input[name="itype"]:checked'
+                        );
+
+
+                    const grams =
+                        parseFloat(
+                            document
+                                .getElementById("w")
+                                .value
+                        );
+
+
+                    if (!typeElement) {
+
+                        showToast(
+                            "Select a waste type."
+                        );
+
+                        return;
+
+                    }
+
+
+                    runDeposit(
+                        name,
+                        typeElement.value,
+                        grams
+                    );
+
+                }
+            );
+
+
+        /* ==========================================
+           LEADERBOARD SEARCH
+        =========================================== */
+
+        document
+            .getElementById("q")
+            .addEventListener(
+                "input",
+                event => {
+
+                    renderLeaderboard(
+                        event.target.value
+                    );
+
+                }
+            );
+
+
+        /* ==========================================
+           RESET SYSTEM
+        =========================================== */
+
+        document
+            .getElementById("reset")
+            .addEventListener(
+                "click",
+                () => {
+
+                    if (
+                        !confirm(
+                            "Reset all system records?"
+                        )
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    globalStats = {
+
+                        totalKg: 0,
+
+                        totalVal: 0,
+
+                        totalCo2: 0
+
+                    };
+
+
+                    communityData = [];
+
+
+                    Object.keys(binsConfig)
+                        .forEach(
+                            key => {
+
+                                binsConfig[key].current =
+                                    0;
+
+                            }
+                        );
+
+
+                    document
+                        .getElementById("feed")
+                        .innerHTML = "";
+
+
+                    renderStats();
+
+                    renderBins();
+
+                    renderLeaderboard();
+
+
+                    logTelemetry(
+                        "DATABASE_RECORDS_CLEARED_RESET"
+                    );
+
+
+                    showToast(
+                        "System records reset."
+                    );
+
+                }
+            );
+
+
+        /* ==========================================
+           AUTO RUN
+        =========================================== */
+
+        document
+            .getElementById("auto")
+            .addEventListener(
+                "click",
+                function () {
+
+                    const active =
+                        this.getAttribute(
+                            "aria-pressed"
+                        ) === "true";
+
+
+                    if (active) {
+
+                        this.setAttribute(
+                            "aria-pressed",
+                            "false"
+                        );
+
+
+                        this.innerText =
+                            "Auto Run: Off";
+
+
+                        clearInterval(
+                            autoInterval
+                        );
+
+
+                        autoInterval =
+                            null;
+
+
+                        logTelemetry(
+                            "AUTOMATED_INFERENCE_DEMO_DISABLED"
+                        );
+
+
+                    } else {
+
+                        this.setAttribute(
+                            "aria-pressed",
+                            "true"
+                        );
+
+
+                        this.innerText =
+                            "Auto Run: Active";
+
+
+                        logTelemetry(
+                            "AUTOMATED_INFERENCE_DEMO_ENABLED"
+                        );
+
+
+                        autoInterval =
+                            setInterval(
+                                () => {
+
+                                    const keys =
+                                        Object.keys(
+                                            itemsConfig
+                                        );
+
+
+                                    const randomKey =
+                                        keys[
+                                            Math.floor(
+                                                Math.random() *
+                                                keys.length
+                                            )
+                                        ];
+
+
+                                    const randomWeight =
+                                        Math.floor(
+                                            Math.random() *
+                                            400
+                                        ) + 100;
+
+
+                                    runDeposit(
+                                        "Automated Kiosk Network Node",
+                                        randomKey,
+                                        randomWeight
+                                    );
+
+                                },
+                                4000
+                            );
+
+                    }
+
+                }
+            );
+
+
+        /* ==========================================
+           LOGOUT
+        =========================================== */
+
+        function handleLogout() {
+
+            if (autoInterval) {
+
+                clearInterval(
+                    autoInterval
+                );
+
+                autoInterval =
+                    null;
+
+            }
+
+
+            logTelemetry(
+                "NODE_DISCONNECTED_CLEANLY"
+            );
+
+
+            setTimeout(
+                () => {
+
+                    document
+                        .getElementById("app-workspace")
+                        .classList
+                        .add("hidden");
+
+
+                    document
+                        .getElementById("auth-gate")
+                        .classList
+                        .remove("hidden");
+
+                },
+                300
+            );
+
+        }
+
+    </script>
+
 </body>
 </html>
