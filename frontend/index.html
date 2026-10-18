@@ -1,1 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EcoExtract – AI E-Waste Gateway & Analytics Portal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 🔐 OPERATOR SECURE ENTRY SYSTEM -->
+    <div id="auth-gate" class="auth-wrapper">
+        <div class="auth-panel">
+            <h2>EcoExtract Hub Login</h2>
+            <p>Authorization required to initialize the local recycling dashboard.</p>
+            
+            <label for="auth-email">Operator Email Signature</label>
+            <input type="email" id="auth-email" placeholder="operator@ecoextract.org">
+            
+            <label for="auth-pass">System Access Token</label>
+            <input type="password" id="auth-pass" placeholder="••••••••">
+            
+            <label for="auth-role">Operational Management Profile</label>
+            <select id="auth-role">
+                <option value="contributor">Community Contributor</option>
+                <option value="admin">System Administrator</option>
+            </select>
+            
+            <button id="btn-enter" onclick="handleAuth()">Enter Kiosk Portal</button>
+        </div>
+    </div>
 
+    <!-- 📊 PRIMARY REAL-TIME DUAL COLUMN LOGS CONSOLE Workspace -->
+    <div id="app-workspace" class="workspace container hidden">
+        <nav class="nav-bar">
+            <span class="brand-logo">EcoExtract ⚙️</span>
+            <div class="profile-badge">🟢 Connected Node: <span id="op-name">Loading...</span> [<span id="op-role">Role</span>]</div>
+            <button class="btn-exit" onclick="handleLogout()">Disconnect Session</button>
+        </nav>
+
+        <main class="workspace-grid">
+            <!-- LEFT SCREEN BLOCK: MANAGEMENT & FORMULAS -->
+            <div class="panel-column left-main">
+                <section class="live-counter-strip">
+                    <div class="counter-widget">
+                        <span>Active Cloud Nodes</span>
+                        <strong id="stat-nodes">1</strong>
+                    </div>
+                    <div class="counter-widget">
+                        <span>Real-Time Events Processed</span>
+                        <strong id="stat-ops">0</strong>
+                    </div>
+                </section>
+
+                <!-- GRANULAR NESTED TECHNICAL ACCORDIONS -->
+                <section class="accordion-framework">
+                    <h3>Localized Micro-Segregation Processing Standards</h3>
+                    
+                    <div class="accordion-block">
+                        <button class="accordion-toggle" onclick="toggleAccordion(this)">1. Drop & AI Vision Detection Hub</button>
+                        <div class="accordion-body">
+                            <p>An integrated high-resolution camera layer scans the arrival deck. Frame sequences route directly down an OpenCV-powered matrix edge-matching classification script.</p>
+                            <div class="nested-specs">
+                                <strong>Target Matrix: Printed Circuit Boards (PCBs)</strong>
+                                <p>Identifies multi-layer tracing lines, precious gold electroplating surface areas, and specific configurations of tantalum surface-mount capacitors.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-block">
+                        <button class="accordion-toggle" onclick="toggleAccordion(this)">2. Automated Mechanical Micro-Segregation</button>
+                        <div class="accordion-body">
+                            <p>Upon verification, digital binary outputs route through local GPIO output registers, managing physical servo-motor motor gates.</p>
+                            <div class="nested-specs">
+                                <strong>Target Matrix: Lithium-Ion Battery Compartment</strong>
+                                <p>Isolates voltage cells instantly into secure thermal safe-boxes, separating them from metallic copper lines to block ignition risks.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-block">
+                        <button class="accordion-toggle" onclick="toggleAccordion(this)">3. Green Ambient Chemical Hydro-Leaching</button>
+                        <div class="accordion-body">
+                            <p>Replaces dangerous furnace smelting with a non-toxic room temperature wet chemistry bath.</p>
+                            <div class="math-code-box">
+                                <code>Chemical Paths: C₆H₈O₇ (Citric Acid) + CH₃COOH (Acetic) + H₂O₂ + Cu → Non-Toxic Reclaimed Copper Matrix</code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-block">
+                        <button class="accordion-toggle" onclick="toggleAccordion(this)">4. Cloud Data Serialization Metrics</button>
+                        <div class="accordion-body">
+                            <p>Weights are captured by internal telemetry units and converted via live cloud equations:</p>
+                            <div class="math-code-box">
+                                <code>Economic Return = Grams × Live Asset Spot Value per Gram</code><br>
+                                <code>CO₂ Displacement = Mass × (Base Mining Footprint - Recycling Factor)</code>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- RIGHT SCREEN BLOCK: LIVE SYSTEM TERMINAL LOG STREAM -->
+            <div class="panel-column right-console">
+                <h3>Live Operations Telemetry Stream</h3>
+                <div id="live-terminal" class="hacker-terminal">
+                    <div class="terminal-line init-line">[SYS_INIT] Remote connection active. Awaiting operator authorization sequence packet...</div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
