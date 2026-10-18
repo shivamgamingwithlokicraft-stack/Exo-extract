@@ -1,1 +1,10 @@
-
+{
+  "name": "ecoextract-dashboard",
+  "version": "1.0.0",
+  "description": "EcoExtract: AI e-waste hub backend and live web dashboard",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "dependencies": { "express": "4.19.2" },
+  "license": "MIT",
+  "author": "Shivam Singh Patel (NextGen AI Studio)"
+}
