@@ -2437,6 +2437,184 @@
       .session-role { display:none; }
     }
 
+  
+
+    /* =========================================================
+       ECOEXTRACT UPDATE: GALLERY, REAL BROWSER AI, ROUTED PAGES
+       Added on top of the original site styles.
+    ========================================================= */
+    .gallery-nav { position: relative; }
+    .gallery-toggle,
+    .nav-feature-button {
+      display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+      padding: 8px 11px; border: 1px solid transparent; border-radius: 10px;
+      background: transparent; color: var(--mute); font-size: 14px; font-weight: 700;
+      transition: background .25s ease, color .25s ease, border-color .25s ease, transform .25s ease;
+      white-space: nowrap;
+    }
+    .gallery-toggle:hover, .gallery-toggle[aria-expanded="true"],
+    .nav-feature-button:hover {
+      color: var(--green); background: rgba(95,224,160,.12);
+      border-color: rgba(15,74,54,.14); transform: translateY(-1px);
+    }
+    .gallery-chevron { display: inline-block; transition: transform .25s ease; }
+    .gallery-toggle[aria-expanded="true"] .gallery-chevron { transform: rotate(180deg); }
+    .gallery-menu {
+      position: absolute; z-index: 1500; top: calc(100% + 14px); left: 0;
+      width: 300px; padding: 10px; border: 1px solid rgba(95,224,160,.22);
+      border-radius: 18px; background: rgba(7,19,14,.96); color: #effff5;
+      box-shadow: 0 22px 65px rgba(2,12,7,.30); backdrop-filter: blur(20px);
+      transform-origin: top left; animation: galleryMenuIn .22s ease both;
+    }
+    .gallery-menu[hidden] { display: none !important; }
+    @keyframes galleryMenuIn { from { opacity:0; transform:translateY(-8px) scale(.98); } to {opacity:1;transform:translateY(0) scale(1);} }
+    .gallery-menu-label { padding: 8px 10px 9px; color: #73dba5; font-size: 10px; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; }
+    .gallery-option {
+      width: 100%; display: flex; align-items: center; gap: 11px; padding: 11px 10px;
+      border: 0; border-radius: 11px; background: transparent; color: #effff5; text-align: left;
+      cursor: pointer; transition: background .2s ease, transform .2s ease;
+    }
+    .gallery-option:hover, .gallery-option:focus-visible { background: rgba(95,224,160,.12); transform: translateX(3px); outline: none; }
+    .gallery-option-icon { width: 35px; height: 35px; display: grid; place-items: center; border-radius: 10px; flex: 0 0 35px; background: linear-gradient(135deg, rgba(95,224,160,.18), rgba(32,227,255,.14)); font-size: 18px; }
+    .gallery-option strong { display: block; font-size: 12px; }
+    .gallery-option small { display: block; margin-top: 2px; color: #9ab1a3; font-size: 10px; }
+    .nav-mobile-tools { display: none; }
+
+    .showcase-data-note { display:flex; align-items:flex-start; gap:12px; margin-top:-18px; margin-bottom:25px; padding:14px 16px; border:1px solid rgba(15,74,54,.14); border-radius:15px; background:rgba(255,255,255,.75); color:#53685c; font-size:11px; line-height:1.65; }
+    .showcase-data-note strong { color:var(--green); }
+    .showcase-note-icon { width:22px; height:22px; display:grid; place-items:center; flex:0 0 22px; border-radius:50%; background:rgba(15,74,54,.1); color:var(--green); font-size:12px; font-weight:900; }
+    body.route-active .nav-mobile-tools { display:none !important; }
+
+    .nav-inner { position: relative; }
+
+    #featureRouteViews { display: none; min-height: 70vh; background: #07130e; color: #f1fff7; overflow: hidden; }
+    #featureRouteViews.active { display: block; animation: routeEnter .4s cubic-bezier(.2,.8,.2,1) both; }
+    .route-panel[hidden] { display: none !important; }
+    .route-panel { padding: 36px 0 76px; min-height: 70vh; }
+    @keyframes routeEnter { from { opacity:0; transform:translateY(10px); } to {opacity:1;transform:translateY(0);} }
+    .route-topline { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:28px; flex-wrap:wrap; }
+    .route-back, .route-quiet-btn {
+      min-height: 42px; border: 1px solid rgba(255,255,255,.15); border-radius: 12px; padding: 10px 14px;
+      color: #eafff2; background: rgba(255,255,255,.055); font-size: 12px; font-weight: 800;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+    }
+    .route-back:hover, .route-quiet-btn:hover { transform: translateY(-2px); background: rgba(95,224,160,.12); border-color: rgba(95,224,160,.4); }
+    .route-eyebrow { display:inline-flex; align-items:center; gap:9px; color:#67e3a5; font-size:10px; font-weight:900; letter-spacing:.17em; text-transform:uppercase; }
+    .route-eyebrow::before { content:""; width:20px; height:2px; background:linear-gradient(90deg,#5fe0a0,#20e3ff); }
+    .route-title { margin-top:14px; font-family:"Bricolage Grotesque",sans-serif; font-size:clamp(34px,5vw,64px); line-height:1.03; letter-spacing:-.045em; color:#f3fff8; }
+    .route-copy { max-width:680px; margin-top:17px; color:#a8bdb1; font-size:16px; line-height:1.75; }
+    .material-layout { display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr); gap:40px; align-items:center; }
+    .material-photo-frame { position:relative; min-height:400px; border:1px solid rgba(95,224,160,.22); border-radius:28px; overflow:hidden; background:linear-gradient(135deg,#10261a,#111c2b 55%,#362a18); box-shadow:0 25px 80px rgba(0,0,0,.28); isolation:isolate; }
+    .material-photo-frame::before { content:""; position:absolute; z-index:2; inset:0; pointer-events:none; background:linear-gradient(180deg,rgba(3,13,8,.02),rgba(3,13,8,.12) 48%,rgba(3,13,8,.78)); }
+    .material-photo-frame::after { content:""; position:absolute; z-index:3; pointer-events:none; left:0; right:0; top:-20%; height:2px; background:#65efb0; box-shadow:0 0 25px #65efb0; opacity:.65; animation:materialScan 5s ease-in-out infinite; }
+    @keyframes materialScan { 0%,100% {top:5%;opacity:.12;} 50% {top:92%;opacity:.9;} }
+    .material-photo { display:block; width:100%; height:100%; min-height:400px; object-fit:cover; position:absolute; inset:0; transition:transform .8s ease,filter .8s ease; }
+    .material-photo-frame:hover .material-photo { transform:scale(1.04); filter:saturate(1.12); }
+    .material-photo-fallback { display:none; position:absolute; inset:0; place-items:center; color:#b4ffe0; font-size:84px; background:radial-gradient(circle at 50% 40%,rgba(95,224,160,.22),transparent 35%),linear-gradient(135deg,#10291d,#07130e); }
+    .material-photo-label { position:absolute; z-index:4; left:22px; right:22px; bottom:20px; display:flex; justify-content:space-between; align-items:end; gap:12px; }
+    .material-photo-label strong { display:block; font-family:"Bricolage Grotesque",sans-serif; font-size:22px; }
+    .material-photo-label span { display:block; color:#c0d4c8; font-size:10px; margin-top:4px; }
+    .material-color-tag { flex:0 0 auto; border:1px solid rgba(255,255,255,.25); border-radius:99px; padding:7px 9px; background:rgba(4,15,9,.55); color:#edfff4; font-size:9px; font-weight:900; letter-spacing:.08em; }
+    .material-facts { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:9px; margin-top:25px; }
+    .material-fact { min-width:0; padding:14px; border:1px solid rgba(255,255,255,.09); border-radius:15px; background:rgba(255,255,255,.045); }
+    .material-fact b { display:block; font-size:11px; color:#75e4ad; }
+    .material-fact span { display:block; margin-top:7px; color:#b5c7bc; font-size:11px; line-height:1.5; }
+    .material-note { margin-top:16px; padding:14px 16px; border-left:3px solid #dca36c; border-radius:0 12px 12px 0; background:rgba(220,163,108,.08); color:#d5c2ae; font-size:12px; line-height:1.6; }
+    .route-actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:24px; }
+    .route-primary { min-height:46px; border:0; border-radius:13px; padding:12px 17px; color:#06140d; background:linear-gradient(105deg,#5fe0a0,#20e3ff,#9b6cff); background-size:200% 100%; font-weight:900; font-size:12px; box-shadow:0 12px 30px rgba(32,227,255,.12); transition:transform .22s ease,background-position .5s ease; }
+    .route-primary:hover { transform:translateY(-3px); background-position:100% 50%; }
+    .route-primary:disabled { opacity:.45; cursor:not-allowed; transform:none; }
+    .route-credits { margin-top:10px; color:#7e9a8a; font-size:10px; line-height:1.5; }
+    .route-credits a { text-decoration:underline; text-underline-offset:3px; }
+
+    .scanner-layout { display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr); gap:22px; margin-top:30px; align-items:start; }
+    .scanner-panel, .scanner-result-panel, .impact-panel, .tour-card { border:1px solid rgba(255,255,255,.10); border-radius:22px; background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.025)); box-shadow:0 20px 60px rgba(0,0,0,.15); }
+    .scanner-panel, .scanner-result-panel { padding:22px; }
+    .scanner-panel h3, .scanner-result-panel h3, .impact-panel h3 { font-family:"Bricolage Grotesque",sans-serif; font-size:21px; }
+    .scanner-help { margin-top:7px; color:#9ab1a3; font-size:12px; line-height:1.65; }
+    .scanner-dropzone { position:relative; min-height:280px; margin-top:18px; border:1px dashed rgba(95,224,160,.38); border-radius:18px; overflow:hidden; display:grid; place-items:center; background:radial-gradient(circle at center,rgba(95,224,160,.08),transparent 45%),rgba(1,10,5,.36); }
+    .scanner-dropzone::before { content:""; position:absolute; inset:0; pointer-events:none; background-image:linear-gradient(rgba(95,224,160,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(95,224,160,.035) 1px,transparent 1px); background-size:28px 28px; }
+    .scanner-prompt { position:relative; z-index:1; padding:20px; text-align:center; }
+    .scanner-prompt .upload-orb { width:70px; height:70px; margin:0 auto 14px; display:grid; place-items:center; border:1px solid rgba(95,224,160,.4); border-radius:24px; background:rgba(95,224,160,.1); font-size:29px; animation:uploadBreathe 3s ease-in-out infinite; }
+    @keyframes uploadBreathe { 50% {transform:translateY(-4px) scale(1.04);box-shadow:0 0 30px rgba(95,224,160,.12);} }
+    .scanner-prompt strong { display:block; font-size:14px; }
+    .scanner-prompt p { max-width:330px; margin:8px auto 0; color:#92aa9b; font-size:11px; line-height:1.6; }
+    #scanPreview { width:100%; max-height:440px; object-fit:contain; display:block; position:relative; z-index:1; background:#030a06; }
+    #cameraVideo { width:100%; max-height:440px; object-fit:contain; position:relative; z-index:1; background:#020603; }
+    .scanner-progress-wrap { display:none; margin-top:15px; }
+    .scanner-progress-wrap.active { display:block; }
+    .scanner-progress-head { display:flex; justify-content:space-between; gap:12px; color:#9ab1a3; font-size:10px; }
+    .scanner-progress-track { height:5px; margin-top:8px; border-radius:99px; overflow:hidden; background:rgba(255,255,255,.08); }
+    .scanner-progress-fill { width:0; height:100%; background:linear-gradient(90deg,#5fe0a0,#20e3ff,#9b6cff); transition:width .3s ease; }
+    .scanner-button-row { display:flex; flex-wrap:wrap; gap:9px; margin-top:14px; }
+    .scanner-button-row .route-primary, .scanner-button-row .route-quiet-btn { flex:1 1 130px; }
+    .scanner-text-input { width:100%; min-height:43px; margin-top:13px; border:1px solid rgba(255,255,255,.14); border-radius:11px; padding:10px 12px; background:rgba(0,0,0,.24); color:#effff5; outline:none; }
+    .scanner-text-input:focus { border-color:#5fe0a0; box-shadow:0 0 0 3px rgba(95,224,160,.08); }
+    .scanner-text-input::placeholder { color:#779082; }
+    .scanner-result-empty { min-height:230px; display:grid; place-items:center; text-align:center; color:#8ca697; font-size:12px; line-height:1.7; padding:25px; }
+    .result-icon { width:48px; height:48px; display:grid; place-items:center; margin:0 auto 11px; border:1px solid rgba(95,224,160,.22); border-radius:15px; color:#63e7a8; font-size:21px; background:rgba(95,224,160,.07); }
+    .model-result-title { margin-top:6px; color:#f0fff7; font-family:"Bricolage Grotesque",sans-serif; font-size:26px; }
+    .model-result-sub { margin-top:8px; color:#a8bdb1; font-size:12px; line-height:1.6; }
+    .score-row { display:flex; justify-content:space-between; gap:10px; margin-top:19px; color:#99b2a2; font-size:10px; }
+    .score-track { height:7px; margin-top:7px; border-radius:99px; background:rgba(255,255,255,.09); overflow:hidden; }
+    .score-fill { width:0; height:100%; border-radius:99px; background:linear-gradient(90deg,#5fe0a0,#20e3ff); transition:width .5s ease; }
+    .scan-warning { margin-top:15px; padding:12px 13px; border:1px solid rgba(255,209,102,.18); border-radius:12px; background:rgba(255,209,102,.06); color:#d8c9a0; font-size:11px; line-height:1.6; }
+    .scan-error { border-color:rgba(255,92,122,.28); background:rgba(255,92,122,.07); color:#ffc0ca; }
+    .collection-section { margin-top:25px; padding-top:22px; border-top:1px solid rgba(255,255,255,.09); }
+    .collection-section-head { display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; }
+    .collection-section-head h4 { font-family:"Bricolage Grotesque",sans-serif; font-size:16px; }
+    .collection-count { color:#6fe7ab; font-size:10px; font-weight:900; letter-spacing:.08em; }
+    .records-empty { margin-top:13px; padding:20px; border:1px dashed rgba(255,255,255,.12); border-radius:14px; color:#82998b; text-align:center; font-size:11px; }
+    .record-row { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:9px; padding:12px 0; border-bottom:1px solid rgba(255,255,255,.07); }
+    .record-row:last-child { border-bottom:0; }
+    .record-row strong { display:block; color:#e9fff2; font-size:12px; overflow-wrap:anywhere; }
+    .record-row small { display:block; margin-top:4px; color:#81988a; font-size:10px; line-height:1.5; }
+    .record-weight { color:#6ce4aa; font-size:12px; font-weight:900; white-space:nowrap; }
+    .impact-overview-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin-top:26px; }
+    .impact-metric { padding:18px; border:1px solid rgba(255,255,255,.10); border-radius:18px; background:rgba(255,255,255,.045); }
+    .impact-metric span { display:block; color:#9ab1a3; font-size:11px; }
+    .impact-metric strong { display:block; margin-top:10px; font-family:"Bricolage Grotesque",sans-serif; font-size:30px; color:#eafff2; overflow-wrap:anywhere; }
+    .impact-metric small { display:block; margin-top:5px; color:#6fe7ab; font-size:10px; }
+    .impact-panel { padding:23px; margin-top:20px; }
+    .impact-breakdown { margin-top:16px; display:grid; gap:13px; }
+    .impact-bar-row { display:grid; grid-template-columns:minmax(110px,.7fr) minmax(0,2fr) auto; gap:10px; align-items:center; color:#b1c5b8; font-size:11px; }
+    .impact-bar-track { height:8px; border-radius:99px; background:rgba(255,255,255,.08); overflow:hidden; }
+    .impact-bar-fill { height:100%; min-width:0; border-radius:99px; background:linear-gradient(90deg,#5fe0a0,#20e3ff,#9b6cff); transition:width .55s ease; }
+    .impact-co2-result { margin-top:16px; padding:16px; border-radius:14px; background:rgba(95,224,160,.07); border:1px solid rgba(95,224,160,.16); color:#c6f9db; font-size:12px; line-height:1.7; }
+    .tour-card { max-width:790px; margin:30px auto 0; padding:clamp(22px,4vw,42px); position:relative; overflow:hidden; }
+    .tour-step-number { color:#6fe7ab; font-size:10px; font-weight:900; letter-spacing:.16em; }
+    .tour-step-title { margin-top:16px; font-family:"Bricolage Grotesque",sans-serif; font-size:clamp(28px,4vw,44px); }
+    .tour-step-copy { margin-top:12px; max-width:570px; color:#a9beb1; font-size:14px; line-height:1.7; }
+    .tour-progress { display:grid; grid-template-columns:repeat(5,1fr); gap:6px; margin-top:25px; }
+    .tour-progress span { height:4px; border-radius:99px; background:rgba(255,255,255,.09); }
+    .tour-progress span.active { background:linear-gradient(90deg,#5fe0a0,#20e3ff); }
+    .tour-controls { display:flex; gap:9px; flex-wrap:wrap; margin-top:26px; }
+    .route-reduced-motion * { animation-duration:.01ms !important; animation-iteration-count:1 !important; scroll-behavior:auto !important; }
+    @media (max-width: 1050px) {
+      .nav-links { gap:8px; }
+      .nav-feature-button, .gallery-toggle { font-size:12px; padding:8px; }
+      .material-layout, .scanner-layout { grid-template-columns:1fr; }
+      .material-photo-frame, .material-photo { min-height:330px; }
+    }
+    @media (max-width: 800px) {
+      .nav-mobile-tools { display:flex; width:100%; gap:7px; flex-wrap:wrap; }
+      .nav-links.mobile-open { display:flex !important; position:absolute; top:calc(100% + 8px); left:0; right:0; z-index:1800; padding:12px; flex-direction:column; align-items:stretch; gap:5px; border:1px solid rgba(95,224,160,.22); border-radius:16px; background:rgba(7,19,14,.98); box-shadow:0 22px 60px rgba(0,0,0,.3); }
+      .nav-links.mobile-open > a, .nav-links.mobile-open .gallery-toggle, .nav-links.mobile-open .nav-feature-button { width:100%; justify-content:flex-start; color:#eafff2; text-align:left; }
+      .nav-links.mobile-open .gallery-nav { width:100%; }
+      .nav-links.mobile-open .gallery-menu { position:absolute; top:calc(100% + 4px); left:0; right:0; width:100%; max-height:55vh; overflow:auto; }
+      .nav-mobile-tools button { flex:1 1 90px; min-height:38px; border:1px solid rgba(15,74,54,.14); border-radius:10px; background:rgba(95,224,160,.10); color:var(--green); font-size:11px; font-weight:800; }
+      #featureRouteViews { min-height:75vh; }
+      .route-panel { padding-top:25px; }
+      .material-photo-frame, .material-photo { min-height:290px; }
+      .material-facts, .impact-overview-grid { grid-template-columns:1fr; }
+      .impact-bar-row { grid-template-columns:minmax(90px,.8fr) minmax(0,1.5fr) auto; }
+      .gallery-menu { position:fixed; top:auto; left:14px; right:14px; width:auto; max-height:70vh; overflow:auto; }
+      .route-title { letter-spacing:-.025em; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #featureRouteViews *, .material-photo-frame::after, .scanner-prompt .upload-orb { animation-duration:.01ms !important; animation-iteration-count:1 !important; scroll-behavior:auto !important; }
+    }
+
   </style>
 </head>
 
@@ -2539,12 +2717,26 @@
         </a>
 
         <div class="nav-links">
+          <div class="gallery-nav">
+            <button type="button" class="gallery-toggle" id="galleryToggle" aria-expanded="false" aria-controls="galleryMenu">Gallery <span class="gallery-chevron">⌄</span></button>
+            <div class="gallery-menu" id="galleryMenu" hidden>
+              <div class="gallery-menu-label">Explore material pages</div>
+              <button class="gallery-option" type="button" data-open-material="gold"><span class="gallery-option-icon">Au</span><span><strong>Gold Recovery</strong><small>Gold-bearing electronic contacts</small></span></button>
+              <button class="gallery-option" type="button" data-open-material="copper"><span class="gallery-option-icon">◎</span><span><strong>Copper & Cables</strong><small>Wire and copper material stream</small></span></button>
+              <button class="gallery-option" type="button" data-open-material="battery"><span class="gallery-option-icon">▰</span><span><strong>Lithium-Ion Batteries</strong><small>Battery collection and safe routing</small></span></button>
+              <button class="gallery-option" type="button" data-open-material="pcb"><span class="gallery-option-icon">▦</span><span><strong>Printed Circuit Boards</strong><small>Boards, chips and connectors</small></span></button>
+              <button class="gallery-option" type="button" data-open-material="mixed"><span class="gallery-option-icon">♻</span><span><strong>Mixed E-Waste</strong><small>Unsorted electronic components</small></span></button>
+            </div>
+          </div>
           <a href="#guide">Value Guide</a>
           <a href="#how">How It Works</a>
           <a href="#dashboard">AI Hub</a>
           <a href="#impact">Impact</a>
           <a href="#about">About</a>
           <a href="#creator">Creator</a>
+          <button type="button" class="nav-feature-button" id="scannerNavLink">AI Scanner</button>
+          <button type="button" class="nav-feature-button" id="impactNavLink">Impact Lab</button>
+          <button type="button" class="nav-feature-button" id="tourNavBtn">Demo Tour</button>
         </div>
 
         <div class="session">
@@ -2556,6 +2748,119 @@
 
       </div>
     </nav>
+
+    <div class="nav-mobile-tools" aria-label="Quick tools">
+      <button type="button" id="mobileGalleryBtn">♻ Gallery</button>
+      <button type="button" id="mobileScannerBtn">⌁ AI Scanner</button>
+      <button type="button" id="mobileTourBtn">▷ Demo Tour</button>
+    </div>
+
+    <!-- Added feature pages: separate views, not scroll-to sections -->
+    <div id="featureRouteViews" aria-live="polite">
+      <section id="materialView" class="route-panel" hidden>
+        <div class="container">
+          <div class="route-topline">
+            <button type="button" class="route-back" data-go-home>← Back to EcoExtract</button>
+            <span class="route-eyebrow">Material explorer / dedicated page</span>
+          </div>
+          <div class="material-layout">
+            <div>
+              <div class="material-photo-frame" id="materialPhotoFrame">
+                <img id="materialImage" class="material-photo" alt="Material category photograph" />
+                <div class="material-photo-fallback" id="materialImageFallback" aria-hidden="true">♻</div>
+                <div class="material-photo-label"><div><strong id="materialPhotoTitle">Material</strong><span id="materialPhotoSubtitle">Material detail view</span></div><span class="material-color-tag" id="materialTag">MATERIAL</span></div>
+              </div>
+              <p class="route-credits" id="materialCredit"></p>
+            </div>
+            <div>
+              <div class="route-eyebrow" id="materialEyebrow">MATERIAL STREAM</div>
+              <h1 class="route-title" id="materialTitle">Explore a material.</h1>
+              <p class="route-copy" id="materialDescription"></p>
+              <div class="material-facts" id="materialFacts"></div>
+              <div class="material-note" id="materialSafety"></div>
+              <div class="route-actions">
+                <button type="button" class="route-primary" id="scanThisMaterial">Scan an item in this category →</button>
+                <button type="button" class="route-quiet-btn" id="backToGallery">← Gallery categories</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="scannerView" class="route-panel" hidden>
+        <div class="container">
+          <div class="route-topline">
+            <button type="button" class="route-back" data-go-home>← Back to EcoExtract</button>
+            <span class="route-eyebrow">Image analysis / model-assisted</span>
+          </div>
+          <div class="route-eyebrow">REAL IMAGE INPUT · NO RANDOM RESULTS</div>
+          <h1 class="route-title">Scan what you actually have.</h1>
+          <p class="route-copy">Upload a photo or use your camera. EcoExtract runs a general-purpose CLIP vision model in your browser and displays the model's returned labels. It is a prototype classifier, not a certified e-waste detector; review every result before physical sorting.</p>
+          <div class="scanner-layout">
+            <div class="scanner-panel">
+              <h3>01 / Image input</h3>
+              <p class="scanner-help">Choose a clear image with one main item, good lighting, and as little background clutter as possible. Your image is processed in this browser; it is not sent to an EcoExtract server.</p>
+              <div class="scanner-dropzone" id="scannerDropzone">
+                <div class="scanner-prompt" id="scannerPrompt"><div class="upload-orb">↑</div><strong>Drop an image here or choose a file</strong><p>JPG, PNG, WEBP. The model files may take several hundred MB to download on first use and are cached by the browser.</p></div>
+                <img id="scanPreview" alt="Your selected electronic waste image" hidden />
+                <video id="cameraVideo" autoplay playsinline hidden></video>
+              </div>
+              <input id="scanFileInput" type="file" accept="image/*" hidden />
+              <div class="scanner-button-row">
+                <button type="button" class="route-primary" id="chooseScanImage">Choose Image</button>
+                <button type="button" class="route-quiet-btn" id="openCameraBtn">Use Camera</button>
+                <button type="button" class="route-quiet-btn" id="captureCameraBtn" disabled>Capture Frame</button>
+              </div>
+              <div class="scanner-progress-wrap" id="scannerProgressWrap"><div class="scanner-progress-head"><span id="scannerProgressLabel">Waiting for model…</span><span id="scannerProgressPct">—</span></div><div class="scanner-progress-track"><div class="scanner-progress-fill" id="scannerProgressFill"></div></div></div>
+              <div class="scanner-button-row"><button type="button" class="route-primary" id="analyseImageBtn" disabled>Analyse Image with AI →</button><button type="button" class="route-quiet-btn" id="clearScanBtn">Clear / Start Over</button></div>
+              <label class="scanner-help" for="scanMassInput" style="display:block;margin-top:18px;">Collection mass (grams) — used only if you confirm this scan as a collection record</label>
+              <input class="scanner-text-input" id="scanMassInput" type="number" min="1" max="1000000" step="1" placeholder="Enter actual measured mass, e.g. 250" />
+              <label class="scanner-help" for="scanSignatureInput" style="display:block;margin-top:12px;">Contributor / institution (optional)</label>
+              <input class="scanner-text-input" id="scanSignatureInput" type="text" maxlength="100" placeholder="Enter a name or institution" />
+            </div>
+            <div class="scanner-result-panel">
+              <h3>02 / Model result</h3>
+              <p class="scanner-help">Results come from the downloaded model and the uploaded image. The displayed score is a model similarity score, not a calibrated probability.</p>
+              <div id="scannerResult" class="scanner-result-empty"><div><div class="result-icon">⌁</div><strong>Waiting for an image</strong><br />Choose a photo and run the analysis. No sample result is inserted automatically.</div></div>
+              <button type="button" class="route-primary" id="confirmCollectionBtn" disabled style="width:100%;margin-top:12px;">Confirm & Add to Collection</button>
+              <div class="scan-warning">Safety note: visual classification cannot verify a battery's condition or make hazardous materials safe. Do not dismantle, puncture, heat, or open batteries. Follow local e-waste collection guidance.</div>
+            </div>
+          </div>
+          <div class="collection-section">
+            <div class="collection-section-head"><h4>Confirmed collection records</h4><span class="collection-count" id="collectionCount">0 RECORDS</span></div>
+            <p class="scanner-help">Only entries you confirm are stored here. These rows are not pre-filled demo records.</p>
+            <div id="collectionRecordsList" aria-live="polite"></div>
+            <div class="route-actions"><button type="button" class="route-quiet-btn" id="exportRecordsBtn">↓ Export CSV Report</button><button type="button" class="route-quiet-btn" id="openImpactFromScanner">View Impact Lab →</button></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="impactView" class="route-panel" hidden>
+        <div class="container">
+          <div class="route-topline"><button type="button" class="route-back" data-go-home>← Back to EcoExtract</button><span class="route-eyebrow">Impact lab / record-based</span></div>
+          <div class="route-eyebrow">IMPACT LAB · BASED ON CONFIRMED RECORDS</div>
+          <h1 class="route-title">Measure the data you collected.</h1>
+          <p class="route-copy">This page calculates totals from your confirmed local collection records. It does not insert sample collections. To estimate CO₂-equivalent impact, enter an emission factor from a source you trust; EcoExtract will show the assumption used.</p>
+          <div class="impact-overview-grid">
+            <div class="impact-metric"><span>Confirmed collection entries</span><strong id="impactRecordCount">0</strong><small>Records saved in this browser</small></div>
+            <div class="impact-metric"><span>Total recorded mass</span><strong id="impactTotalKg">0.000 kg</strong><small>Sum of entered gram values</small></div>
+            <div class="impact-metric"><span>Material categories</span><strong id="impactCategoryCount">0</strong><small>Categories present in records</small></div>
+          </div>
+          <div class="impact-panel"><h3>Material breakdown</h3><p class="scanner-help">Bars are computed from actual confirmed record weights. An empty view means no records have been confirmed yet.</p><div class="impact-breakdown" id="impactBreakdown"></div></div>
+          <div class="impact-panel"><h3>Optional CO₂e estimate</h3><p class="scanner-help">Only use an emission factor supported by a source for your material and recycling pathway. The app does not supply an arbitrary default.</p><label class="scanner-help" for="co2FactorInput" style="display:block;margin-top:14px;">Emission factor (kg CO₂e per kg collected)</label><input id="co2FactorInput" class="scanner-text-input" type="number" min="0.000001" max="1000000" step="any" placeholder="Enter a sourced factor" /><div class="route-actions"><button type="button" class="route-primary" id="calculateImpactBtn">Calculate Using This Factor</button><button type="button" class="route-quiet-btn" id="exportImpactBtn">Export Report CSV</button></div><div class="impact-co2-result" id="co2Result" aria-live="polite">No CO₂e estimate shown. Enter a source-backed factor to calculate an estimate.</div></div>
+        </div>
+      </section>
+
+      <section id="tourView" class="route-panel" hidden>
+        <div class="container">
+          <div class="route-topline"><button type="button" class="route-back" data-go-home>← Back to EcoExtract</button><span class="route-eyebrow">Presentation mode</span></div>
+          <div class="route-eyebrow">GUIDED PROJECT WALKTHROUGH</div>
+          <h1 class="route-title">A five-step EcoExtract demo.</h1>
+          <p class="route-copy">Use this guided sequence to show the judges the project in a consistent order. The tour never fabricates a scan or collection.</p>
+          <div class="tour-card"><div class="tour-step-number" id="tourStepNumber">STEP 01 / 05</div><h2 class="tour-step-title" id="tourStepTitle">Explore the materials</h2><p class="tour-step-copy" id="tourStepCopy"></p><div class="tour-progress" id="tourProgress"><span></span><span></span><span></span><span></span><span></span></div><div class="tour-controls"><button type="button" class="route-quiet-btn" id="tourPreviousBtn">← Previous</button><button type="button" class="route-quiet-btn" id="tourActionBtn">Open feature</button><button type="button" class="route-primary" id="tourNextBtn">Next step →</button></div></div>
+        </div>
+      </section>
+    </div>
 
     <!-- =======================================================
          HERO
@@ -2595,6 +2900,7 @@
             <a href="#how" class="btn btn-secondary">
               Explore How It Works
             </a>
+            <button type="button" class="btn btn-secondary" id="startTourHeroBtn">Start Guided Demo ↗</button>
           </div>
 
         </div>
@@ -2657,6 +2963,11 @@
 
       </div>
     </section>
+
+    <aside class="container showcase-data-note" role="note">
+      <span class="showcase-note-icon">i</span>
+      <p><strong>Data note:</strong> the original homepage counters and sample leaderboard are static showcase examples, not live sensor readings. The new AI scanner runs image inference, and its downloadable report includes only collection records a user explicitly confirms.</p>
+    </aside>
 
     <!-- =======================================================
          VALUE GUIDE
@@ -4374,6 +4685,678 @@
     });
 
   </script>
+
+
+<script>
+/* ==============================================================
+   ECOEXTRACT ADDITIVE UPDATE
+   - Dedicated gallery pages
+   - Real local-browser image inference (Transformers.js + CLIP)
+   - Camera input, confirmed collection records, CSV export
+   - Record-based impact calculator, responsive controls, demo tour
+   Existing website sections remain in place.
+============================================================== */
+(() => {
+  'use strict';
+
+  const $ = (selector, root = document) => root.querySelector(selector);
+  const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
+  const byId = id => document.getElementById(id);
+  const routeRoot = byId('featureRouteViews');
+  if (!routeRoot || routeRoot.dataset.updateInitialized === 'true') return;
+  routeRoot.dataset.updateInitialized = 'true';
+
+  const galleryToggle = byId('galleryToggle');
+  const galleryMenu = byId('galleryMenu');
+  const materialView = byId('materialView');
+  const scannerView = byId('scannerView');
+  const impactView = byId('impactView');
+  const tourView = byId('tourView');
+  const routePanels = [materialView, scannerView, impactView, tourView];
+  let currentMaterialId = 'pcb';
+  let currentRoute = 'home';
+  let selectedScanFile = null;
+  let selectedScanUrl = '';
+  let currentModelResult = null;
+  let classifierPromise = null;
+  let classifier = null;
+  let cameraStream = null;
+  let currentTourStep = 0;
+  let scanBusy = false;
+  let preferredMaterial = null;
+
+  const materials = {
+    gold: {
+      title: 'Gold-bearing Components', eyebrow: 'PRECIOUS-METAL STREAM', tag: 'Au / RECOVERY', icon: 'Au',
+      image: 'https://services.meteored.com/img/article/une-nouvelle-technologie-permet-d-extraire-l-or-des-dechets-electroniques-en-quelques-minutes-avec-un-impact-reduit-recyclage-1774530818845_1280.jpeg',
+      imageAlt: 'Gold-coloured metal particles and a circuit board, representing precious-metal recovery from electronic waste',
+      creditText: 'Image source: Meteored article on precious-metal recovery from electronic waste.',
+      creditUrl: 'https://www.tameteo.com/actualites/science/une-nouvelle-technologie-permet-d-extraire-l-or-des-dechets-electroniques-en-quelques-minutes-avec-un-impact-reduit-recyclage.html',
+      subtitle: 'Gold-bearing contacts and electronic components',
+      description: 'Some electronic connectors and circuit-board components contain small amounts of gold or gold plating. Actual recovery requires specialist, controlled recycling processes; a photograph alone cannot determine recoverable quantity or purity.',
+      facts: [['Where found', 'Some connectors and board contacts'], ['Why it matters', 'A potential precious-metal stream'], ['Sorting note', 'Keep identified parts in a labelled collection stream']],
+      safety: 'Do not use acids or household chemical methods to extract metals. Store and route electronics through qualified e-waste recyclers.'
+    },
+    copper: {
+      title: 'Copper & Cables', eyebrow: 'CONDUCTIVE-METAL STREAM', tag: 'Cu / CABLES', icon: '◎',
+      image: 'https://ik.imagekit.io/jjuoxstfm/Blue%20Ridge%20trade%20/copper%202.png',
+      imageAlt: 'A pile of copper wire strands ready for material sorting',
+      creditText: 'Image source: Blue Ridge Trade copper scrap photo.',
+      creditUrl: 'https://www.blueridgetrade.in/industrial/copper-scrap',
+      subtitle: 'Copper wire, cable and conductor material',
+      description: 'Copper is widely used in electrical wiring because it conducts electricity well. Separating cable from other electronic components can help a recycler route the material into a suitable recovery stream.',
+      facts: [['Where found', 'Power and data cables'], ['Why it matters', 'A widely reused conductive metal'], ['Sorting note', 'Keep copper cable separate from batteries']],
+      safety: 'Do not burn cable insulation or handle unknown damaged electrical equipment while it is powered. Use an approved collection route.'
+    },
+    battery: {
+      title: 'Lithium-Ion Batteries', eyebrow: 'BATTERY COLLECTION STREAM', tag: 'LI-ION / CARE', icon: '▰',
+      image: 'https://www.swiss.tech/sites/default/files/styles/ratio_1_77_width_1980/public/2021-09/lithiumion_battery.jpeg?h=c7cedbee&itok=LEqAaHFU',
+      imageAlt: 'Industrial battery material in a lithium-ion battery recycling context',
+      creditText: 'Image source: SwissTech article on electric-vehicle battery recycling.',
+      creditUrl: 'https://www.swiss.tech/news/95-recycling-electric-car-batteries',
+      subtitle: 'Rechargeable cells and battery packs',
+      description: 'Lithium-ion batteries are found in phones, laptops, power tools and many other devices. They must be collected separately from general scrap and passed to suitable battery handlers because damaged cells can present fire and chemical hazards.',
+      facts: [['Where found', 'Phones, laptops and devices'], ['Why it matters', 'Battery materials may be recovered'], ['Sorting note', 'Keep batteries separate from metal scrap']],
+      safety: 'Never puncture, dismantle, heat or crush batteries. Do not place damaged or swollen cells into ordinary recycling bins; follow local battery collection guidance.'
+    },
+    pcb: {
+      title: 'Printed Circuit Boards', eyebrow: 'ELECTRONIC-COMPONENT STREAM', tag: 'PCB / BOARD', icon: '▦',
+      image: 'https://img.static-rmg.be/a/view/q75/w/h/5029971/7399001-jpg.jpg',
+      imageAlt: 'Discarded printed circuit boards with chips and electronic components',
+      creditText: 'Image source: Trends-Tendances report on rare earths and digitalisation.',
+      creditUrl: 'https://trends.levif.be/entreprises/la-bataille-des-terres-rares-la-face-cachee-de-la-digitalisation/',
+      subtitle: 'Boards, microchips, connectors and components',
+      description: 'Printed circuit boards connect and support electronic components. Their composition varies by device and manufacturer, so a generic image classifier can only suggest a broad category; material content must be verified through appropriate recycling processes.',
+      facts: [['Where found', 'Computers, phones and appliances'], ['Why it matters', 'Boards contain mixed material streams'], ['Sorting note', 'Avoid mixing boards with loose batteries']],
+      safety: 'Do not burn boards or attempt informal chemical recovery. Keep collection and downstream processing with authorised handlers.'
+    },
+    mixed: {
+      title: 'Mixed Electronic Waste', eyebrow: 'MANUAL-REVIEW STREAM', tag: 'E-WASTE / REVIEW', icon: '♻',
+      image: 'https://img.static-rmg.be/a/view/q75/w/h/5029971/7399001-jpg.jpg',
+      imageAlt: 'A collection of electronic circuit boards representing mixed electronic waste',
+      creditText: 'Image source: Trends-Tendances report on electronic materials.',
+      creditUrl: 'https://trends.levif.be/entreprises/la-bataille-des-terres-rares-la-face-cachee-de-la-digitalisation/',
+      subtitle: 'Unsorted electronic parts that need review',
+      description: 'Mixed e-waste can contain circuit boards, plastics, metals, cables and batteries. Separate identifiable battery packs and other special streams before a mixed batch proceeds through a collection workflow.',
+      facts: [['Where found', 'Mixed device collection boxes'], ['Why it matters', 'Different parts need different routes'], ['Sorting note', 'Use manual review when uncertain']],
+      safety: 'When the material cannot be identified confidently, choose manual review rather than forcing an AI label.'
+    }
+  };
+
+  const categoryToBin = {
+    pcb: 'PCB Safe-Box',
+    copper: 'Copper Bin',
+    battery: 'Lithium Cell Box',
+    gold: 'Gold Recovery Box',
+    mixed: 'Manual Review Bay'
+  };
+
+  const prompts = [
+    'a photograph of lithium-ion rechargeable battery cells or a battery pack',
+    'a photograph of copper electrical wire or stripped copper cable',
+    'a photograph of a printed circuit board with electronic chips and connectors',
+    'a photograph of gold-bearing electronic connector pins or gold-plated contacts on a circuit board',
+    'a photograph of mixed electronic waste and discarded computer components',
+    'a photograph of an unrelated non-electronic object, not electronic waste'
+  ];
+  const promptToCategory = new Map([
+    [prompts[0], 'battery'], [prompts[1], 'copper'], [prompts[2], 'pcb'],
+    [prompts[3], 'gold'], [prompts[4], 'mixed'], [prompts[5], 'other']
+  ]);
+
+  // Additive bin streams for categories introduced by the Gallery/AI scanner.
+  if (typeof itemsConfig !== 'undefined' && typeof binsConfig !== 'undefined') {
+    itemsConfig['Gold-bearing Components'] = { bin: 'Gold Recovery Box', icon: 'Au' };
+    itemsConfig['Mixed Electronic Waste'] = { bin: 'Manual Review Bay', icon: '♻' };
+    if (!binsConfig['Gold Recovery Box']) binsConfig['Gold Recovery Box'] = { level: 0, status: 'EMPTY', type: 'Gold-bearing Components' };
+    if (!binsConfig['Manual Review Bay']) binsConfig['Manual Review Bay'] = { level: 0, status: 'EMPTY', type: 'Mixed Electronic Waste' };
+  }
+
+  let collectionRecords = loadRecords();
+  restoreSavedBinLevels();
+
+  function loadRecords() {
+    try {
+      const rows = JSON.parse(localStorage.getItem('ecoextract_confirmed_records_v1') || '[]');
+      return Array.isArray(rows) ? rows.filter(row => row && row.id && row.category && Number.isFinite(Number(row.grams))) : [];
+    } catch (_) { return []; }
+  }
+
+  function saveRecords() {
+    try { localStorage.setItem('ecoextract_confirmed_records_v1', JSON.stringify(collectionRecords)); }
+    catch (_) { announce('Could not save records in this browser. Export the report to keep a copy.'); }
+  }
+
+  function restoreSavedBinLevels() {
+    if (typeof binsConfig === 'undefined') return;
+    try {
+      const saved = JSON.parse(localStorage.getItem('ecoextract_bin_levels_v1') || '{}');
+      Object.entries(saved || {}).forEach(([name, item]) => {
+        if (binsConfig[name] && item && Number.isFinite(Number(item.level))) {
+          binsConfig[name].level = Math.max(0, Math.min(100, Number(item.level)));
+          binsConfig[name].status = binsConfig[name].level === 0 ? 'EMPTY' : (binsConfig[name].level >= 90 ? 'NEARLY FULL' : 'READY');
+        }
+      });
+    } catch (_) {}
+  }
+
+  function saveBinLevels() {
+    if (typeof binsConfig === 'undefined') return;
+    const levels = {};
+    Object.entries(binsConfig).forEach(([name, item]) => { levels[name] = { level: Number(item.level) || 0 }; });
+    try { localStorage.setItem('ecoextract_bin_levels_v1', JSON.stringify(levels)); } catch (_) {}
+    if (typeof renderBins === 'function') renderBins();
+  }
+
+  function announce(message) {
+    const toast = byId('toast');
+    if (toast && typeof window.showToast === 'function') window.showToast(message);
+    else if (toast) { toast.textContent = message; toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 3200); }
+    else console.info(message);
+  }
+
+  function escapeHtml(value) {
+    return String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  }
+
+  function toggleGallery(force) {
+    if (!galleryMenu || !galleryToggle) return;
+    const open = typeof force === 'boolean' ? force : galleryMenu.hidden;
+    galleryMenu.hidden = !open;
+    galleryToggle.setAttribute('aria-expanded', String(open));
+    if (!open) $('.nav-links')?.classList.remove('mobile-open');
+  }
+
+  function routeHash(route, id) {
+    if (route === 'material') return '#material/' + encodeURIComponent(id || 'pcb');
+    if (route === 'scanner') return '#ai-scanner';
+    if (route === 'impact') return '#impact-lab';
+    if (route === 'tour') return '#demo-tour';
+    return '#home';
+  }
+
+  function stopCamera() {
+    if (cameraStream) {
+      cameraStream.getTracks().forEach(track => track.stop());
+      cameraStream = null;
+    }
+    const video = byId('cameraVideo');
+    if (video) { video.pause(); video.srcObject = null; video.hidden = true; }
+    const capture = byId('captureCameraBtn');
+    if (capture) capture.disabled = true;
+  }
+
+  function setRoute(route, materialId = currentMaterialId, pushHistory = true) {
+    if (route === 'material' && !materials[materialId]) materialId = 'pcb';
+    currentRoute = route;
+    if (route === 'material') currentMaterialId = materialId;
+    toggleGallery(false);
+
+    const mainNodes = $$('#app > header, #app > section, #app > footer');
+    mainNodes.forEach(node => {
+      if (route !== 'home') {
+        if (!Object.prototype.hasOwnProperty.call(node.dataset, 'featureOriginalDisplay')) node.dataset.featureOriginalDisplay = node.style.display || '';
+        node.style.display = 'none';
+      } else if (node.dataset.featureOriginalDisplay !== undefined) {
+        node.style.display = node.dataset.featureOriginalDisplay;
+        delete node.dataset.featureOriginalDisplay;
+      }
+    });
+
+    if (route === 'home') {
+      routeRoot.classList.remove('active');
+      routePanels.forEach(panel => panel.hidden = true);
+      stopCamera();
+      if (pushHistory && location.hash !== '#home') history.pushState({ ecoExtractRoute: 'home' }, '', '#home');
+      document.body.classList.remove('route-active');
+      return;
+    }
+
+    routeRoot.classList.add('active');
+    routePanels.forEach(panel => panel.hidden = true);
+    const panel = route === 'material' ? materialView : route === 'scanner' ? scannerView : route === 'impact' ? impactView : tourView;
+    if (panel) panel.hidden = false;
+    document.body.classList.add('route-active');
+    if (route === 'material') renderMaterial(materialId);
+    if (route === 'scanner') { renderRecords(); if (selectedScanFile) byId('analyseImageBtn').disabled = false; }
+    if (route === 'impact') renderImpact();
+    if (route === 'tour') renderTour();
+    if (pushHistory) history.pushState({ ecoExtractRoute: route, materialId }, '', routeHash(route, materialId));
+    stopCamera();
+    window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  }
+
+  function renderMaterial(id) {
+    const data = materials[id];
+    if (!data) return;
+    byId('materialEyebrow').textContent = data.eyebrow;
+    byId('materialTitle').textContent = data.title;
+    byId('materialPhotoTitle').textContent = data.title;
+    byId('materialPhotoSubtitle').textContent = data.subtitle;
+    byId('materialTag').textContent = data.tag;
+    byId('materialDescription').textContent = data.description;
+    byId('materialSafety').textContent = data.safety;
+    byId('materialFacts').innerHTML = data.facts.map(([label, detail]) => `<div class="material-fact"><b>${escapeHtml(label)}</b><span>${escapeHtml(detail)}</span></div>`).join('');
+    const image = byId('materialImage');
+    const fallback = byId('materialImageFallback');
+    image.style.display = 'block'; fallback.style.display = 'none';
+    image.alt = data.imageAlt; image.src = data.image;
+    image.onerror = () => { image.style.display = 'none'; fallback.style.display = 'grid'; fallback.textContent = data.icon; };
+    byId('materialCredit').innerHTML = `Photo reference: <a href="${escapeHtml(data.creditUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(data.creditText)}</a>. If the external host blocks the image, the category illustration is shown instead.`;
+    preferredMaterial = id;
+  }
+
+  function openMaterial(id) { setRoute('material', id); }
+  function openScanner(materialId = null) { preferredMaterial = materialId || null; setRoute('scanner'); if (preferredMaterial) byId('scannerProgressLabel').textContent = 'Gallery context: ' + materials[preferredMaterial].title + '. The model will still evaluate all categories.'; else byId('scannerProgressLabel').textContent = 'The model loads only after you click Analyse Image.'; }
+
+  // Gallery dropdown: every category opens a separate page-like view.
+  galleryToggle?.addEventListener('click', event => { event.stopPropagation(); toggleGallery(); });
+  $$('[data-open-material]').forEach(button => button.addEventListener('click', () => openMaterial(button.dataset.openMaterial)));
+  byId('mobileGalleryBtn')?.addEventListener('click', () => { const shouldOpen = galleryMenu.hidden; if (shouldOpen) $('.nav-links')?.classList.add('mobile-open'); toggleGallery(shouldOpen); });
+  document.addEventListener('click', event => { if (galleryMenu && !galleryMenu.contains(event.target) && !galleryToggle?.contains(event.target) && !byId('mobileGalleryBtn')?.contains(event.target)) toggleGallery(false); });
+  byId('mobileScannerBtn')?.addEventListener('click', () => openScanner());
+  byId('mobileTourBtn')?.addEventListener('click', () => setRoute('tour'));
+  byId('scannerNavLink')?.addEventListener('click', event => { event.preventDefault(); openScanner(); });
+  byId('impactNavLink')?.addEventListener('click', event => { event.preventDefault(); setRoute('impact'); });
+  byId('tourNavBtn')?.addEventListener('click', () => setRoute('tour'));
+  byId('startTourHeroBtn')?.addEventListener('click', () => setRoute('tour'));
+  $$('[data-go-home]').forEach(button => button.addEventListener('click', () => setRoute('home')));
+  byId('scanThisMaterial')?.addEventListener('click', () => openScanner(currentMaterialId));
+  byId('backToGallery')?.addEventListener('click', () => { setRoute('home'); if (window.matchMedia('(max-width: 800px)').matches) $('.nav-links')?.classList.add('mobile-open'); setTimeout(() => toggleGallery(true), 0); });
+  byId('openImpactFromScanner')?.addEventListener('click', () => setRoute('impact'));
+
+  // Keep the legacy dashboard button, but route it to the real image scanner instead of the old fake-delay scan.
+  // Capture phase prevents the previous simulated classification handler from running.
+  if (byId('dropBtn')) { byId('dropBtn').textContent = 'Upload Image & Run AI →'; byId('dropBtn').title = 'Opens the real image-analysis page; no category is guessed from the selected chip.'; }
+  if (byId('autoBtn')) { byId('autoBtn').textContent = 'Use Live Image →'; byId('autoBtn').title = 'Auto classification requires a live image frame. Opens the browser scanner.'; }
+  const kioskSubhead = $('#dashboard .kiosk-head > div > span');
+  if (kioskSubhead) kioskSubhead.textContent = 'Upload an image to run the browser AI model';
+  if (byId('dropBtn')) { byId('dropBtn').textContent = 'Upload Image & Run AI →'; byId('dropBtn').title = 'Opens the real image-analysis page; no category is guessed from the selected chip.'; }
+  if (byId('autoBtn')) { byId('autoBtn').textContent = 'Use Live Image →'; byId('autoBtn').title = 'Auto classification requires a live image frame. Opens the browser scanner.'; }
+  byId('dropBtn')?.addEventListener('click', event => {
+    event.preventDefault(); event.stopImmediatePropagation(); openScanner(selectedWaste === 'PCB' ? 'pcb' : selectedWaste === 'Copper Wires & Cables' ? 'copper' : 'battery');
+  }, true);
+  byId('autoBtn')?.addEventListener('click', event => {
+    event.preventDefault(); event.stopImmediatePropagation();
+    announce('Auto Run needs a live image stream. Upload a photo or use Camera to analyse an actual frame.');
+    openScanner();
+  }, true);
+
+  // Extend the original Admin actions so they manage the extra category bins too.
+  byId('emptySelectedBinBtn')?.addEventListener('click', event => {
+    event.preventDefault(); event.stopImmediatePropagation();
+    if (document.body.dataset.role !== 'admin') { announce('Admin access required.'); return; }
+    const config = itemsConfig[selectedWaste];
+    const binName = config && config.bin;
+    if (!binName || !binsConfig[binName]) { announce('No bin is configured for the current selection.'); return; }
+    if (!window.confirm(`Empty ${binName}? This changes its fill level to 0%.`)) return;
+    binsConfig[binName].level = 0; binsConfig[binName].status = 'EMPTY';
+    saveBinLevels();
+    if (typeof addTerminalLine === 'function') addTerminalLine(`ADMIN: ${binName} emptied and marked EMPTY.`);
+    announce(`${binName} is now empty.`);
+  }, true);
+  byId('resetBinsBtn')?.addEventListener('click', event => {
+    event.preventDefault(); event.stopImmediatePropagation();
+    if (document.body.dataset.role !== 'admin') { announce('Admin access required.'); return; }
+    if (!window.confirm('Reset every collection bin to its initial demo level? Confirmed collection records will remain saved.')) return;
+    const baseline = { 'PCB Safe-Box':32, 'Copper Bin':47, 'Lithium Cell Box':21, 'Gold Recovery Box':0, 'Manual Review Bay':0 };
+    Object.entries(binsConfig).forEach(([name, bin]) => {
+      bin.level = Object.prototype.hasOwnProperty.call(baseline, name) ? baseline[name] : 0;
+      bin.status = bin.level === 0 ? 'EMPTY' : name === 'Lithium Cell Box' ? 'SAFE' : 'READY';
+    });
+    saveBinLevels();
+    if (typeof addTerminalLine === 'function') addTerminalLine('ADMIN: all bin levels reset. Collection records retained.');
+    announce('All bin levels reset. Collection history was kept.');
+  }, true);
+
+  byId('chooseScanImage')?.addEventListener('click', () => byId('scanFileInput').click());
+  byId('scanFileInput')?.addEventListener('change', event => {
+    const file = event.target.files && event.target.files[0];
+    if (file) setSelectedImage(file);
+  });
+
+  function setSelectedImage(file) {
+    if (!file || !file.type || !file.type.startsWith('image/')) { announce('Please select a valid image file.'); return; }
+    if (file.size > 15 * 1024 * 1024) { announce('Please choose an image smaller than 15 MB.'); return; }
+    stopCamera();
+    if (selectedScanUrl) URL.revokeObjectURL(selectedScanUrl);
+    selectedScanFile = file;
+    selectedScanUrl = URL.createObjectURL(file);
+    currentModelResult = null;
+    const image = byId('scanPreview');
+    image.src = selectedScanUrl; image.hidden = false;
+    byId('scannerPrompt').hidden = true;
+    byId('cameraVideo').hidden = true;
+    byId('analyseImageBtn').disabled = false;
+    byId('confirmCollectionBtn').disabled = true;
+    byId('scannerResult').className = 'scanner-result-empty';
+    byId('scannerResult').innerHTML = '<div><div class="result-icon">⌁</div><strong>Image ready for analysis</strong><br />Click Analyse Image with AI. No classification is shown until the model responds.</div>';
+    byId('scannerProgressWrap').classList.remove('active');
+  }
+
+  byId('scannerDropzone')?.addEventListener('dragover', event => { event.preventDefault(); byId('scannerDropzone').style.borderColor = '#5fe0a0'; });
+  byId('scannerDropzone')?.addEventListener('dragleave', () => { byId('scannerDropzone').style.borderColor = ''; });
+  byId('scannerDropzone')?.addEventListener('drop', event => {
+    event.preventDefault(); byId('scannerDropzone').style.borderColor = '';
+    const file = event.dataTransfer?.files?.[0]; if (file) setSelectedImage(file);
+  });
+
+  byId('openCameraBtn')?.addEventListener('click', async () => {
+    if (!navigator.mediaDevices?.getUserMedia) { announce('Camera access requires a supported browser and a secure page (HTTPS or localhost).'); return; }
+    try {
+      stopCamera();
+      cameraStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: 'environment' } }, audio: false });
+      const video = byId('cameraVideo');
+      byId('scanPreview').hidden = true; byId('scannerPrompt').hidden = true;
+      video.srcObject = cameraStream; video.hidden = false; await video.play();
+      byId('captureCameraBtn').disabled = false;
+      announce('Camera ready. Capture a clear image of one item.');
+    } catch (error) {
+      stopCamera();
+      const msg = error && error.name === 'NotAllowedError' ? 'Camera permission was denied. Choose an image file instead.' : 'Camera could not start. Use Choose Image or check HTTPS permissions.';
+      announce(msg);
+    }
+  });
+
+  byId('captureCameraBtn')?.addEventListener('click', () => {
+    const video = byId('cameraVideo');
+    if (!cameraStream || !video.videoWidth || !video.videoHeight) { announce('Wait for the camera frame to be ready.'); return; }
+    const canvas = document.createElement('canvas');
+    canvas.width = video.videoWidth; canvas.height = video.videoHeight;
+    canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+    canvas.toBlob(blob => {
+      if (!blob) { announce('Could not capture this frame. Try a file upload.'); return; }
+      setSelectedImage(new File([blob], `ecoextract-camera-${Date.now()}.jpg`, { type: 'image/jpeg' }));
+      stopCamera();
+    }, 'image/jpeg', .92);
+  });
+
+  byId('clearScanBtn')?.addEventListener('click', () => {
+    stopCamera();
+    if (selectedScanUrl) URL.revokeObjectURL(selectedScanUrl);
+    selectedScanFile = null; selectedScanUrl = ''; currentModelResult = null;
+    byId('scanFileInput').value = ''; byId('scanPreview').removeAttribute('src'); byId('scanPreview').hidden = true;
+    byId('scannerPrompt').hidden = false; byId('analyseImageBtn').disabled = true; byId('confirmCollectionBtn').disabled = true;
+    byId('scannerProgressWrap').classList.remove('active'); byId('scannerProgressFill').style.width = '0%';
+    byId('scannerResult').className = 'scanner-result-empty';
+    byId('scannerResult').innerHTML = '<div><div class="result-icon">⌁</div><strong>Waiting for an image</strong><br />Choose a photo and run the analysis. No sample result is inserted automatically.</div>';
+  });
+
+  function updateProgress(message, percent) {
+    byId('scannerProgressWrap').classList.add('active');
+    if (message) byId('scannerProgressLabel').textContent = message;
+    if (Number.isFinite(percent)) {
+      const safe = Math.max(0, Math.min(100, percent));
+      byId('scannerProgressFill').style.width = safe + '%';
+      byId('scannerProgressPct').textContent = Math.round(safe) + '%';
+    } else byId('scannerProgressPct').textContent = '…';
+  }
+
+  async function getClassifier() {
+    if (classifier) return classifier;
+    if (!classifierPromise) {
+      classifierPromise = (async () => {
+        updateProgress('Loading browser AI library…', 2);
+        const library = await import('https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.2.0');
+        if (library.env) {
+          library.env.allowLocalModels = false;
+          library.env.useBrowserCache = true;
+        }
+        const pipelineOptions = {
+          progress_callback: progress => {
+            if (!progress || typeof progress !== 'object') return;
+            const name = progress.file || progress.name || progress.status || 'model assets';
+            if (Number.isFinite(progress.progress)) updateProgress('Loading ' + name + '…', progress.progress);
+            else if (progress.status === 'done') updateProgress('Loaded ' + name, 95);
+            else updateProgress('Preparing ' + name + '…', NaN);
+          }
+        };
+        updateProgress('Downloading model files (first run can take time)…', 4);
+        const pipeline = await library.pipeline('zero-shot-image-classification', 'Xenova/clip-vit-base-patch32', pipelineOptions);
+        classifier = pipeline;
+        updateProgress('AI model ready.', 100);
+        return classifier;
+      })().catch(error => { classifierPromise = null; throw error; });
+    }
+    return classifierPromise;
+  }
+
+  function categoryDetails(category) {
+    const table = {
+      battery: { title:'Lithium-Ion Battery', bin:'Lithium Cell Box', icon:'▰' },
+      copper: { title:'Copper Wires & Cables', bin:'Copper Bin', icon:'◎' },
+      pcb: { title:'Printed Circuit Board', bin:'PCB Safe-Box', icon:'▦' },
+      gold: { title:'Gold-bearing Components', bin:'Gold Recovery Box', icon:'Au' },
+      mixed: { title:'Mixed Electronic Waste', bin:'Manual Review Bay', icon:'♻' },
+      other: { title:'No supported e-waste category', bin:null, icon:'?' }
+    };
+    return table[category] || table.other;
+  }
+
+  byId('analyseImageBtn')?.addEventListener('click', async () => {
+    if (scanBusy) return;
+    if (!selectedScanFile || !byId('scanPreview').src) { announce('Choose or capture an image first.'); return; }
+    scanBusy = true;
+    currentModelResult = null;
+    byId('analyseImageBtn').disabled = true;
+    byId('confirmCollectionBtn').disabled = true;
+    byId('analyseImageBtn').textContent = 'Analysing image…';
+    byId('scannerResult').className = 'scanner-result-empty';
+    byId('scannerResult').innerHTML = '<div><div class="result-icon">⌁</div><strong>Running real model inference…</strong><br />The result will appear only after the model returns its labels.</div>';
+    try {
+      const image = byId('scanPreview');
+      if (image.decode) await image.decode();
+      const model = await getClassifier();
+      updateProgress('Comparing the image against material categories…', 96);
+      const output = await model(selectedScanUrl, prompts);
+      if (!Array.isArray(output) || !output.length || !output[0].label || !Number.isFinite(Number(output[0].score))) {
+        throw new Error('The model returned no usable classification.');
+      }
+      const sorted = output.slice().sort((a, b) => Number(b.score) - Number(a.score));
+      const top = sorted[0];
+      const category = promptToCategory.get(top.label) || 'other';
+      const secondScore = sorted[1] ? Number(sorted[1].score) : 0;
+      const score = Number(top.score);
+      const needsReview = category === 'other' || score < 0.27 || (score - secondScore) < 0.04;
+      currentModelResult = { category, label: top.label, score, secondScore, needsReview, fileName: selectedScanFile.name || 'camera-capture' };
+      renderModelResult(currentModelResult, sorted);
+      updateProgress('Model analysis completed.', 100);
+    } catch (error) {
+      const detail = error && error.message ? error.message : 'Unknown error';
+      byId('scannerResult').className = 'scanner-result-empty';
+      byId('scannerResult').innerHTML = `<div><div class="result-icon">!</div><strong>Real AI analysis could not complete</strong><p class="scanner-help" style="margin-top:10px;">No result was invented or substituted. Check your internet connection, try again, or use a supported browser. Technical detail: ${escapeHtml(detail.slice(0, 260))}</p></div>`;
+      updateProgress('Model failed to load or analyse the image. Retry when ready.', 0);
+      announce('AI scan failed; no classification was recorded.');
+    } finally {
+      scanBusy = false;
+      byId('analyseImageBtn').disabled = !selectedScanFile;
+      byId('analyseImageBtn').textContent = 'Analyse Image with AI →';
+    }
+  });
+
+  function renderModelResult(result, allResults) {
+    const data = categoryDetails(result.category);
+    const scorePct = Math.max(0, Math.min(100, result.score * 100));
+    const review = result.needsReview;
+    const topThree = allResults.slice(0, 3).map(row => `<div class="record-row"><div><strong>${escapeHtml(row.label)}</strong><small>Model-returned comparison label</small></div><span class="record-weight">${(Number(row.score) * 100).toFixed(1)}%</span></div>`).join('');
+    byId('scannerResult').className = '';
+    byId('scannerResult').innerHTML = `
+      <div class="result-icon">${escapeHtml(data.icon)}</div>
+      <div class="route-eyebrow">${review ? 'REVIEW REQUIRED' : 'MODEL SUGGESTION'}</div>
+      <div class="model-result-title">${escapeHtml(data.title)}</div>
+      <p class="model-result-sub">Model label: <strong>${escapeHtml(result.label)}</strong><br />Suggested destination: ${escapeHtml(data.bin || 'Manual review required')}</p>
+      <div class="score-row"><span>Model similarity score · not a probability</span><strong>${scorePct.toFixed(1)}%</strong></div>
+      <div class="score-track"><div class="score-fill" style="width:${scorePct.toFixed(2)}%"></div></div>
+      ${review ? '<div class="scan-warning">The model result may be ambiguous or outside supported categories. Verify the physical item and do not use this label as the only basis for routing.</div>' : '<div class="scan-warning">This is a general-purpose vision model, not a certified e-waste detector. Confirm the physical item before recording it.</div>'}
+      <details style="margin-top:16px;"><summary style="cursor:pointer;color:#79e5b0;font-size:11px;font-weight:800;">View top model comparisons</summary><div style="margin-top:8px;">${topThree}</div></details>`;
+    byId('confirmCollectionBtn').disabled = result.category === 'other';
+    byId('confirmCollectionBtn').textContent = result.category === 'other' ? 'Manual review required — cannot auto-route' : 'Confirm & Add to Collection';
+    if (result.category === 'other') announce('The model did not suggest a supported e-waste category. No collection can be auto-routed.');
+  }
+
+  byId('confirmCollectionBtn')?.addEventListener('click', () => {
+    if (!currentModelResult) { announce('Run an AI analysis before confirming a collection.'); return; }
+    if (currentModelResult.category === 'other') { announce('This image needs manual review and cannot be auto-routed.'); return; }
+    const grams = Number(byId('scanMassInput').value);
+    if (!Number.isFinite(grams) || grams <= 0 || grams > 1000000) { announce('Enter the actual measured mass in grams (between 1 and 1,000,000).'); byId('scanMassInput').focus(); return; }
+    if (typeof binsConfig === 'undefined') { announce('Bin data is unavailable. Please reload the site.'); return; }
+    const data = categoryDetails(currentModelResult.category);
+    if (!data.bin || !binsConfig[data.bin]) { announce('No collection bin is configured for this category; nothing was recorded.'); return; }
+    const now = new Date();
+    const record = {
+      id: (globalThis.crypto && crypto.randomUUID) ? crypto.randomUUID() : 'rec-' + now.getTime() + '-' + (collectionRecords.length + 1),
+      timestamp: now.toISOString(), category: currentModelResult.category,
+      material: data.title, bin: data.bin, grams,
+      modelLabel: currentModelResult.label, modelScore: currentModelResult.score,
+      imageName: selectedScanFile?.name || 'camera-capture',
+      signature: byId('scanSignatureInput').value.trim()
+    };
+    collectionRecords.unshift(record);
+    saveRecords();
+    const capacity = ({ 'PCB Safe-Box': 25000, 'Copper Bin': 30000, 'Lithium Cell Box': 15000, 'Gold Recovery Box': 8000, 'Manual Review Bay': 40000 })[data.bin] || 30000;
+    const bin = binsConfig[data.bin];
+    bin.level = Math.min(100, Math.max(0, Number(bin.level) || 0) + (grams / capacity) * 100);
+    bin.status = bin.level >= 90 ? 'NEARLY FULL' : bin.level === 0 ? 'EMPTY' : data.bin === 'Lithium Cell Box' ? 'SAFE' : 'READY';
+    saveBinLevels();
+    if (typeof addTerminalLine === 'function') addTerminalLine(`Confirmed collection: ${data.title}, ${grams} g → ${data.bin}`);
+    currentModelResult = null;
+    byId('confirmCollectionBtn').disabled = true;
+    byId('confirmCollectionBtn').textContent = 'Record saved ✓';
+    renderRecords(); renderImpact();
+    announce('Confirmed collection saved. Bin level and report data updated.');
+  });
+
+  function renderRecords() {
+    const list = byId('collectionRecordsList');
+    if (!list) return;
+    byId('collectionCount').textContent = `${collectionRecords.length} RECORD${collectionRecords.length === 1 ? '' : 'S'}`;
+    if (!collectionRecords.length) {
+      list.innerHTML = '<div class="records-empty">No confirmed records yet. Analyse an image and confirm a collection to create the first record.</div>';
+      return;
+    }
+    list.innerHTML = collectionRecords.slice(0, 50).map(record => {
+      const date = new Date(record.timestamp);
+      const dateText = Number.isNaN(date.getTime()) ? 'Date unavailable' : date.toLocaleString();
+      const signature = record.signature ? ` · ${escapeHtml(record.signature)}` : '';
+      return `<div class="record-row"><div><strong>${escapeHtml(record.material)}</strong><small>${escapeHtml(dateText)} · ${escapeHtml(record.bin)}${signature}<br />Model label: ${escapeHtml(record.modelLabel)}</small></div><span class="record-weight">${Number(record.grams).toLocaleString()} g</span></div>`;
+    }).join('');
+  }
+
+  function exportCsv() {
+    if (!collectionRecords.length) { announce('There are no confirmed collection records to export.'); return; }
+    const headers = ['timestamp','material','category','grams','bin','model_label','model_similarity_score','image_name','contributor'];
+    const escapeCell = value => '"' + String(value ?? '').replace(/"/g, '""') + '"';
+    const rows = collectionRecords.map(r => [r.timestamp,r.material,r.category,r.grams,r.bin,r.modelLabel,r.modelScore,r.imageName,r.signature]);
+    const csv = [headers.map(escapeCell).join(','), ...rows.map(row => row.map(escapeCell).join(','))].join('\r\n');
+    const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob); const a = document.createElement('a');
+    a.href = url; a.download = `ecoextract-collection-report-${new Date().toISOString().slice(0,10)}.csv`;
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+    announce('CSV report downloaded. It contains confirmed records only.');
+  }
+  byId('exportRecordsBtn')?.addEventListener('click', exportCsv);
+  byId('exportImpactBtn')?.addEventListener('click', exportCsv);
+
+  function summariseRecords() {
+    const gramsByCategory = {};
+    let totalGrams = 0;
+    collectionRecords.forEach(record => {
+      const grams = Number(record.grams);
+      if (!Number.isFinite(grams) || grams <= 0) return;
+      totalGrams += grams;
+      gramsByCategory[record.category] = (gramsByCategory[record.category] || 0) + grams;
+    });
+    return { gramsByCategory, totalGrams, count: collectionRecords.length };
+  }
+
+  function renderImpact() {
+    const summary = summariseRecords();
+    byId('impactRecordCount').textContent = String(summary.count);
+    byId('impactTotalKg').textContent = (summary.totalGrams / 1000).toFixed(3) + ' kg';
+    byId('impactCategoryCount').textContent = String(Object.keys(summary.gramsByCategory).length);
+    const breakdown = byId('impactBreakdown');
+    const items = Object.entries(summary.gramsByCategory).sort((a,b) => b[1]-a[1]);
+    if (!items.length) {
+      breakdown.innerHTML = '<div class="records-empty">No confirmed collection mass is available yet. Records appear here after the user confirms an AI scan.</div>';
+    } else {
+      const max = Math.max(...items.map(item => item[1]));
+      breakdown.innerHTML = items.map(([id, grams]) => {
+        const title = categoryDetails(id).title;
+        const percent = max ? grams / max * 100 : 0;
+        return `<div class="impact-bar-row"><span>${escapeHtml(title)}</span><div class="impact-bar-track"><div class="impact-bar-fill" style="width:${percent.toFixed(2)}%"></div></div><strong>${(grams/1000).toFixed(3)} kg</strong></div>`;
+      }).join('');
+    }
+    const result = byId('co2Result');
+    if (result && !byId('co2FactorInput').dataset.applied) result.textContent = 'No CO₂e estimate shown. Enter a source-backed factor to calculate an estimate.';
+  }
+
+  byId('calculateImpactBtn')?.addEventListener('click', () => {
+    const factor = Number(byId('co2FactorInput').value);
+    if (!Number.isFinite(factor) || factor <= 0 || factor > 1000000) { announce('Enter a positive emission factor from a source you can cite. No default is assumed.'); byId('co2FactorInput').focus(); return; }
+    const kg = summariseRecords().totalGrams / 1000;
+    const estimate = kg * factor;
+    byId('co2FactorInput').dataset.applied = 'true';
+    byId('co2Result').textContent = `Estimated result: ${estimate.toFixed(4)} kg CO₂e, calculated as ${kg.toFixed(3)} kg recorded e-waste × ${factor} kg CO₂e/kg. This is only as reliable as the emission factor and pathway assumptions you entered; cite that source in any presentation.`;
+  });
+  byId('co2FactorInput')?.addEventListener('input', () => { byId('co2FactorInput').dataset.applied = ''; });
+
+  const tourSteps = [
+    { title:'Explore materials', copy:'Open the Gallery dropdown and visit a dedicated material page. Each page has its own image, category context and handling notes.', action:'Open Lithium-Ion Gallery Page', run:() => openMaterial('battery') },
+    { title:'Run a real image analysis', copy:'Upload a photo or capture a frame. The browser model produces candidate labels from the provided pixels. The app does not pre-fill a result.', action:'Open AI Scanner', run:() => openScanner() },
+    { title:'Confirm the collection', copy:'Enter a measured mass and confirm the returned result only after checking the actual item. This creates the first record and updates the selected bin.', action:'Open Collection Workflow', run:() => openScanner() },
+    { title:'Review the material data', copy:'View totals and the category breakdown from confirmed collection records. With no records, the page shows zeros and an empty state.', action:'Open Impact Lab', run:() => setRoute('impact') },
+    { title:'Export a report', copy:'Download a CSV built from confirmed local records. If no record exists, the export button explains why there is nothing to export.', action:'Open Report & Impact Tools', run:() => setRoute('impact') }
+  ];
+  function renderTour() {
+    const step = tourSteps[currentTourStep];
+    byId('tourStepNumber').textContent = `STEP ${String(currentTourStep+1).padStart(2,'0')} / ${String(tourSteps.length).padStart(2,'0')}`;
+    byId('tourStepTitle').textContent = step.title;
+    byId('tourStepCopy').textContent = step.copy;
+    byId('tourActionBtn').textContent = step.action;
+    byId('tourPreviousBtn').disabled = currentTourStep === 0;
+    byId('tourNextBtn').textContent = currentTourStep === tourSteps.length - 1 ? 'Finish tour ✓' : 'Next step →';
+    $$('#tourProgress span').forEach((el,index) => el.classList.toggle('active', index <= currentTourStep));
+  }
+  byId('tourPreviousBtn')?.addEventListener('click', () => { currentTourStep = Math.max(0, currentTourStep - 1); renderTour(); });
+  byId('tourNextBtn')?.addEventListener('click', () => { if (currentTourStep === tourSteps.length - 1) { setRoute('home'); announce('Guided demo complete.'); } else { currentTourStep += 1; renderTour(); } });
+  byId('tourActionBtn')?.addEventListener('click', () => tourSteps[currentTourStep].run());
+
+  // Browser history makes feature views act like separate pages, while preserving the original one-file site.
+  window.addEventListener('popstate', () => {
+    const hash = location.hash || '#home';
+    if (hash.startsWith('#material/')) setRoute('material', decodeURIComponent(hash.slice('#material/'.length)), false);
+    else if (hash === '#ai-scanner') setRoute('scanner', null, false);
+    else if (hash === '#impact-lab') setRoute('impact', null, false);
+    else if (hash === '#demo-tour') setRoute('tour', null, false);
+    else setRoute('home', null, false);
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') toggleGallery(false);
+    if (event.altKey && event.key.toLowerCase() === 'g' && byId('app')?.style.display !== 'none') { event.preventDefault(); toggleGallery(); }
+    if (event.altKey && event.key.toLowerCase() === 's' && byId('app')?.style.display !== 'none') { event.preventDefault(); openScanner(); }
+  });
+
+  // Keep material/record numbers current if the old Admin actions change a bin.
+  if (typeof MutationObserver !== 'undefined') {
+    const binArea = byId('bins');
+    if (binArea) new MutationObserver(() => {
+      if (typeof binsConfig !== 'undefined') {
+        const levels = {};
+        Object.entries(binsConfig).forEach(([name,item]) => levels[name] = { level:Number(item.level)||0 });
+        try { localStorage.setItem('ecoextract_bin_levels_v1', JSON.stringify(levels)); } catch (_) {}
+      }
+    }).observe(binArea, { childList:true, subtree:true });
+  }
+
+  renderRecords();
+  renderImpact();
+
+  // Initialise as home without touching login/auth visibility; the original script controls auth.
+  routePanels.forEach(panel => panel.hidden = true);
+  routeRoot.classList.remove('active');
+})();
+</script>
 
 </body>
 </html>
