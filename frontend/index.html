@@ -1977,6 +1977,17 @@
       }
     }
 
+
+    .maintenance-mode .dash-live {
+      background: rgba(255,145,77,.12) !important;
+      color: #c65b14 !important;
+    }
+
+    .maintenance-mode .session-dot {
+      background: var(--neon-orange) !important;
+      box-shadow: 0 0 0 4px rgba(255,145,77,.12) !important;
+    }
+
     @media (max-width: 800px) {
       .nav-links {
         display: none;
@@ -2097,6 +2108,335 @@
         height: 280px;
       }
     }
+
+
+    /* =========================================================
+       ECOEXTRACT ENHANCEMENT LAYER — ADDITIVE ONLY
+    ========================================================= */
+    :root {
+      --neon-cyan: #20e3ff;
+      --neon-purple: #9b6cff;
+      --neon-pink: #ff5db1;
+      --neon-yellow: #ffd166;
+      --neon-orange: #ff914d;
+      --neon-blue: #5b8cff;
+      --neon-green: #45f0a0;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: -25%;
+      z-index: -2;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(32,227,255,.10), transparent 22%),
+        radial-gradient(circle at 82% 18%, rgba(155,108,255,.10), transparent 24%),
+        radial-gradient(circle at 75% 78%, rgba(255,93,177,.08), transparent 24%),
+        radial-gradient(circle at 20% 85%, rgba(255,209,102,.08), transparent 22%);
+      filter: blur(12px);
+      animation: ecoAmbient 16s ease-in-out infinite alternate;
+    }
+
+    @keyframes ecoAmbient {
+      from { transform: translate3d(-2%, -1%, 0) scale(1); }
+      to { transform: translate3d(2%, 2%, 0) scale(1.06); }
+    }
+
+    .auth-card {
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 25px 90px rgba(15,74,54,.18), 0 0 70px rgba(32,227,255,.07);
+    }
+
+    .auth-card::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(120deg, rgba(32,227,255,.65), rgba(155,108,255,.55), rgba(255,93,177,.5), rgba(69,240,160,.65));
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      animation: authBorder 7s linear infinite;
+    }
+
+    @keyframes authBorder {
+      to { filter: hue-rotate(360deg); }
+    }
+
+    .auth-icon {
+      animation: authIconPulse 2.4s ease-in-out infinite;
+    }
+
+    @keyframes authIconPulse {
+      0%,100% { transform: scale(1); box-shadow: 0 0 0 rgba(32,227,255,0); }
+      50% { transform: scale(1.06); box-shadow: 0 0 28px rgba(32,227,255,.25); }
+    }
+
+    .auth-processing .auth-card {
+      animation: loginPulse 1.2s ease-in-out infinite;
+    }
+
+    @keyframes loginPulse {
+      50% { transform: translateY(-4px) scale(1.01); }
+    }
+
+    .auth-btn {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(100deg, var(--green), var(--green-3), var(--neon-cyan));
+      background-size: 220% 100%;
+      animation: authGradient 5s ease infinite;
+    }
+
+    @keyframes authGradient {
+      0%,100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .auth-btn::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -120%;
+      width: 70%;
+      height: 100%;
+      transform: skewX(-20deg);
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent);
+      animation: buttonShine 3.5s ease-in-out infinite;
+    }
+
+    @keyframes buttonShine {
+      0%,45% { left: -120%; }
+      75%,100% { left: 150%; }
+    }
+
+    .session {
+      position: relative;
+    }
+
+    .session-role {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 8px;
+      border-radius: 999px;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      background: rgba(32,227,255,.10);
+      color: #078ba0;
+      border: 1px solid rgba(32,227,255,.24);
+    }
+
+    .admin-mode .session-role {
+      background: linear-gradient(100deg, rgba(155,108,255,.15), rgba(255,93,177,.14));
+      color: #7a43d1;
+      border-color: rgba(155,108,255,.35);
+    }
+
+    .admin-only { display: none !important; }
+    .admin-mode .admin-only { display: block !important; }
+
+    .admin-control-card {
+      margin-top: 18px;
+      padding: 20px;
+      border-radius: 20px;
+      border: 1px solid rgba(155,108,255,.25);
+      background:
+        linear-gradient(135deg, rgba(155,108,255,.09), rgba(32,227,255,.06)),
+        rgba(255,255,255,.72);
+      box-shadow: 0 15px 45px rgba(91,80,180,.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .admin-control-card::after {
+      content: "";
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      right: -70px;
+      top: -80px;
+      border-radius: 50%;
+      background: rgba(255,93,177,.10);
+      filter: blur(4px);
+    }
+
+    .admin-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .admin-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: #6f39bf;
+      background: rgba(155,108,255,.12);
+      border: 1px solid rgba(155,108,255,.25);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .admin-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .admin-action {
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: rgba(255,255,255,.82);
+      padding: 12px;
+      text-align: left;
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+
+    .admin-action:hover {
+      transform: translateY(-4px);
+      border-color: rgba(155,108,255,.35);
+      box-shadow: 0 12px 28px rgba(91,80,180,.10);
+    }
+
+    .admin-action strong { display:block; font-size: 12px; }
+    .admin-action span { display:block; margin-top:3px; color:var(--mute); font-size:10px; }
+
+    .empty-bin-card {
+      margin-top: 12px;
+      padding: 15px;
+      border-radius: 18px;
+      border: 1px dashed rgba(255,145,77,.48);
+      background: linear-gradient(135deg, rgba(255,209,102,.10), rgba(255,145,77,.07));
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .empty-bin-card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(var(--neon-yellow), var(--neon-orange));
+      animation: emptyPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes emptyPulse {
+      50% { opacity: .35; }
+    }
+
+    .empty-bin-icon {
+      width: 40px;
+      height: 40px;
+      flex: 0 0 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      background: rgba(255,209,102,.18);
+      color: #c47b00;
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .empty-bin-card strong { font-size: 12px; }
+    .empty-bin-card p { margin-top: 2px; color: var(--mute); font-size: 10px; }
+    .empty-status {
+      margin-left: auto;
+      padding: 5px 8px;
+      border-radius: 999px;
+      background: rgba(255,145,77,.12);
+      color: #c65b14;
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: .08em;
+    }
+
+    .bin {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bin::after {
+      content: "";
+      position: absolute;
+      left: -30%;
+      top: 0;
+      width: 25%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.38), transparent);
+      transform: skewX(-20deg);
+      animation: binShine 4s ease-in-out infinite;
+    }
+
+    @keyframes binShine {
+      0%,55% { left: -30%; }
+      100% { left: 130%; }
+    }
+
+    .bin-fill {
+      position: relative;
+      background: linear-gradient(90deg, var(--neon-green), var(--neon-cyan), var(--neon-purple)) !important;
+      background-size: 200% 100% !important;
+      animation: binGradient 4s linear infinite;
+    }
+
+    @keyframes binGradient {
+      to { background-position: 200% 0; }
+    }
+
+    .waste-btn.active {
+      background: linear-gradient(100deg, rgba(32,227,255,.12), rgba(155,108,255,.14)) !important;
+      border-color: rgba(32,227,255,.42) !important;
+      color: #147f91 !important;
+      box-shadow: 0 8px 20px rgba(32,227,255,.08);
+    }
+
+    .drop-btn {
+      background: linear-gradient(100deg, #45f0a0, #20e3ff, #9b6cff) !important;
+      background-size: 220% 100% !important;
+      animation: dropGradient 5s ease infinite;
+    }
+
+    @keyframes dropGradient {
+      0%,100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .reveal {
+      will-change: transform, opacity;
+    }
+
+    .reveal.is-visible {
+      animation: revealPop .7s cubic-bezier(.2,.8,.2,1) both;
+    }
+
+    @keyframes revealPop {
+      from { opacity: 0; transform: translateY(22px) scale(.985); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @media (max-width: 800px) {
+      .admin-grid { grid-template-columns: 1fr; }
+      .session-role { display:none; }
+    }
+
   </style>
 </head>
 
@@ -2210,6 +2550,7 @@
         <div class="session">
           <span class="session-dot"></span>
           <span id="sessionUser">Connected</span>
+          <span class="session-role" id="sessionRole">GUEST</span>
           <button class="logout" id="logoutBtn">Disconnect</button>
         </div>
 
@@ -2679,6 +3020,15 @@
 
               <div id="bins"></div>
 
+              <div class="empty-bin-card reveal">
+                <div class="empty-bin-icon">＋</div>
+                <div>
+                  <strong>Empty Collection Slot</strong>
+                  <p>Ready for the next e-waste batch. No material detected.</p>
+                </div>
+                <span class="empty-status">EMPTY</span>
+              </div>
+
               <div class="leaderboard">
 
                 <div class="panel-title">
@@ -2723,6 +3073,31 @@
 
             </div>
 
+          </div>
+        </div>
+
+        <div class="admin-control-card admin-only reveal" id="adminControlPanel">
+          <div class="admin-head">
+            <div>
+              <div class="section-label" style="margin-bottom:5px;color:#7a43d1;">ADMIN CONTROL CENTER</div>
+              <h3 style="font-family:&quot;Bricolage Grotesque&quot;,sans-serif;">System & Collection Controls</h3>
+              <p style="color:var(--mute);font-size:12px;margin-top:4px;">Admin-only presentation controls for bins, telemetry and demo operations.</p>
+            </div>
+            <span class="admin-badge">✦ ADMIN ACCESS</span>
+          </div>
+          <div class="admin-grid">
+            <button class="admin-action" id="emptySelectedBinBtn">
+              <strong>🗑 Empty Selected Bin</strong>
+              <span>Reset the active waste stream to 0%.</span>
+            </button>
+            <button class="admin-action" id="resetBinsBtn">
+              <strong>↻ Reset All Bins</strong>
+              <span>Restore demo collection levels.</span>
+            </button>
+            <button class="admin-action" id="maintenanceBtn">
+              <strong>⚙ Maintenance Mode</strong>
+              <span id="maintenanceText">System operating normally.</span>
+            </button>
           </div>
         </div>
 
@@ -3285,53 +3660,84 @@
     ========================================================= */
 
     window.addEventListener("load", () => {
+      // IMPORTANT: never auto-open the dashboard.
+      // The user must explicitly submit the login form every time the page loads.
+      document.body.classList.add("locked");
+      app.style.display = "none";
+      authGate.classList.remove("hidden");
 
       setTimeout(() => {
         intro.classList.add("hide");
-        document.body.classList.remove("locked");
       }, 2600);
-
-      setTimeout(() => {
-        authGate.classList.add("hidden");
-        app.style.display = "block";
-        initDashboard();
-      }, 3050);
-
     });
 
     /* =========================================================
-       AUTH
+       AUTH — MANUAL LOGIN ONLY
     ========================================================= */
 
     authForm.addEventListener("submit", function(event) {
       event.preventDefault();
 
       const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+      const role = document.getElementById("role").value;
+      const button = authForm.querySelector("button[type=submit]");
 
-      if (!email) {
-        showToast("Please enter your email.");
+      if (!email || !password) {
+        showToast("Please enter your email and password.");
         return;
       }
 
-      authGate.classList.add("hidden");
-      app.style.display = "block";
-      document.body.classList.remove("locked");
+      // Demo credentials for presentation mode.
+      if (role === "Admin" && email.toLowerCase() !== "admin@ecoextract.org") {
+        showToast("Admin demo login: use admin@ecoextract.org");
+        return;
+      }
 
-      document.getElementById("sessionUser").textContent =
-        email.split("@")[0] || "Connected";
+      if (role === "Admin" && password !== "password") {
+        showToast("Admin demo password is: password");
+        return;
+      }
 
-      initDashboard();
+      document.body.classList.add("auth-processing");
+      button.disabled = true;
+      const originalButtonText = button.innerHTML;
+      button.innerHTML = "Connecting EcoExtract…";
 
-      showToast("EcoExtract portal connected.");
+      setTimeout(() => {
+        authGate.classList.add("hidden");
+        app.style.display = "block";
+        document.body.classList.remove("locked", "auth-processing");
+        document.body.dataset.role = role.toLowerCase();
+        document.body.classList.toggle("admin-mode", role === "Admin");
+
+        document.getElementById("sessionUser").textContent =
+          email.split("@")[0] || "Connected";
+        document.getElementById("sessionRole").textContent = role;
+
+        button.disabled = false;
+        button.innerHTML = originalButtonText;
+
+        initDashboard();
+
+        showToast(
+          role === "Admin"
+            ? "Admin portal connected. Full controls enabled."
+            : "Contributor portal connected."
+        );
+      }, 900);
     });
 
     document.getElementById("logoutBtn").addEventListener("click", () => {
-
       app.style.display = "none";
       authGate.classList.remove("hidden");
       document.body.classList.add("locked");
-
-      showToast("Session disconnected.");
+      document.body.classList.remove("admin-mode");
+      document.body.removeAttribute("data-role");
+      document.getElementById("sessionRole").textContent = "GUEST";
+      document.getElementById("password").value = "";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      showToast("Session disconnected. Login required.");
     });
 
     /* =========================================================
@@ -3361,7 +3767,7 @@
           <div class="bin">
             <div class="bin-top">
               <span>${data.type}</span>
-              <span class="bin-status">${data.status}</span>
+              <span class="bin-status">${data.level === 0 ? "EMPTY" : data.status}</span>
             </div>
 
             <div class="bin-bar">
@@ -3384,6 +3790,72 @@
           </div>
         `
       ).join("");
+    }
+
+    /* =========================================================
+       ADMIN CONTROLS
+    ========================================================= */
+
+    const demoBinLevels = {
+      "PCB Safe-Box": 32,
+      "Copper Bin": 47,
+      "Lithium Cell Box": 21
+    };
+
+    const emptySelectedBinBtn = document.getElementById("emptySelectedBinBtn");
+    const resetBinsBtn = document.getElementById("resetBinsBtn");
+    const maintenanceBtn = document.getElementById("maintenanceBtn");
+
+    if (emptySelectedBinBtn) {
+      emptySelectedBinBtn.addEventListener("click", () => {
+        if (document.body.dataset.role !== "admin") {
+          showToast("Admin access required.");
+          return;
+        }
+
+        const config = itemsConfig[selectedWaste];
+        binsConfig[config.bin].level = 0;
+        binsConfig[config.bin].status = "EMPTY";
+        renderBins();
+        addTerminalLine("ADMIN: " + config.bin + " emptied and marked EMPTY.");
+        showToast(config.bin + " is now empty.");
+      });
+    }
+
+    if (resetBinsBtn) {
+      resetBinsBtn.addEventListener("click", () => {
+        if (document.body.dataset.role !== "admin") {
+          showToast("Admin access required.");
+          return;
+        }
+
+        Object.entries(demoBinLevels).forEach(([name, level]) => {
+          binsConfig[name].level = level;
+          binsConfig[name].status = name === "Lithium Cell Box" ? "SAFE" : "READY";
+        });
+
+        renderBins();
+        addTerminalLine("ADMIN: demo bin levels restored.");
+        showToast("All collection bins reset.");
+      });
+    }
+
+    if (maintenanceBtn) {
+      maintenanceBtn.addEventListener("click", () => {
+        if (document.body.dataset.role !== "admin") {
+          showToast("Admin access required.");
+          return;
+        }
+
+        const active = document.body.classList.toggle("maintenance-mode");
+        const text = document.getElementById("maintenanceText");
+        if (text) text.textContent = active
+          ? "Maintenance mode enabled for demo."
+          : "System operating normally.";
+
+        addTerminalLine("ADMIN: maintenance mode " + (active ? "enabled." : "disabled."));
+        showToast(active ? "Maintenance mode enabled." : "Maintenance mode disabled.");
+      });
     }
 
     /* =========================================================
