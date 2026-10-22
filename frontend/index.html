@@ -4316,14 +4316,20 @@
     ========================================================= */
 
     window.addEventListener("load", () => {
-      document.body.classList.add("locked");
-      app.style.display = "none";
-      authGate.classList.remove("hidden");
+    document.body.classList.add("locked");
+    app.style.display = "none";
+    authGate.classList.remove("hidden");
 
-      setTimeout(() => {
-        intro.classList.add("hide");
-      }, 2600);
-    });
+    // HOTFIX: pre-render dashboard data
+    try {
+        if (typeof renderBins === 'function') renderBins();
+        if (typeof renderLeaderboard === 'function') renderLeaderboard();
+    } catch (_) {}
+
+    setTimeout(() => {
+      intro.classList.add("hide");
+    }, 2600);
+});
 
     /* =========================================================
        AUTH — MANUAL LOGIN ONLY
