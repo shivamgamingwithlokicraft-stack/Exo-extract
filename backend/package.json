@@ -1,10 +1,27 @@
 {
-  "name": "ecoextract-dashboard",
+  "name": "ecoextract-backend",
   "version": "1.0.0",
-  "description": "EcoExtract: AI e-waste hub backend and live web dashboard",
+  "description": "EcoExtract API backend — e-waste collection records, material catalog, impact calculation, CSV export",
   "main": "server.js",
-  "scripts": { "start": "node server.js" },
-  "dependencies": { "express": "4.19.2" },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "ecoextract",
+    "ewaste",
+    "recycling",
+    "api",
+    "environment",
+    "tagore-bal-vigyan-parv"
+  ],
+  "author": "Shivam Singh Patel",
   "license": "MIT",
-  "author": "Shivam Singh Patel (NextGen AI Studio)"
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "cors": "^2.8.5"
+  }
 }
