@@ -1,1 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#08120e" />
+  <title>EcoExtract — Terminal Console</title>
 
+  <!-- Terminal console stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Small inline style for cross-page nav consistency -->
+  <style>
+    .cross-nav-link {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 100;
+      background: var(--card-surface-color);
+      border: 1px solid var(--border-line);
+      color: var(--accent-green);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform .2s ease, background .2s ease;
+    }
+    .cross-nav-link:hover {
+      transform: translateY(-2px);
+      background: #132a1f;
+      text-decoration: none;
+    }
+    .footer-credit {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 100;
+      color: var(--text-muted);
+      font-size: 10px;
+      letter-spacing: .08em;
+    }
+    @media (max-width: 800px) {
+      .cross-nav-link { bottom: 12px; left: 12px; font-size: 11px; padding: 6px 10px; }
+      .footer-credit { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════
+       AUTH GATE — login form
+       IDs match handleAuth() in app.js:
+       auth-email, auth-pass, auth-role, auth-gate
+  ═════════════════════════════════════════════════════════ -->
+  <div class="auth-wrapper" id="auth-gate">
+    <div class="auth-panel">
+      <h2>⌬ EcoExtract Terminal</h2>
+      <p>Technical operations console — authorized access only.</p>
+
+      <label for="auth-email">Operator Email</label>
+      <input
+        id="auth-email"
+        type="email"
+        value="admin@ecoextract.org"
+        placeholder="operator@ecoextract.org"
+        autocomplete="username"
+      />
+
+      <label for="auth-pass">Access Key</label>
+      <input
+        id="auth-pass"
+        type="password"
+        value="password"
+        placeholder="Enter access key"
+        autocomplete="current-password"
+      />
+
+      <label for="auth-role">Access Level</label>
+      <select id="auth-role">
+        <option value="admin">System Admin</option>
+        <option value="contributor">Contributor</option>
+      </select>
+
+      <button type="button" onclick="handleAuth()">Connect to Console →</button>
+
+      <p style="margin-top:16px;text-align:center;font-size:11px;color:var(--text-muted);">
+        <a href="index.html" style="color:var(--accent-green);">← Back to Main EcoExtract Site</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       WORKSPACE — shown after successful auth
+       IDs match handleAuth() / handleLogout() in app.js:
+       app-workspace, op-name, op-role, stat-ops, stat-nodes,
+       live-terminal
+  ═════════════════════════════════════════════════════════ -->
+  <div id="app-workspace" class="hidden">
+
+    <!-- Top navigation bar -->
+    <nav class="nav-bar">
+      <div class="brand-logo">⌬ EcoExtract · Terminal</div>
+      <div style="display:flex;gap:12px;align-items:center;">
+        <div class="profile-badge">
+          <span id="op-name">operator</span>
+          <span style="color:var(--accent-copper);margin-left:6px;">
+            [<span id="op-role">GUEST</span>]
+          </span>
+        </div>
+        <button type="button" class="btn-exit" onclick="handleLogout()">Disconnect</button>
+      </div>
+    </nav>
+
+    <!-- Main two-column workspace -->
+    <div class="workspace-grid">
+
+      <!-- ══ LEFT PANEL — system specs + accordion ══ -->
+      <div class="panel-column left-main">
+
+        <!-- Live counters -->
+        <div class="live-counter-strip">
+          <div class="counter-widget">
+            <span>Operations Logged</span>
+            <strong id="stat-ops">0</strong>
+          </div>
+          <div class="counter-widget">
+            <span>Active Nodes</span>
+            <strong id="stat-nodes">0</strong>
+          </div>
+          <div class="counter-widget">
+            <span>System Status</span>
+            <strong style="font-size:18px;color:var(--accent-green);">ONLINE</strong>
+          </div>
+        </div>
+
+        <h3 style="margin:0 0 12px;font-size:16px;color:var(--accent-green);letter-spacing:.05em;">
+          ▸ SYSTEM SPECIFICATIONS
+        </h3>
+
+        <!-- Accordion 01 — AI model -->
+        <div class="accordion-block active">
+          <button type="button" class="accordion-toggle" onclick="toggleAccordion(this)">
+            01 — AI Classification Model
+          </button>
+          <div class="accordion-body">
+            <div class="nested-specs">
+              <strong>Model</strong>
+              <p>Xenova/clip-vit-base-patch32 · Zero-shot CLIP ViT-Base</p>
+            </div>
+            <div class="nested-specs">
+              <strong>Runtime</strong>
+              <p>Transformers.js · WebAssembly + WebGL in-browser</p>
+            </div>
+            <div class="nested-specs">
+              <strong>Input</strong>
+              <p>User image (processed locally, never uploaded)</p>
+            </div>
+            <div class="nested-specs">
+              <strong>Output</strong>
+              <p>Top similarity score + category label · review flag below 27%</p>
+            </div>
+            <div class="math-code-box">score = cos_sim( image_embedding , text_embedding )
+category = argmax( score over 6 prompts )
+needs_review = ( max_score &lt; 0.27 ) OR ( top1 - top2 &lt; 0.04 )</div>
+          </div>
+        </div>
+
+        <!-- Accordion 02 — Data storage -->
+        <div class="accordion-block">
+          <button type="button" class="accordion-toggle" onclick="toggleAccordion(this)">
+            02 — Data Storage &amp; Privacy
+          </button>
+          <div class="accordion-body">
+            <div class="nested-specs">
+              <strong>Storage</strong>
+              <p>Browser localStorage · device-local only</p>
+            </div>
+            <div class="nested-specs">
+              <strong>Records Key</strong>
+              <p>ecoextract_confirmed_records_v1</p>
+            </div>
+            <div class="nested-specs">
+              <strong>Bins Key</strong>
+              <p>ecoextract_bin_levels_v1</p>
+            </div>
+            <div class="nested-specs">
+              <strong>Themes Key</strong>
+              <p>ecoextract_theme</p>
+            </div>
+            <div class="nested-specs">
+              <strong>No Server</strong>
+              <p>No images or records leave the device · images never uploaded</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Accordion 03 — Impact calculation -->
+        <div class="accordion-block">
+          <button type="button" class="accordion-toggle" onclick="toggleAccordion(this)">
+            03 — Impact Calculation
+          </button>
+          <div class="accordion-body">
+            <div class="nested-specs">
+              <strong>Formula</strong>
+              <p>CO₂e = total_kg × emission_factor</p>
+            </div>
+            <div class="nested-specs">
+              <strong>Factor Source</strong>
+              <p>User-supplied · must be cited (no arbitrary default)</p>
+            </div>
+            <div class="nested-specs">
+              <strong>Record Mass</strong>
+              <p>Sum of user-confirmed gram values across all records</p>
+            </div>
+            <div class="math-code-box">CO₂e = Σ(record.kg) × factor_kgCO2_per_kg</div>
+          </div>
+        </div>
+
+        <!-- Accordion 04 — Research citations -->
+        <div class="accordion-block">
+          <button type="button" class="accordion-toggle" onclick="toggleAccordion(this)">
+            04 — Research &amp; Sources
+          </button>
+          <div class="accordion-body">
+            <div class="nested-specs">
+              <strong>Global E-Waste Monitor 2024 (UNITAR)</strong>
+              <p>62 Mt generated · only 22.3% formally collected · $91B raw material value lost</p>
+            </div>
+            <div class="nested-specs">
+              <strong>Forti et al. (2020)</strong>
+              <p>1 tonne of PCBs contains 40–800× more gold than 1 tonne of gold ore</p>
+            </div>
+            <div class="nested-specs">
+              <strong>Baldé et al. (2017)</strong>
+              <p>Recycling 1 million laptops saves energy equal to 3,657 US homes/year</p>
+            </div>
+            <div class="nested-specs">
+              <strong>CPCB India (2022)</strong>
+              <p>Only ~10% of India's e-waste formally recycled</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ══ RIGHT PANEL — live telemetry stream ══ -->
+      <div class="panel-column">
+        <h3 style="margin:0 0 12px;font-size:16px;color:var(--accent-green);letter-spacing:.05em;">
+          ▸ LIVE OPERATIONS TELEMETRY
+        </h3>
+        <div class="hacker-terminal" id="live-terminal">
+          <div class="terminal-line init-line">[SYS] EcoExtract terminal initialised</div>
+          <div class="terminal-line init-line">[SYS] Awaiting operator authentication...</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Cross-page navigation links -->
+  <a href="index.html" class="cross-nav-link">← Main Site</a>
+  <div class="footer-credit">EcoExtract · NextGen AI Studio</div>
+
+  <!-- Terminal console JavaScript -->
+  <script src="app.js"></script>
+
+</body>
+</html>
