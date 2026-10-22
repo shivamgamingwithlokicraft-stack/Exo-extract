@@ -33,25 +33,6 @@
       --max: 1240px;
     }
 
-    /* Mood Theme Overrides */
-    body.light-theme {
-      --bg: #f5f7f2;
-      --card: #ffffff;
-      --ink: #14261e;
-      --mute: #5a6b62;
-      background: #f5f7f2 !important;
-      color: #14261e !important;
-    }
-
-    body.dark-theme {
-      --bg: #07100c;
-      --card: #0d1a13;
-      --ink: #edf7f0;
-      --mute: #91a69a;
-      background: #07100c !important;
-      color: #edf7f0 !important;
-    }
-
     * {
       box-sizing: border-box;
       margin: 0;
@@ -387,7 +368,7 @@
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 24px;
     }
 
     .nav-links a {
@@ -1880,6 +1861,89 @@
     }
 
     /* =========================================================
+       DARK SYSTEM MODE
+    ========================================================= */
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: #07100c;
+        color: #edf7f0;
+      }
+
+      .navbar {
+        background: rgba(7,16,12,.82);
+        border-color: rgba(255,255,255,.08);
+      }
+
+      .brand {
+        color: white;
+      }
+
+      .nav-links a,
+      .session,
+      .logout {
+        color: #91a69a;
+      }
+
+      .eyebrow,
+      .stat-card,
+      .value-card,
+      .feature-card,
+      .accordion,
+      .about-card,
+      .impact-card {
+        background: #0d1a13;
+        border-color: rgba(255,255,255,.08);
+      }
+
+      .hero-text,
+      .section-copy,
+      .value-card p,
+      .feature-card p,
+      .about-card p,
+      .impact-card span,
+      .guide-note,
+      .estimate-note {
+        color: #91a69a;
+      }
+
+      .hero-grid {
+        background-image:
+          linear-gradient(rgba(95,224,160,.025) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(95,224,160,.025) 1px, transparent 1px);
+      }
+
+      .btn-secondary,
+      .filter-btn {
+        background: #0d1a13;
+        color: #c9dbd0;
+        border-color: rgba(255,255,255,.08);
+      }
+
+      .stat-card::after {
+        background: rgba(95,224,160,.04);
+      }
+
+      .material-icon,
+      .feature-icon,
+      .impact-icon {
+        background: #12251b;
+      }
+
+      .accordion-head {
+        color: white;
+      }
+
+      .accordion-body-inner {
+        color: #91a69a;
+      }
+
+      .about-card h3 {
+        color: white;
+      }
+    }
+
+    /* =========================================================
        RESPONSIVE
     ========================================================= */
 
@@ -2377,13 +2441,14 @@
 
     /* =========================================================
        ECOEXTRACT UPDATE: GALLERY, REAL BROWSER AI, ROUTED PAGES
+       Added on top of the original site styles.
     ========================================================= */
     .gallery-nav { position: relative; }
     .gallery-toggle,
     .nav-feature-button {
       display: inline-flex; align-items: center; justify-content: center; gap: 7px;
       padding: 8px 11px; border: 1px solid transparent; border-radius: 10px;
-      background: transparent; color: var(--mute); font-size: 13px; font-weight: 700;
+      background: transparent; color: var(--mute); font-size: 14px; font-weight: 700;
       transition: background .25s ease, color .25s ease, border-color .25s ease, transform .25s ease;
       white-space: nowrap;
     }
@@ -2526,8 +2591,8 @@
     .tour-controls { display:flex; gap:9px; flex-wrap:wrap; margin-top:26px; }
     .route-reduced-motion * { animation-duration:.01ms !important; animation-iteration-count:1 !important; scroll-behavior:auto !important; }
     @media (max-width: 1050px) {
-      .nav-links { gap:6px; }
-      .nav-feature-button, .gallery-toggle { font-size:11px; padding:6px; }
+      .nav-links { gap:8px; }
+      .nav-feature-button, .gallery-toggle { font-size:12px; padding:8px; }
       .material-layout, .scanner-layout { grid-template-columns:1fr; }
       .material-photo-frame, .material-photo { min-height:330px; }
     }
@@ -2672,7 +2737,6 @@
           <button type="button" class="nav-feature-button" id="scannerNavLink">AI Scanner</button>
           <button type="button" class="nav-feature-button" id="impactNavLink">Impact Lab</button>
           <button type="button" class="nav-feature-button" id="tourNavBtn">Demo Tour</button>
-          <button type="button" class="nav-feature-button" id="themeToggleBtn" title="Switch Theme">Mood: Auto 🌓</button>
         </div>
 
         <div class="session">
@@ -2691,7 +2755,7 @@
       <button type="button" id="mobileTourBtn">▷ Demo Tour</button>
     </div>
 
-    <!-- Feature Route Views -->
+    <!-- Added feature pages: separate views, not scroll-to sections -->
     <div id="featureRouteViews" aria-live="polite">
       <section id="materialView" class="route-panel" hidden>
         <div class="container">
@@ -2731,13 +2795,13 @@
           </div>
           <div class="route-eyebrow">REAL IMAGE INPUT · NO RANDOM RESULTS</div>
           <h1 class="route-title">Scan what you actually have.</h1>
-          <p class="route-copy">Upload a photo or use your camera. EcoExtract runs a general-purpose CLIP vision model in your browser and displays the model's returned labels.</p>
+          <p class="route-copy">Upload a photo or use your camera. EcoExtract runs a general-purpose CLIP vision model in your browser and displays the model's returned labels. It is a prototype classifier, not a certified e-waste detector; review every result before physical sorting.</p>
           <div class="scanner-layout">
             <div class="scanner-panel">
               <h3>01 / Image input</h3>
-              <p class="scanner-help">Choose a clear image with one main item.</p>
+              <p class="scanner-help">Choose a clear image with one main item, good lighting, and as little background clutter as possible. Your image is processed in this browser; it is not sent to an EcoExtract server.</p>
               <div class="scanner-dropzone" id="scannerDropzone">
-                <div class="scanner-prompt" id="scannerPrompt"><div class="upload-orb">↑</div><strong>Drop an image here or choose a file</strong><p>JPG, PNG, WEBP.</p></div>
+                <div class="scanner-prompt" id="scannerPrompt"><div class="upload-orb">↑</div><strong>Drop an image here or choose a file</strong><p>JPG, PNG, WEBP. The model files may take several hundred MB to download on first use and are cached by the browser.</p></div>
                 <img id="scanPreview" alt="Your selected electronic waste image" hidden />
                 <video id="cameraVideo" autoplay playsinline hidden></video>
               </div>
@@ -2749,22 +2813,22 @@
               </div>
               <div class="scanner-progress-wrap" id="scannerProgressWrap"><div class="scanner-progress-head"><span id="scannerProgressLabel">Waiting for model…</span><span id="scannerProgressPct">—</span></div><div class="scanner-progress-track"><div class="scanner-progress-fill" id="scannerProgressFill"></div></div></div>
               <div class="scanner-button-row"><button type="button" class="route-primary" id="analyseImageBtn" disabled>Analyse Image with AI →</button><button type="button" class="route-quiet-btn" id="clearScanBtn">Clear / Start Over</button></div>
-              <label class="scanner-help" for="scanMassInput" style="display:block;margin-top:18px;">Collection mass (grams)</label>
+              <label class="scanner-help" for="scanMassInput" style="display:block;margin-top:18px;">Collection mass (grams) — used only if you confirm this scan as a collection record</label>
               <input class="scanner-text-input" id="scanMassInput" type="number" min="1" max="1000000" step="1" placeholder="Enter actual measured mass, e.g. 250" />
               <label class="scanner-help" for="scanSignatureInput" style="display:block;margin-top:12px;">Contributor / institution (optional)</label>
               <input class="scanner-text-input" id="scanSignatureInput" type="text" maxlength="100" placeholder="Enter a name or institution" />
             </div>
             <div class="scanner-result-panel">
               <h3>02 / Model result</h3>
-              <p class="scanner-help">Results come from the downloaded model and uploaded image.</p>
-              <div id="scannerResult" class="scanner-result-empty"><div><div class="result-icon">⌁</div><strong>Waiting for an image</strong><br />Choose a photo and run the analysis.</div></div>
+              <p class="scanner-help">Results come from the downloaded model and the uploaded image. The displayed score is a model similarity score, not a calibrated probability.</p>
+              <div id="scannerResult" class="scanner-result-empty"><div><div class="result-icon">⌁</div><strong>Waiting for an image</strong><br />Choose a photo and run the analysis. No sample result is inserted automatically.</div></div>
               <button type="button" class="route-primary" id="confirmCollectionBtn" disabled style="width:100%;margin-top:12px;">Confirm & Add to Collection</button>
-              <div class="scan-warning">Safety note: visual classification cannot verify battery condition. Follow local e-waste collection guidance.</div>
+              <div class="scan-warning">Safety note: visual classification cannot verify a battery's condition or make hazardous materials safe. Do not dismantle, puncture, heat, or open batteries. Follow local e-waste collection guidance.</div>
             </div>
           </div>
           <div class="collection-section">
             <div class="collection-section-head"><h4>Confirmed collection records</h4><span class="collection-count" id="collectionCount">0 RECORDS</span></div>
-            <p class="scanner-help">Only entries you confirm are stored here.</p>
+            <p class="scanner-help">Only entries you confirm are stored here. These rows are not pre-filled demo records.</p>
             <div id="collectionRecordsList" aria-live="polite"></div>
             <div class="route-actions"><button type="button" class="route-quiet-btn" id="exportRecordsBtn">↓ Export CSV Report</button><button type="button" class="route-quiet-btn" id="openImpactFromScanner">View Impact Lab →</button></div>
           </div>
@@ -2773,17 +2837,17 @@
 
       <section id="impactView" class="route-panel" hidden>
         <div class="container">
-          <div class="route-topline"><button type="button" class="route-back" data-go-home>← Back to EcoExtract</button><span class="route-eyebrow">Impact lab</span></div>
+          <div class="route-topline"><button type="button" class="route-back" data-go-home>← Back to EcoExtract</button><span class="route-eyebrow">Impact lab / record-based</span></div>
           <div class="route-eyebrow">IMPACT LAB · BASED ON CONFIRMED RECORDS</div>
           <h1 class="route-title">Measure the data you collected.</h1>
-          <p class="route-copy">Calculates totals from your confirmed local collection records.</p>
+          <p class="route-copy">This page calculates totals from your confirmed local collection records. It does not insert sample collections. To estimate CO₂-equivalent impact, enter an emission factor from a source you trust; EcoExtract will show the assumption used.</p>
           <div class="impact-overview-grid">
-            <div class="impact-metric"><span>Confirmed collection entries</span><strong id="impactRecordCount">0</strong><small>Records saved</small></div>
-            <div class="impact-metric"><span>Total recorded mass</span><strong id="impactTotalKg">0.000 kg</strong><small>Sum of gram values</small></div>
-            <div class="impact-metric"><span>Material categories</span><strong id="impactCategoryCount">0</strong><small>Categories present</small></div>
+            <div class="impact-metric"><span>Confirmed collection entries</span><strong id="impactRecordCount">0</strong><small>Records saved in this browser</small></div>
+            <div class="impact-metric"><span>Total recorded mass</span><strong id="impactTotalKg">0.000 kg</strong><small>Sum of entered gram values</small></div>
+            <div class="impact-metric"><span>Material categories</span><strong id="impactCategoryCount">0</strong><small>Categories present in records</small></div>
           </div>
-          <div class="impact-panel"><h3>Material breakdown</h3><div class="impact-breakdown" id="impactBreakdown"></div></div>
-          <div class="impact-panel"><h3>Optional CO₂e estimate</h3><label class="scanner-help" for="co2FactorInput" style="display:block;margin-top:14px;">Emission factor (kg CO₂e per kg collected)</label><input id="co2FactorInput" class="scanner-text-input" type="number" min="0.000001" max="1000000" step="any" placeholder="Enter a sourced factor" /><div class="route-actions"><button type="button" class="route-primary" id="calculateImpactBtn">Calculate Using This Factor</button><button type="button" class="route-quiet-btn" id="exportImpactBtn">Export Report CSV</button></div><div class="impact-co2-result" id="co2Result" aria-live="polite">No CO₂e estimate shown.</div></div>
+          <div class="impact-panel"><h3>Material breakdown</h3><p class="scanner-help">Bars are computed from actual confirmed record weights. An empty view means no records have been confirmed yet.</p><div class="impact-breakdown" id="impactBreakdown"></div></div>
+          <div class="impact-panel"><h3>Optional CO₂e estimate</h3><p class="scanner-help">Only use an emission factor supported by a source for your material and recycling pathway. The app does not supply an arbitrary default.</p><label class="scanner-help" for="co2FactorInput" style="display:block;margin-top:14px;">Emission factor (kg CO₂e per kg collected)</label><input id="co2FactorInput" class="scanner-text-input" type="number" min="0.000001" max="1000000" step="any" placeholder="Enter a sourced factor" /><div class="route-actions"><button type="button" class="route-primary" id="calculateImpactBtn">Calculate Using This Factor</button><button type="button" class="route-quiet-btn" id="exportImpactBtn">Export Report CSV</button></div><div class="impact-co2-result" id="co2Result" aria-live="polite">No CO₂e estimate shown. Enter a source-backed factor to calculate an estimate.</div></div>
         </div>
       </section>
 
@@ -2792,54 +2856,86 @@
           <div class="route-topline"><button type="button" class="route-back" data-go-home>← Back to EcoExtract</button><span class="route-eyebrow">Presentation mode</span></div>
           <div class="route-eyebrow">GUIDED PROJECT WALKTHROUGH</div>
           <h1 class="route-title">A five-step EcoExtract demo.</h1>
+          <p class="route-copy">Use this guided sequence to show the judges the project in a consistent order. The tour never fabricates a scan or collection.</p>
           <div class="tour-card"><div class="tour-step-number" id="tourStepNumber">STEP 01 / 05</div><h2 class="tour-step-title" id="tourStepTitle">Explore the materials</h2><p class="tour-step-copy" id="tourStepCopy"></p><div class="tour-progress" id="tourProgress"><span></span><span></span><span></span><span></span><span></span></div><div class="tour-controls"><button type="button" class="route-quiet-btn" id="tourPreviousBtn">← Previous</button><button type="button" class="route-quiet-btn" id="tourActionBtn">Open feature</button><button type="button" class="route-primary" id="tourNextBtn">Next step →</button></div></div>
         </div>
       </section>
     </div>
 
-    <!-- HERO -->
+    <!-- =======================================================
+         HERO
+    ======================================================= -->
+
     <header class="hero" id="home">
+
       <div class="hero-grid"></div>
       <div class="hero-orb orb-one"></div>
       <div class="hero-orb orb-two"></div>
+
       <div class="container">
+
         <div class="hero-content">
+
           <div class="eyebrow reveal">
-            <i></i> AI E-WASTE MANAGEMENT • LIVE CONCEPT
+            <i></i>
+            AI E-WASTE MANAGEMENT • LIVE CONCEPT
           </div>
+
           <h1 class="reveal reveal-delay-1">
             Turn discarded electronics into
             <span>valuable resources.</span>
           </h1>
+
           <p class="hero-text reveal reveal-delay-2">
-            EcoExtract is an AI-vision-powered concept designed to make electronic waste management more organised.
+            EcoExtract is an AI-vision-powered concept designed to make
+            electronic waste management more organised, measurable and
+            environmentally responsible.
           </p>
+
           <div class="hero-actions reveal reveal-delay-3">
-            <a href="#dashboard" class="btn btn-primary">Open AI Sorting Hub →</a>
-            <a href="#how" class="btn btn-secondary">Explore How It Works</a>
+            <a href="#dashboard" class="btn btn-primary">
+              Open AI Sorting Hub →
+            </a>
+
+            <a href="#how" class="btn btn-secondary">
+              Explore How It Works
+            </a>
             <button type="button" class="btn btn-secondary" id="startTourHeroBtn">Start Guided Demo ↗</button>
           </div>
+
         </div>
+
         <div class="hero-mini-card">
+
           <div class="mini-top">
             <span>VISION NODE / 01</span>
             <span>LIVE</span>
           </div>
+
           <div class="mini-status">
-            <b></b> AI vision system active
+            <b></b>
+            AI vision system active
           </div>
+
           <div class="mini-scan">
             <div class="mini-chip"></div>
             <div class="scan-line"></div>
           </div>
+
         </div>
+
       </div>
     </header>
 
-    <!-- STATS -->
+    <!-- =======================================================
+         STATS
+    ======================================================= -->
+
     <section class="stats-strip">
       <div class="container">
+
         <div class="stats-grid">
+
           <div class="stat-card reveal">
             <div class="stat-label">E-Waste Diverted</div>
             <div class="stat-number">
@@ -2847,12 +2943,14 @@
               <small>kg</small>
             </div>
           </div>
+
           <div class="stat-card reveal reveal-delay-1">
             <div class="stat-label">Estimated Material Value</div>
             <div class="stat-number">
               ₹<span class="counter" data-target="18450">0</span>
             </div>
           </div>
+
           <div class="stat-card reveal reveal-delay-2">
             <div class="stat-label">Potential CO₂ Avoided</div>
             <div class="stat-number">
@@ -2860,231 +2958,953 @@
               <small>kg</small>
             </div>
           </div>
+
         </div>
+
       </div>
     </section>
 
-    <!-- VALUE GUIDE -->
+    <aside class="container showcase-data-note" role="note">
+      <span class="showcase-note-icon">i</span>
+      <p><strong>Data note:</strong> the original homepage counters and sample leaderboard are static showcase examples, not live sensor readings. The new AI scanner runs image inference, and its downloadable report includes only collection records a user explicitly confirms.</p>
+    </aside>
+
+    <!-- =======================================================
+         VALUE GUIDE
+    ======================================================= -->
+
     <section class="section" id="guide">
+
       <div class="container">
+
         <div class="guide-header reveal">
+
           <div>
             <div class="section-label">Sample Material Guide</div>
-            <h2 class="section-title">Know what your e-waste may be worth.</h2>
+
+            <h2 class="section-title">
+              Know what your e-waste may be worth.
+            </h2>
+
+            <p class="section-copy">
+              Explore illustrative material categories used by EcoExtract
+              to communicate potential resource value.
+            </p>
           </div>
+
+          <div class="guide-note">
+            Values shown below are illustrative estimates for the project
+            interface and are not live market prices.
+          </div>
+
         </div>
+
         <div class="filter-row reveal">
-          <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="e-waste">E-Waste</button>
-          <button class="filter-btn" data-filter="metal">Metal</button>
-          <button class="filter-btn" data-filter="battery">Battery</button>
-          <button class="filter-btn" data-filter="other">Other</button>
+
+          <button class="filter-btn active" data-filter="all">
+            All
+          </button>
+
+          <button class="filter-btn" data-filter="e-waste">
+            E-Waste
+          </button>
+
+          <button class="filter-btn" data-filter="metal">
+            Metal
+          </button>
+
+          <button class="filter-btn" data-filter="battery">
+            Battery
+          </button>
+
+          <button class="filter-btn" data-filter="other">
+            Other
+          </button>
+
         </div>
+
         <div class="value-grid" id="valueGrid">
+
           <article class="value-card reveal" data-category="e-waste">
             <div class="material-icon">▦</div>
             <div class="value-type">E-Waste</div>
             <h3>PCB Boards</h3>
-            <p>Circuit boards containing recoverable material streams.</p>
-            <div class="price"><strong>₹350</strong><span>illustrative / kg</span></div>
+            <p>
+              Circuit boards containing recoverable material streams.
+            </p>
+
+            <div class="price">
+              <strong>₹350</strong>
+              <span>illustrative / kg</span>
+            </div>
           </article>
+
           <article class="value-card reveal reveal-delay-1" data-category="metal">
             <div class="material-icon">◎</div>
             <div class="value-type">Metal</div>
             <h3>Copper Cables</h3>
-            <p>Copper-rich wires and cables separated from discarded electronics.</p>
-            <div class="price"><strong>₹600</strong><span>illustrative / kg</span></div>
+            <p>
+              Copper-rich wires and cables separated from discarded electronics.
+            </p>
+
+            <div class="price">
+              <strong>₹600</strong>
+              <span>illustrative / kg</span>
+            </div>
           </article>
+
           <article class="value-card reveal reveal-delay-2" data-category="metal">
             <div class="material-icon">◇</div>
             <div class="value-type">Metal</div>
             <h3>Aluminium</h3>
-            <p>Lightweight metal found in electronic housings.</p>
-            <div class="price"><strong>₹180</strong><span>illustrative / kg</span></div>
+            <p>
+              Lightweight metal commonly found in electronic housings and components.
+            </p>
+
+            <div class="price">
+              <strong>₹180</strong>
+              <span>illustrative / kg</span>
+            </div>
           </article>
+
           <article class="value-card reveal reveal-delay-3" data-category="battery">
             <div class="material-icon">▰</div>
             <div class="value-type">Battery</div>
             <h3>Lithium Cells</h3>
-            <p>Battery materials requiring responsible handling.</p>
-            <div class="price"><strong>₹120</strong><span>illustrative / kg</span></div>
+            <p>
+              Battery materials that require responsible collection and handling.
+            </p>
+
+            <div class="price">
+              <strong>₹120</strong>
+              <span>illustrative / kg</span>
+            </div>
           </article>
+
+          <article class="value-card reveal" data-category="e-waste">
+            <div class="material-icon">▤</div>
+            <div class="value-type">E-Waste</div>
+            <h3>Mixed Electronics</h3>
+            <p>
+              A mixed stream containing multiple electronic components.
+            </p>
+
+            <div class="price">
+              <strong>₹80</strong>
+              <span>illustrative / kg</span>
+            </div>
+          </article>
+
+          <article class="value-card reveal reveal-delay-1" data-category="other">
+            <div class="material-icon">◈</div>
+            <div class="value-type">Other</div>
+            <h3>Connectors</h3>
+            <p>
+              Small electronic connectors and hardware pieces suitable for sorting.
+            </p>
+
+            <div class="price">
+              <strong>₹220</strong>
+              <span>illustrative / kg</span>
+            </div>
+          </article>
+
         </div>
+
+        <div class="estimate-note">
+          * Sample figures are included for demonstration of the EcoExtract
+          value-guide concept.
+        </div>
+
       </div>
     </section>
 
-    <!-- HOW IT WORKS -->
+    <!-- =======================================================
+         HOW IT WORKS
+    ======================================================= -->
+
     <section class="section dark-section" id="how">
+
       <div class="container">
-        <div class="section-label reveal">EcoExtract Process</div>
-        <h2 class="section-title reveal">Simple by design. Intelligent by nature.</h2>
+
+        <div class="section-label reveal">
+          EcoExtract Process
+        </div>
+
+        <h2 class="section-title reveal">
+          Simple by design. Intelligent by nature.
+        </h2>
+
+        <p class="section-copy reveal">
+          EcoExtract connects collection, AI-based identification,
+          segregation and environmental tracking into one digital workflow.
+        </p>
+
         <div class="process-grid">
+
           <div class="process-line"></div>
+
           <div class="process-card reveal">
             <div class="process-number">01</div>
             <h3>Drop</h3>
-            <p>Electronic waste enters the collection point.</p>
+            <p>
+              Electronic waste enters the collection point and its basic
+              telemetry is recorded.
+            </p>
           </div>
+
           <div class="process-card reveal reveal-delay-1">
             <div class="process-number">02</div>
             <h3>AI Vision</h3>
-            <p>Computer vision concept analyses the item.</p>
+            <p>
+              A computer-vision concept analyses the item and assists with
+              material identification.
+            </p>
           </div>
+
           <div class="process-card reveal reveal-delay-2">
             <div class="process-number">03</div>
             <h3>Identify</h3>
-            <p>Maps the detected object to a category.</p>
+            <p>
+              The system maps the detected object to a suitable e-waste
+              category.
+            </p>
           </div>
+
           <div class="process-card reveal reveal-delay-3">
             <div class="process-number">04</div>
             <h3>Sort</h3>
-            <p>Communicates the destination bin.</p>
+            <p>
+              The dashboard communicates the appropriate destination bin
+              for the material stream.
+            </p>
           </div>
+
           <div class="process-card reveal reveal-delay-4">
             <div class="process-number">05</div>
             <h3>Recover</h3>
-            <p>Communicates resource recovery.</p>
+            <p>
+              Collected information helps communicate potential resource
+              recovery and environmental impact.
+            </p>
           </div>
+
         </div>
+
       </div>
     </section>
 
-    <!-- AI DASHBOARD -->
+    <!-- =======================================================
+         AI DASHBOARD
+    ======================================================= -->
+
     <section class="section" id="dashboard">
+
       <div class="container">
-        <div class="section-label reveal">Live Operations</div>
-        <h2 class="section-title reveal">Virtual AI Sorting Hub.</h2>
+
+        <div class="section-label reveal">
+          Live Operations
+        </div>
+
+        <h2 class="section-title reveal">
+          Virtual AI Sorting Hub.
+        </h2>
+
+        <p class="section-copy reveal">
+          Simulate an intelligent e-waste collection node and watch the
+          digital operations layer respond in real time.
+        </p>
+
         <div class="dashboard-wrap reveal">
+
           <div class="dashboard-top">
+
             <div class="dash-title">
               <h3>EcoExtract Operations Console</h3>
-              <p>AI vision • material routing • telemetry</p>
+              <p>AI vision • material routing • environmental telemetry</p>
             </div>
+
             <div class="dash-live">
-              <span class="session-dot"></span> SYSTEM ONLINE
+              <span class="session-dot"></span>
+              SYSTEM ONLINE
             </div>
+
           </div>
+
           <div class="dashboard-grid">
+
+            <!-- KIOSK -->
+
             <div class="kiosk">
+
               <div class="kiosk-head">
                 <div>
                   <h4>AI Vision Sorting Hub</h4>
-                  <span>Camera node simulation</span>
+                  <span>Camera node / simulated detection environment</span>
                 </div>
-                <span id="detectionStatus">READY</span>
+
+                <span id="detectionStatus">
+                  READY
+                </span>
               </div>
+
               <div class="camera">
+
                 <div class="camera-grid"></div>
-                <div class="camera-ring"><div class="target"></div></div>
-                <div class="laser"></div>
-                <div class="camera-status">
-                  <span>VISION: <strong id="visionStatus">SCANNING</strong></span>
-                  <span id="cameraTarget">TARGET: NONE</span>
+
+                <div class="camera-ring">
+                  <div class="target"></div>
                 </div>
+
+                <div class="laser"></div>
+
+                <div class="camera-status">
+                  <span>
+                    VISION:
+                    <strong id="visionStatus">SCANNING</strong>
+                  </span>
+
+                  <span id="cameraTarget">
+                    TARGET: NONE
+                  </span>
+                </div>
+
               </div>
+
               <div class="drop-controls">
-                <input id="signature" class="dark-input" type="text" placeholder="User / signature" />
-                <input id="mass" class="dark-input" type="number" min="1" value="250" placeholder="Mass in grams" />
+
+                <input
+                  id="signature"
+                  class="dark-input"
+                  type="text"
+                  placeholder="User / institution signature"
+                />
+
+                <input
+                  id="mass"
+                  class="dark-input"
+                  type="number"
+                  min="1"
+                  value="250"
+                  placeholder="Mass in grams"
+                />
+
               </div>
+
               <div class="waste-types">
-                <button class="waste-btn active" data-type="PCB">▦ PCB</button>
-                <button class="waste-btn" data-type="Copper Wires & Cables">◎ Copper Cable</button>
-                <button class="waste-btn" data-type="Lithium-Ion Battery">▰ Lithium Battery</button>
+
+                <button class="waste-btn active" data-type="PCB">
+                  ▦ PCB
+                </button>
+
+                <button class="waste-btn" data-type="Copper Wires & Cables">
+                  ◎ Copper Cable
+                </button>
+
+                <button class="waste-btn" data-type="Lithium-Ion Battery">
+                  ▰ Lithium Battery
+                </button>
+
               </div>
+
               <div class="drop-row">
-                <button class="drop-btn" id="dropBtn">Update & Add Data Directly →</button>
-                <button class="auto-btn" id="autoBtn">Auto Run: Off</button>
+
+                <button class="drop-btn" id="dropBtn">
+                  Drop Item & Run AI →
+                </button>
+
+                <button class="auto-btn" id="autoBtn">
+                  Auto Run: Off
+                </button>
+
               </div>
+
             </div>
+
+            <!-- SIDE -->
 
             <aside class="side-panel">
-              <div class="panel-title">Smart Sorting Bins</div>
-              <div id="bins"></div>
-              <div class="leaderboard">
-                <div class="panel-title">Community Leaderboard</div>
-                <div id="leaderboard"></div>
+
+              <div class="panel-title">
+                Smart Sorting Bins
               </div>
+
+              <div id="bins"></div>
+
+              <div class="empty-bin-card reveal">
+                <div class="empty-bin-icon">＋</div>
+                <div>
+                  <strong>Empty Collection Slot</strong>
+                  <p>Ready for the next e-waste batch. No material detected.</p>
+                </div>
+                <span class="empty-status">EMPTY</span>
+              </div>
+
+              <div class="leaderboard">
+
+                <div class="panel-title">
+                  Community Leaderboard
+                </div>
+
+                <div id="leaderboard"></div>
+
+              </div>
+
             </aside>
 
+            <!-- TELEMETRY -->
+
             <div class="telemetry">
+
               <div class="telemetry-head">
-                <span>LIVE TELEMETRY</span>
-                <span>NODES: <strong id="nodeCount">2</strong></span>
+                <span>LIVE OPERATIONS TELEMETRY</span>
+                <span>
+                  ACTIVE HARDWARE NODES:
+                  <strong id="nodeCount">2</strong>
+                </span>
               </div>
+
               <div class="terminal" id="terminal">
-                <div class="terminal-line">Telemetry channel initialised.</div>
+                <div class="terminal-line">
+                  EcoExtract telemetry channel initialised.
+                </div>
+
+                <div class="terminal-line">
+                  Vision node connected.
+                </div>
+
+                <div class="terminal-line">
+                  Sorting pipeline standing by.
+                </div>
+
+                <div class="terminal-line">
+                  Waiting for incoming e-waste.
+                </div>
               </div>
+
             </div>
+
           </div>
         </div>
+
+        <div class="admin-control-card admin-only reveal" id="adminControlPanel">
+          <div class="admin-head">
+            <div>
+              <div class="section-label" style="margin-bottom:5px;color:#7a43d1;">ADMIN CONTROL CENTER</div>
+              <h3 style="font-family:&quot;Bricolage Grotesque&quot;,sans-serif;">System & Collection Controls</h3>
+              <p style="color:var(--mute);font-size:12px;margin-top:4px;">Admin-only presentation controls for bins, telemetry and demo operations.</p>
+            </div>
+            <span class="admin-badge">✦ ADMIN ACCESS</span>
+          </div>
+          <div class="admin-grid">
+            <button class="admin-action" id="emptySelectedBinBtn">
+              <strong>🗑 Empty Selected Bin</strong>
+              <span>Reset the active waste stream to 0%.</span>
+            </button>
+            <button class="admin-action" id="resetBinsBtn">
+              <strong>↻ Reset All Bins</strong>
+              <span>Restore demo collection levels.</span>
+            </button>
+            <button class="admin-action" id="maintenanceBtn">
+              <strong>⚙ Maintenance Mode</strong>
+              <span id="maintenanceText">System operating normally.</span>
+            </button>
+          </div>
+        </div>
+
       </div>
     </section>
 
-    <!-- IMPACT -->
+    <!-- =======================================================
+         IMPACT
+    ======================================================= -->
+
     <section class="section" id="impact">
+
       <div class="container">
+
         <div class="impact-layout">
+
           <div class="impact-visual reveal">
+
             <div class="impact-planet"></div>
+
+            <div class="impact-particle" style="top:18%;left:20%;"></div>
+            <div class="impact-particle" style="top:30%;right:18%;animation-delay:.7s;"></div>
+            <div class="impact-particle" style="bottom:20%;left:28%;animation-delay:1.2s;"></div>
+            <div class="impact-particle" style="bottom:28%;right:26%;animation-delay:1.8s;"></div>
+
           </div>
+
           <div>
-            <div class="section-label reveal">Environmental Impact</div>
-            <h2 class="section-title reveal">Measure the difference, not just the waste.</h2>
+
+            <div class="section-label reveal">
+              Environmental Impact
+            </div>
+
+            <h2 class="section-title reveal">
+              Measure the difference, not just the waste.
+            </h2>
+
+            <p class="section-copy reveal">
+              EcoExtract is designed to make environmental impact easier
+              to understand through simple, visible metrics.
+            </p>
+
             <div class="impact-cards">
+
               <div class="impact-card reveal">
                 <div class="impact-icon">♻</div>
                 <span>E-waste diverted</span>
                 <strong>45.6 kg</strong>
               </div>
+
+              <div class="impact-card reveal reveal-delay-1">
+                <div class="impact-icon">◎</div>
+                <span>Material value tracked</span>
+                <strong>₹18.4K</strong>
+              </div>
+
+              <div class="impact-card reveal reveal-delay-2">
+                <div class="impact-icon">🌱</div>
+                <span>Potential CO₂ impact</span>
+                <strong>78.2 kg</strong>
+              </div>
+
             </div>
+
           </div>
+
         </div>
+
       </div>
     </section>
 
-    <!-- ABOUT -->
-    <section class="section" id="about">
+    <!-- =======================================================
+         FEATURES
+    ======================================================= -->
+
+    <section class="section" id="features">
+
       <div class="container">
-        <div class="section-label reveal">About EcoExtract</div>
-        <h2 class="section-title reveal">Technology with a purpose.</h2>
-        <div class="about-grid">
-          <article class="about-card full reveal">
-            <h3>About My Website — EcoExtract</h3>
-            <p>EcoExtract is an AI-vision-powered concept for smarter electronic waste management and resource recovery.</p>
+
+        <div class="section-label reveal">
+          Platform Features
+        </div>
+
+        <h2 class="section-title reveal">
+          One hub for smarter e-waste operations.
+        </h2>
+
+        <p class="section-copy reveal">
+          EcoExtract brings the important parts of an e-waste workflow
+          together in one interactive environment.
+        </p>
+
+        <div class="feature-grid">
+
+          <article class="feature-card reveal">
+            <div class="feature-icon">♻</div>
+            <h3>Smart E-Waste Management</h3>
+            <p>
+              Supports a more organised approach to collecting and managing
+              electronic waste.
+            </p>
           </article>
+
+          <article class="feature-card reveal reveal-delay-1">
+            <div class="feature-icon">⌁</div>
+            <h3>AI-Vision Segregation</h3>
+            <p>
+              Designed around computer vision concepts for identifying and
+              sorting e-waste categories.
+            </p>
+          </article>
+
+          <article class="feature-card reveal reveal-delay-2">
+            <div class="feature-icon">▥</div>
+            <h3>Interactive Dashboard</h3>
+            <p>
+              Displays collection, weight, estimated value and operational
+              information in one place.
+            </p>
+          </article>
+
+          <article class="feature-card reveal reveal-delay-3">
+            <div class="feature-icon">CO₂</div>
+            <h3>CO₂ Impact Tracking</h3>
+            <p>
+              Communicates the potential environmental benefits of responsible
+              e-waste management.
+            </p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon">▣</div>
+            <h3>Bin-Level Monitoring</h3>
+            <p>
+              Helps track waste-bin levels and identify collection needs.
+            </p>
+          </article>
+
+          <article class="feature-card reveal reveal-delay-1">
+            <div class="feature-icon">★</div>
+            <h3>Community Leaderboard</h3>
+            <p>
+              Encourages engagement through tracked contributions and activity.
+            </p>
+          </article>
+
+          <article class="feature-card reveal reveal-delay-2">
+            <div class="feature-icon">⌘</div>
+            <h3>Hub Integration API</h3>
+            <p>
+              Supports communication between collection hubs and the dashboard.
+            </p>
+          </article>
+
+          <article class="feature-card reveal reveal-delay-3">
+            <div class="feature-icon">AI</div>
+            <h3>AI-Ready Architecture</h3>
+            <p>
+              Designed as a foundation for future computer-vision and
+              data-driven improvements.
+            </p>
+          </article>
+
         </div>
+
       </div>
     </section>
 
-    <!-- CREATOR -->
-    <section class="section creator-section" id="creator">
+    <!-- =======================================================
+         TECHNOLOGY
+    ======================================================= -->
+
+    <section class="section" id="technology">
+
       <div class="container">
-        <div class="creator-grid">
-          <div class="creator-avatar reveal"><span>SSP</span></div>
-          <div class="creator-content">
-            <div class="section-label reveal">About The Creator</div>
-            <h2 class="section-title reveal">Built by a student.</h2>
-            <div class="creator-role reveal">Student • Developer</div>
-            <p class="reveal">Hi, I'm Shivam Singh Patel, from Madhya Pradesh, India.</p>
+
+        <div class="tech-grid">
+
+          <div>
+
+            <div class="section-label reveal">
+              Technology
+            </div>
+
+            <h2 class="section-title reveal">
+              The technology behind the concept.
+            </h2>
+
+            <p class="section-copy reveal">
+              EcoExtract combines a digital dashboard, AI-vision concepts,
+              telemetry and data visualisation to create a smarter e-waste
+              workflow.
+            </p>
+
           </div>
+
+          <div class="accordion-list">
+
+            <div class="accordion open reveal">
+
+              <button class="accordion-head">
+                <span>01 — AI Vision Detection Pipeline</span>
+                <span>+</span>
+              </button>
+
+              <div class="accordion-body" style="max-height: 200px;">
+                <div class="accordion-body-inner">
+                  The concept uses computer-vision logic to identify an
+                  incoming electronic item and associate it with a suitable
+                  material category before routing it to the appropriate
+                  collection bin.
+                </div>
+              </div>
+
+            </div>
+
+            <div class="accordion reveal reveal-delay-1">
+
+              <button class="accordion-head">
+                <span>02 — Automated Micro-Segregation</span>
+                <span>+</span>
+              </button>
+
+              <div class="accordion-body">
+                <div class="accordion-body-inner">
+                  Once a category is identified, the dashboard can represent
+                  an automated sorting decision and communicate the destination
+                  stream for the item.
+                </div>
+              </div>
+
+            </div>
+
+            <div class="accordion reveal reveal-delay-2">
+
+              <button class="accordion-head">
+                <span>03 — Environmental Data Layer</span>
+                <span>+</span>
+              </button>
+
+              <div class="accordion-body">
+                <div class="accordion-body-inner">
+                  EcoExtract records collection information and translates it
+                  into simple environmental metrics such as material value,
+                  waste diverted and potential impact.
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
         </div>
+
       </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer>
+    <!-- =======================================================
+         ABOUT ECOEXTRACT
+    ======================================================= -->
+
+    <section class="section" id="about">
+
       <div class="container">
-        <div class="footer-bottom">
-          <span>© 2026 EcoExtract. Concept project.</span>
-          <span>Created by Shivam Singh Patel | NextGen AI Studio</span>
+
+        <div class="section-label reveal">
+          About EcoExtract
         </div>
+
+        <h2 class="section-title reveal">
+          Technology with a purpose.
+        </h2>
+
+        <div class="about-grid">
+
+          <article class="about-card full reveal">
+
+            <h3>About My Website — EcoExtract</h3>
+
+            <p>
+              EcoExtract is an AI-vision-powered concept for smarter
+              electronic waste management and resource recovery.
+              <br><br>
+              The goal of this project is to make e-waste management more
+              organised, data-driven, and environmentally responsible.
+              By combining AI-based vision concepts with a digital monitoring
+              dashboard, EcoExtract aims to support better waste segregation,
+              collection tracking, and the recovery of valuable materials
+              from discarded electronics.
+            </p>
+
+          </article>
+
+          <article class="about-card reveal">
+
+            <h3>Why EcoExtract?</h3>
+
+            <p>
+              Electronic waste contains materials that can potentially be
+              recovered and reused, while improper disposal can create
+              environmental challenges. EcoExtract explores how technology
+              can make the collection and segregation process more visible,
+              organised and data-driven.
+            </p>
+
+          </article>
+
+          <article class="about-card reveal reveal-delay-1">
+
+            <h3>From Waste to Data</h3>
+
+            <p>
+              Instead of treating e-waste as a single category, EcoExtract
+              represents it as a collection of measurable material streams.
+              This makes it easier to visualise what is collected, where it
+              goes and what potential value it represents.
+            </p>
+
+          </article>
+
+        </div>
+
+        <div class="mission-vision">
+
+          <article class="mv-card mission reveal">
+
+            <h3>My Mission</h3>
+
+            <p>
+              My mission is to explore how technology and artificial
+              intelligence can help solve environmental challenges.
+              Through EcoExtract, I aim to contribute to a future where
+              electronic waste is managed more responsibly and valuable
+              resources can be recovered more efficiently.
+            </p>
+
+          </article>
+
+          <article class="mv-card vision reveal reveal-delay-1">
+
+            <h3>My Vision</h3>
+
+            <p>
+              I want to keep learning, building meaningful projects, and
+              developing technology that creates a positive impact on people
+              and the planet.
+            </p>
+
+            <div class="vision-tag">
+              Building smarter technology for a cleaner future.
+            </div>
+
+          </article>
+
+        </div>
+
       </div>
+    </section>
+
+    <!-- =======================================================
+         CREATOR
+    ======================================================= -->
+
+    <section class="section creator-section" id="creator">
+
+      <div class="container">
+
+        <div class="creator-grid">
+
+          <div class="creator-avatar reveal">
+            <span>SSP</span>
+          </div>
+
+          <div class="creator-content">
+
+            <div class="section-label reveal">
+              About The Creator
+            </div>
+
+            <h2 class="section-title reveal">
+              Built by a student who likes turning ideas into projects.
+            </h2>
+
+            <div class="creator-role reveal">
+              Student • Aspiring Developer • Technology Enthusiast
+            </div>
+
+            <p class="reveal">
+              Hi, I'm Shivam Singh Patel, a student, aspiring developer,
+              and technology enthusiast from Madhya Pradesh, India.
+              I enjoy exploring Artificial Intelligence, software development,
+              web technologies, and innovative ideas that can solve
+              real-world problems.
+            </p>
+
+            <p class="reveal reveal-delay-1">
+              I'm passionate about transforming ideas into practical digital
+              solutions. I enjoy learning through hands-on projects,
+              experimenting with new technologies, and continuously
+              developing my technical and creative skills.
+            </p>
+
+            <div class="studio reveal reveal-delay-2">
+              NextGen AI Studio
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =======================================================
+         FOOTER
+    ======================================================= -->
+
+    <footer>
+
+      <div class="container">
+
+        <div class="footer-grid">
+
+          <div>
+
+            <div class="footer-brand">
+              Eco<span>Extract</span>
+            </div>
+
+            <p class="footer-copy">
+              AI-vision-powered e-waste management and resource recovery
+              concept focused on smarter collection, segregation,
+              monitoring and environmental impact.
+            </p>
+
+          </div>
+
+          <div>
+
+            <div class="footer-title">
+              Explore
+            </div>
+
+            <div class="footer-links">
+              <a href="#guide">Value Guide</a>
+              <a href="#how">How It Works</a>
+              <a href="#dashboard">AI Sorting Hub</a>
+              <a href="#impact">Impact</a>
+            </div>
+
+          </div>
+
+          <div>
+
+            <div class="footer-title">
+              Project
+            </div>
+
+            <div class="footer-links">
+              <a href="#features">Features</a>
+              <a href="#technology">Technology</a>
+              <a href="#about">About EcoExtract</a>
+              <a href="#creator">Creator</a>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+          <span>
+            © 2026 EcoExtract. Concept project.
+          </span>
+
+          <span>
+            Created by Shivam Singh Patel | NextGen AI Studio
+          </span>
+
+        </div>
+
+      </div>
+
     </footer>
+
   </div>
+
+  <!-- TOAST -->
 
   <div id="toast"></div>
 
   <script>
+    /* =========================================================
+       ECOEXTRACT APPLICATION
+    ========================================================= */
+
     const app = document.getElementById("app");
     const authGate = document.getElementById("authGate");
     const authForm = document.getElementById("authForm");
@@ -3092,69 +3912,167 @@
     const toast = document.getElementById("toast");
 
     const itemsConfig = {
-      "PCB": { bin: "PCB Safe-Box", icon: "▦" },
-      "Copper Wires & Cables": { bin: "Copper Bin", icon: "◎" },
-      "Lithium-Ion Battery": { bin: "Lithium Cell Box", icon: "▰" }
+      "PCB": {
+        bin: "PCB Safe-Box",
+        icon: "▦"
+      },
+      "Copper Wires & Cables": {
+        bin: "Copper Bin",
+        icon: "◎"
+      },
+      "Lithium-Ion Battery": {
+        bin: "Lithium Cell Box",
+        icon: "▰"
+      }
     };
 
     const binsConfig = {
-      "PCB Safe-Box": { level: 32, status: "READY", type: "PCB" },
-      "Copper Bin": { level: 47, status: "READY", type: "Copper Wires & Cables" },
-      "Lithium Cell Box": { level: 21, status: "SAFE", type: "Lithium-Ion Battery" }
+      "PCB Safe-Box": {
+        level: 32,
+        status: "READY",
+        type: "PCB"
+      },
+      "Copper Bin": {
+        level: 47,
+        status: "READY",
+        type: "Copper Wires & Cables"
+      },
+      "Lithium Cell Box": {
+        level: 21,
+        status: "SAFE",
+        type: "Lithium-Ion Battery"
+      }
     };
 
     const communityData = [
-      { name: "Green Valley Public School", kg: 24.5, points: 580 },
-      { name: "Bhopal Tech Institute", kg: 14.2, points: 340 }
+      {
+        name: "Green Valley Public School",
+        kg: 24.5,
+        points: 580
+      },
+      {
+        name: "Bhopal Tech Institute",
+        kg: 14.2,
+        points: 340
+      },
+      {
+        name: "Eco Club Sector-6",
+        kg: 6.9,
+        points: 155
+      }
     ];
 
     let selectedWaste = "PCB";
     let autoRun = false;
+    let cloudEvents = 4;
+
+    /* =========================================================
+       INTRO
+    ========================================================= */
 
     window.addEventListener("load", () => {
+      // IMPORTANT: never auto-open the dashboard.
+      // The user must explicitly submit the login form every time the page loads.
       document.body.classList.add("locked");
       app.style.display = "none";
       authGate.classList.remove("hidden");
-      setTimeout(() => { intro.classList.add("hide"); }, 2600);
+
+      setTimeout(() => {
+        intro.classList.add("hide");
+      }, 2600);
     });
+
+    /* =========================================================
+       AUTH — MANUAL LOGIN ONLY
+    ========================================================= */
 
     authForm.addEventListener("submit", function(event) {
       event.preventDefault();
+
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value;
       const role = document.getElementById("role").value;
+      const button = authForm.querySelector("button[type=submit]");
 
-      authGate.classList.add("hidden");
-      app.style.display = "block";
-      document.body.classList.remove("locked");
-      document.body.dataset.role = role.toLowerCase();
-      document.body.classList.toggle("admin-mode", role === "Admin");
+      if (!email || !password) {
+        showToast("Please enter your email and password.");
+        return;
+      }
 
-      document.getElementById("sessionUser").textContent = email.split("@")[0] || "Connected";
-      document.getElementById("sessionRole").textContent = role;
+      // Demo credentials for presentation mode.
+      if (role === "Admin" && email.toLowerCase() !== "admin@ecoextract.org") {
+        showToast("Admin demo login: use admin@ecoextract.org");
+        return;
+      }
 
-      initDashboard();
-      showToast("Portal connected successfully.");
+      if (role === "Admin" && password !== "password") {
+        showToast("Admin demo password is: password");
+        return;
+      }
+
+      document.body.classList.add("auth-processing");
+      button.disabled = true;
+      const originalButtonText = button.innerHTML;
+      button.innerHTML = "Connecting EcoExtract…";
+
+      setTimeout(() => {
+        authGate.classList.add("hidden");
+        app.style.display = "block";
+        document.body.classList.remove("locked", "auth-processing");
+        document.body.dataset.role = role.toLowerCase();
+        document.body.classList.toggle("admin-mode", role === "Admin");
+
+        document.getElementById("sessionUser").textContent =
+          email.split("@")[0] || "Connected";
+        document.getElementById("sessionRole").textContent = role;
+
+        button.disabled = false;
+        button.innerHTML = originalButtonText;
+
+        initDashboard();
+
+        showToast(
+          role === "Admin"
+            ? "Admin portal connected. Full controls enabled."
+            : "Contributor portal connected."
+        );
+      }, 900);
     });
 
     document.getElementById("logoutBtn").addEventListener("click", () => {
       app.style.display = "none";
       authGate.classList.remove("hidden");
       document.body.classList.add("locked");
+      document.body.classList.remove("admin-mode");
+      document.body.removeAttribute("data-role");
+      document.getElementById("sessionRole").textContent = "GUEST";
+      document.getElementById("password").value = "";
       window.scrollTo({ top: 0, behavior: "smooth" });
-      showToast("Session disconnected.");
+      showToast("Session disconnected. Login required.");
     });
+
+    /* =========================================================
+       DASHBOARD
+    ========================================================= */
 
     function initDashboard() {
       renderBins();
       renderLeaderboard();
+      initRevealObserver();
+      initCounters();
       initFilters();
       initWasteButtons();
+      initAccordions();
     }
 
+    /* =========================================================
+       BINS
+    ========================================================= */
+
     function renderBins() {
+
       const container = document.getElementById("bins");
-      if (!container) return;
+
       container.innerHTML = Object.entries(binsConfig).map(
         ([name, data]) => `
           <div class="bin">
@@ -3162,223 +4080,1283 @@
               <span>${data.type}</span>
               <span class="bin-status">${data.level === 0 ? "EMPTY" : data.status}</span>
             </div>
+
             <div class="bin-bar">
-              <div class="bin-fill" style="width:${data.level}%"></div>
+              <div
+                class="bin-fill"
+                style="width:${data.level}%"
+              ></div>
+            </div>
+
+            <div style="
+              display:flex;
+              justify-content:space-between;
+              margin-top:7px;
+              color:#657c6e;
+              font-size:10px;
+            ">
+              <span>${name}</span>
+              <span>${data.level}%</span>
             </div>
           </div>
         `
       ).join("");
     }
 
+    /* =========================================================
+       ADMIN CONTROLS
+    ========================================================= */
+
+    const demoBinLevels = {
+      "PCB Safe-Box": 32,
+      "Copper Bin": 47,
+      "Lithium Cell Box": 21
+    };
+
+    const emptySelectedBinBtn = document.getElementById("emptySelectedBinBtn");
+    const resetBinsBtn = document.getElementById("resetBinsBtn");
+    const maintenanceBtn = document.getElementById("maintenanceBtn");
+
+    if (emptySelectedBinBtn) {
+      emptySelectedBinBtn.addEventListener("click", () => {
+        if (document.body.dataset.role !== "admin") {
+          showToast("Admin access required.");
+          return;
+        }
+
+        const config = itemsConfig[selectedWaste];
+        binsConfig[config.bin].level = 0;
+        binsConfig[config.bin].status = "EMPTY";
+        renderBins();
+        addTerminalLine("ADMIN: " + config.bin + " emptied and marked EMPTY.");
+        showToast(config.bin + " is now empty.");
+      });
+    }
+
+    if (resetBinsBtn) {
+      resetBinsBtn.addEventListener("click", () => {
+        if (document.body.dataset.role !== "admin") {
+          showToast("Admin access required.");
+          return;
+        }
+
+        Object.entries(demoBinLevels).forEach(([name, level]) => {
+          binsConfig[name].level = level;
+          binsConfig[name].status = name === "Lithium Cell Box" ? "SAFE" : "READY";
+        });
+
+        renderBins();
+        addTerminalLine("ADMIN: demo bin levels restored.");
+        showToast("All collection bins reset.");
+      });
+    }
+
+    if (maintenanceBtn) {
+      maintenanceBtn.addEventListener("click", () => {
+        if (document.body.dataset.role !== "admin") {
+          showToast("Admin access required.");
+          return;
+        }
+
+        const active = document.body.classList.toggle("maintenance-mode");
+        const text = document.getElementById("maintenanceText");
+        if (text) text.textContent = active
+          ? "Maintenance mode enabled for demo."
+          : "System operating normally.";
+
+        addTerminalLine("ADMIN: maintenance mode " + (active ? "enabled." : "disabled."));
+        showToast(active ? "Maintenance mode enabled." : "Maintenance mode disabled.");
+      });
+    }
+
+    /* =========================================================
+       LEADERBOARD
+    ========================================================= */
+
     function renderLeaderboard() {
+
       const container = document.getElementById("leaderboard");
-      if (!container) return;
+
       container.innerHTML = communityData.map(
         (item, index) => `
           <div class="leader-row">
             <div class="rank">#${index + 1}</div>
+
             <div>
               <div class="leader-name">${item.name}</div>
-              <div class="leader-kg">${item.points} pts</div>
+              <div class="leader-kg">${item.points} points</div>
             </div>
-            <div class="leader-kg">${item.kg} kg</div>
+
+            <div class="leader-kg">
+              ${item.kg} kg
+            </div>
           </div>
         `
       ).join("");
     }
 
-    function initWasteButtons() {
-      document.querySelectorAll(".waste-btn").forEach(button => {
-        button.addEventListener("click", () => {
-          document.querySelectorAll(".waste-btn").forEach(btn => btn.classList.remove("active"));
-          button.classList.add("active");
-          selectedWaste = button.dataset.type;
-          document.getElementById("cameraTarget").textContent = "TARGET: " + selectedWaste.toUpperCase();
-        });
-      });
-    }
+    /* =========================================================
+       WASTE TYPE
+    ========================================================= */
 
-    // Direct Data Update Handler without scanning detour
-    document.getElementById("dropBtn").addEventListener("click", () => {
+    document.querySelectorAll(".waste-btn").forEach(button => {
+
+      button.addEventListener("click", () => {
+
+        document.querySelectorAll(".waste-btn").forEach(btn => {
+          btn.classList.remove("active");
+        });
+
+        button.classList.add("active");
+
+        selectedWaste = button.dataset.type;
+
+        document.getElementById("cameraTarget").textContent =
+          "TARGET: " + selectedWaste.toUpperCase();
+
+        document.getElementById("detectionStatus").textContent =
+          "TARGET SELECTED";
+      });
+
+    });
+
+    /* =========================================================
+       DROP ITEM
+    ========================================================= */
+
+    document.getElementById("dropBtn").addEventListener(
+      "click",
+      runDeposit
+    );
+
+    function runDeposit() {
+
       const massInput = document.getElementById("mass");
       const signatureInput = document.getElementById("signature");
-      const grams = Number(massInput?.value);
+
+      const grams = Number(massInput.value);
 
       if (!grams || grams <= 0) {
-        showToast("Please enter a valid mass in grams.");
+        showToast("Enter a valid item mass.");
         return;
       }
 
-      const config = itemsConfig[selectedWaste] || itemsConfig["PCB"];
       const kg = grams / 1000;
+      const config = itemsConfig[selectedWaste];
 
-      binsConfig[config.bin].level = Math.min(100, binsConfig[config.bin].level + Math.max(2, kg * 10));
-      renderBins();
+      document.getElementById("visionStatus").textContent =
+        "ANALYSING";
 
-      addTerminalLine(`Direct entry updated: ${selectedWaste} / ${grams}g added to ${config.bin}`);
-      showToast(`Data updated successfully: ${grams}g added!`);
-    });
+      document.getElementById("detectionStatus").textContent =
+        "AI PROCESSING";
+
+      document.getElementById("cameraTarget").textContent =
+        "TARGET: " + selectedWaste.toUpperCase();
+
+      addTerminalLine(
+        "Incoming item detected: " +
+        selectedWaste +
+        " / " +
+        grams +
+        "g"
+      );
+
+      setTimeout(() => {
+
+        document.getElementById("visionStatus").textContent =
+          "DETECTED";
+
+        document.getElementById("detectionStatus").textContent =
+          "SORT DECISION READY";
+
+        binsConfig[config.bin].level = Math.min(
+          100,
+          binsConfig[config.bin].level + Math.max(2, kg * 10)
+        );
+
+        renderBins();
+
+        addTerminalLine(
+          "AI classification complete → " +
+          config.bin
+        );
+
+        cloudEvents++;
+
+        addTerminalLine(
+          "Cloud operations event #" +
+          cloudEvents +
+          " recorded."
+        );
+
+        showToast(
+          config.icon +
+          " " +
+          selectedWaste +
+          " routed to " +
+          config.bin
+        );
+
+        if (signatureInput.value.trim()) {
+          addTerminalLine(
+            "Contributor: " +
+            signatureInput.value.trim()
+          );
+        }
+
+        setTimeout(() => {
+          document.getElementById("visionStatus").textContent =
+            "SCANNING";
+
+          document.getElementById("detectionStatus").textContent =
+            "READY";
+        }, 1800);
+
+      }, 1200);
+    }
+
+    /* =========================================================
+       AUTO RUN
+    ========================================================= */
+
+    document.getElementById("autoBtn").addEventListener(
+      "click",
+      function() {
+
+        autoRun = !autoRun;
+
+        this.classList.toggle("active", autoRun);
+
+        this.textContent =
+          autoRun
+            ? "Auto Run: Active"
+            : "Auto Run: Off";
+
+        if (autoRun) {
+
+          showToast("Auto Run activated.");
+
+          runDeposit();
+
+        } else {
+
+          showToast("Auto Run paused.");
+
+        }
+      }
+    );
+
+    /* =========================================================
+       TERMINAL
+    ========================================================= */
 
     function addTerminalLine(text) {
+
       const terminal = document.getElementById("terminal");
-      if (!terminal) return;
+
       const line = document.createElement("div");
+
       line.className = "terminal-line";
-      const time = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" });
-      line.textContent = "[" + time + "] " + text;
+
+      const time = new Date().toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit"
+      });
+
+      line.textContent =
+        "[" + time + "] " + text;
+
       terminal.appendChild(line);
+
       while (terminal.children.length > 9) {
         terminal.removeChild(terminal.firstChild);
       }
+
       terminal.scrollTop = terminal.scrollHeight;
     }
 
+    /* =========================================================
+       VALUE FILTER
+    ========================================================= */
+
     function initFilters() {
-      const filterButtons = document.querySelectorAll(".filter-btn");
-      const cards = document.querySelectorAll(".value-card");
+
+      const filterButtons =
+        document.querySelectorAll(".filter-btn");
+
+      const cards =
+        document.querySelectorAll(".value-card");
+
       filterButtons.forEach(button => {
+
         button.addEventListener("click", () => {
-          filterButtons.forEach(btn => btn.classList.remove("active"));
+
+          filterButtons.forEach(btn =>
+            btn.classList.remove("active")
+          );
+
           button.classList.add("active");
-          const filter = button.dataset.filter;
+
+          const filter =
+            button.dataset.filter;
+
           cards.forEach(card => {
-            if (filter === "all" || card.dataset.category === filter) {
+
+            if (
+              filter === "all" ||
+              card.dataset.category === filter
+            ) {
+
               card.style.display = "";
+
+              requestAnimationFrame(() => {
+                card.style.opacity = "1";
+                card.style.transform = "translateY(0)";
+              });
+
             } else {
-              card.style.display = "none";
+
+              card.style.opacity = "0";
+              card.style.transform = "translateY(10px)";
+
+              setTimeout(() => {
+                card.style.display = "none";
+              }, 220);
+
             }
+
           });
+
         });
+
       });
     }
 
-    // Mood Theme Toggle Logic
-    const themeBtn = document.getElementById('themeToggleBtn');
-    if (themeBtn) {
-      let currentTheme = localStorage.getItem('ecoextract_theme_mode') || 'auto';
-      
-      function applyTheme(mode) {
-        document.body.classList.remove('light-theme', 'dark-theme');
-        if (mode === 'light') {
-          document.body.classList.add('light-theme');
-          themeBtn.textContent = 'Mood: Light ☀️';
-        } else if (mode === 'dark') {
-          document.body.classList.add('dark-theme');
-          themeBtn.textContent = 'Mood: Dark 🌙';
-        } else {
-          themeBtn.textContent = 'Mood: Auto 🌓';
-        }
-        localStorage.setItem('ecoextract_theme_mode', mode);
+    /* =========================================================
+       ACCORDION
+    ========================================================= */
+
+    function initAccordions() {
+
+      document.querySelectorAll(".accordion-head")
+        .forEach(button => {
+
+          button.addEventListener("click", () => {
+
+            const accordion =
+              button.closest(".accordion");
+
+            const body =
+              accordion.querySelector(".accordion-body");
+
+            const isOpen =
+              accordion.classList.contains("open");
+
+            document.querySelectorAll(".accordion")
+              .forEach(item => {
+
+                item.classList.remove("open");
+
+                const itemBody =
+                  item.querySelector(".accordion-body");
+
+                itemBody.style.maxHeight = null;
+              });
+
+            if (!isOpen) {
+
+              accordion.classList.add("open");
+
+              body.style.maxHeight =
+                body.scrollHeight + "px";
+            }
+
+          });
+
+        });
+
+    }
+
+    /* =========================================================
+       SCROLL REVEAL
+    ========================================================= */
+
+    let revealObserver;
+
+    function initRevealObserver() {
+
+      const elements =
+        document.querySelectorAll(".reveal");
+
+      if (!("IntersectionObserver" in window)) {
+
+        elements.forEach(el =>
+          el.classList.add("visible")
+        );
+
+        return;
       }
 
-      applyTheme(currentTheme);
+      if (revealObserver) {
+        revealObserver.disconnect();
+      }
 
-      themeBtn.addEventListener('click', () => {
-        if (currentTheme === 'auto') {
-          currentTheme = 'light';
-        } else if (currentTheme === 'light') {
-          currentTheme = 'dark';
-        } else {
-          currentTheme = 'auto';
-        }
-        applyTheme(currentTheme);
-        showToast(`Theme switched to: ${currentTheme.toUpperCase()}`);
+      revealObserver =
+        new IntersectionObserver(
+          entries => {
+
+            entries.forEach(entry => {
+
+              if (entry.isIntersecting) {
+
+                entry.target.classList.add("visible");
+
+                revealObserver.unobserve(
+                  entry.target
+                );
+
+              }
+
+            });
+
+          },
+          {
+            threshold: .08
+          }
+        );
+
+      elements.forEach(element =>
+        revealObserver.observe(element)
+      );
+    }
+
+    /* =========================================================
+       COUNTERS
+    ========================================================= */
+
+    function initCounters() {
+
+      const counters =
+        document.querySelectorAll(".counter");
+
+      counters.forEach(counter => {
+
+        const target =
+          Number(counter.dataset.target);
+
+        let started = false;
+
+        const observer =
+          new IntersectionObserver(entries => {
+
+            if (
+              entries[0].isIntersecting &&
+              !started
+            ) {
+
+              started = true;
+
+              animateCounter(
+                counter,
+                target
+              );
+
+              observer.disconnect();
+            }
+
+          });
+
+        observer.observe(counter);
+
       });
     }
+
+    function animateCounter(element, target) {
+
+      const duration = 1400;
+      const start = performance.now();
+
+      function update(now) {
+
+        const progress =
+          Math.min(
+            (now - start) / duration,
+            1
+          );
+
+        const eased =
+          1 - Math.pow(1 - progress, 3);
+
+        const value =
+          target * eased;
+
+        element.textContent =
+          target % 1 === 0
+            ? Math.floor(value).toLocaleString()
+            : value.toFixed(1);
+
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        }
+
+      }
+
+      requestAnimationFrame(update);
+    }
+
+    /* =========================================================
+       TOAST
+    ========================================================= */
 
     let toastTimer;
+
     function showToast(message) {
+
       toast.textContent = message;
+
       toast.classList.add("show");
+
       clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => {
-        toast.classList.remove("show");
-      }, 3000);
+
+      toastTimer =
+        setTimeout(() => {
+          toast.classList.remove("show");
+        }, 3000);
     }
-  </script>
 
-  <!-- External feature/scanner update script layer -->
-  <script>
-    (() => {
-      'use strict';
-      const $ = (selector, root = document) => root.querySelector(selector);
-      const byId = id => document.getElementById(id);
-      const routeRoot = byId('featureRouteViews');
-      if (!routeRoot) return;
+    /* =========================================================
+       NAV LINK ACTIVE MOTION
+    ========================================================= */
 
-      const galleryToggle = byId('galleryToggle');
-      const galleryMenu = byId('galleryMenu');
-      const materialView = byId('materialView');
-      const scannerView = byId('scannerView');
-      const impactView = byId('impactView');
-      const tourView = byId('tourView');
-      const routePanels = [materialView, scannerView, impactView, tourView];
-      let currentMaterialId = 'pcb';
-      let currentRoute = 'home';
+    document.querySelectorAll(
+      ".nav-links a"
+    ).forEach(link => {
 
-      const materials = {
-        gold: { title: 'Gold-bearing Components', eyebrow: 'PRECIOUS-METAL STREAM', tag: 'Au', icon: 'Au', image: 'https://services.meteored.com/img/article/une-nouvelle-technologie-permet-d-extraire-l-or-des-dechets-electroniques-en-quelques-minutes-avec-un-impact-reduit-recyclage-1774530818845_1280.jpeg', description: 'Gold-bearing contacts.' },
-        copper: { title: 'Copper & Cables', eyebrow: 'CONDUCTIVE-METAL STREAM', tag: 'Cu', icon: '◎', image: 'https://ik.imagekit.io/jjuoxstfm/Blue%20Ridge%20trade%20/copper%202.png', description: 'Copper wires.' },
-        battery: { title: 'Lithium-Ion Batteries', eyebrow: 'BATTERY STREAM', tag: 'LI', icon: '▰', image: 'https://www.swiss.tech/sites/default/files/styles/ratio_1_77_width_1980/public/2021-09/lithiumion_battery.jpeg?h=c7cedbee&itok=LEqAaHFU', description: 'Rechargeable cells.' },
-        pcb: { title: 'Printed Circuit Boards', eyebrow: 'COMPONENT STREAM', tag: 'PCB', icon: '▦', image: 'https://img.static-rmg.be/a/view/q75/w/h/5029971/7399001-jpg.jpg', description: 'Circuit boards.' },
-        mixed: { title: 'Mixed E-Waste', eyebrow: 'REVIEW STREAM', tag: 'MIX', icon: '♻', image: 'https://img.static-rmg.be/a/view/q75/w/h/5029971/7399001-jpg.jpg', description: 'Unsorted parts.' }
-      };
+      link.addEventListener("click", () => {
 
-      function toggleGallery(force) {
-        if (!galleryMenu || !galleryToggle) return;
-        const open = typeof force === 'boolean' ? force : galleryMenu.hidden;
-        galleryMenu.hidden = !open;
-        galleryToggle.setAttribute('aria-expanded', String(open));
-      }
+        document.querySelectorAll(
+          ".nav-links a"
+        ).forEach(item =>
+          item.style.color = ""
+        );
 
-      function setRoute(route, materialId = currentMaterialId) {
-        currentRoute = route;
-        if (route === 'material') currentMaterialId = materialId;
-        toggleGallery(false);
+        link.style.color =
+          "var(--green)";
+      });
 
-        const mainNodes = document.querySelectorAll('#app > header, #app > section, #app > footer');
-        mainNodes.forEach(node => {
-          if (route !== 'home') {
-            if (!node.dataset.featureOriginalDisplay) node.dataset.featureOriginalDisplay = node.style.display || '';
-            node.style.display = 'none';
-          } else if (node.dataset.featureOriginalDisplay !== undefined) {
-            node.style.display = node.dataset.featureOriginalDisplay;
-            delete node.dataset.featureOriginalDisplay;
-          }
-        });
+    });
 
-        if (route === 'home') {
-          routeRoot.classList.remove('active');
-          routePanels.forEach(panel => panel.hidden = true);
-          document.body.classList.remove('route-active');
-          return;
+    /* =========================================================
+       PARALLAX-LIKE HERO MOTION
+    ========================================================= */
+
+    window.addEventListener(
+      "scroll",
+      () => {
+
+        const scroll =
+          window.scrollY;
+
+        const orb =
+          document.querySelector(".orb-one");
+
+        if (orb && scroll < 700) {
+          orb.style.transform =
+            `translateY(${scroll * .08}px)`;
         }
 
-        routeRoot.classList.add('active');
-        routePanels.forEach(panel => panel.hidden = true);
-        const panel = route === 'material' ? materialView : route === 'scanner' ? scannerView : route === 'impact' ? impactView : tourView;
-        if (panel) panel.hidden = false;
-        document.body.classList.add('route-active');
-        if (route === 'material') {
-          const data = materials[materialId];
-          if (data) {
-            byId('materialTitle').textContent = data.title;
-            byId('materialDescription').textContent = data.description;
-            const img = byId('materialImage');
-            if (img) img.src = data.image;
-          }
-        }
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+      },
+      { passive: true }
+    );
+
+    /* =========================================================
+       KEYBOARD ESC
+    ========================================================= */
+
+    document.addEventListener("keydown", event => {
+
+      if (event.key === "Escape") {
+
+        toast.classList.remove("show");
+
       }
 
-      galleryToggle?.addEventListener('click', e => { e.stopPropagation(); toggleGallery(); });
-      document.querySelectorAll('[data-open-material]').forEach(btn => btn.addEventListener('click', () => { setRoute('material', btn.dataset.openMaterial); }));
-      document.querySelectorAll('[data-go-home]').forEach(btn => btn.addEventListener('click', () => setRoute('home')));
-      byId('scannerNavLink')?.addEventListener('click', e => { e.preventDefault(); setRoute('scanner'); });
-      byId('impactNavLink')?.addEventListener('click', e => { e.preventDefault(); setRoute('impact'); });
-      byId('tourNavBtn')?.addEventListener('click', () => setRoute('tour'));
-      byId('startTourHeroBtn')?.addEventListener('click', () => setRoute('tour'));
-    })();
+    });
+
   </script>
+
+
+<script>
+/* ==============================================================
+   ECOEXTRACT ADDITIVE UPDATE
+   - Dedicated gallery pages
+   - Real local-browser image inference (Transformers.js + CLIP)
+   - Camera input, confirmed collection records, CSV export
+   - Record-based impact calculator, responsive controls, demo tour
+   Existing website sections remain in place.
+============================================================== */
+(() => {
+  'use strict';
+
+  const $ = (selector, root = document) => root.querySelector(selector);
+  const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
+  const byId = id => document.getElementById(id);
+  const routeRoot = byId('featureRouteViews');
+  if (!routeRoot || routeRoot.dataset.updateInitialized === 'true') return;
+  routeRoot.dataset.updateInitialized = 'true';
+
+  const galleryToggle = byId('galleryToggle');
+  const galleryMenu = byId('galleryMenu');
+  const materialView = byId('materialView');
+  const scannerView = byId('scannerView');
+  const impactView = byId('impactView');
+  const tourView = byId('tourView');
+  const routePanels = [materialView, scannerView, impactView, tourView];
+  let currentMaterialId = 'pcb';
+  let currentRoute = 'home';
+  let selectedScanFile = null;
+  let selectedScanUrl = '';
+  let currentModelResult = null;
+  let classifierPromise = null;
+  let classifier = null;
+  let cameraStream = null;
+  let currentTourStep = 0;
+  let scanBusy = false;
+  let preferredMaterial = null;
+
+  const materials = {
+    gold: {
+      title: 'Gold-bearing Components', eyebrow: 'PRECIOUS-METAL STREAM', tag: 'Au / RECOVERY', icon: 'Au',
+      image: 'https://services.meteored.com/img/article/une-nouvelle-technologie-permet-d-extraire-l-or-des-dechets-electroniques-en-quelques-minutes-avec-un-impact-reduit-recyclage-1774530818845_1280.jpeg',
+      imageAlt: 'Gold-coloured metal particles and a circuit board, representing precious-metal recovery from electronic waste',
+      creditText: 'Image source: Meteored article on precious-metal recovery from electronic waste.',
+      creditUrl: 'https://www.tameteo.com/actualites/science/une-nouvelle-technologie-permet-d-extraire-l-or-des-dechets-electroniques-en-quelques-minutes-avec-un-impact-reduit-recyclage.html',
+      subtitle: 'Gold-bearing contacts and electronic components',
+      description: 'Some electronic connectors and circuit-board components contain small amounts of gold or gold plating. Actual recovery requires specialist, controlled recycling processes; a photograph alone cannot determine recoverable quantity or purity.',
+      facts: [['Where found', 'Some connectors and board contacts'], ['Why it matters', 'A potential precious-metal stream'], ['Sorting note', 'Keep identified parts in a labelled collection stream']],
+      safety: 'Do not use acids or household chemical methods to extract metals. Store and route electronics through qualified e-waste recyclers.'
+    },
+    copper: {
+      title: 'Copper & Cables', eyebrow: 'CONDUCTIVE-METAL STREAM', tag: 'Cu / CABLES', icon: '◎',
+      image: 'https://ik.imagekit.io/jjuoxstfm/Blue%20Ridge%20trade%20/copper%202.png',
+      imageAlt: 'A pile of copper wire strands ready for material sorting',
+      creditText: 'Image source: Blue Ridge Trade copper scrap photo.',
+      creditUrl: 'https://www.blueridgetrade.in/industrial/copper-scrap',
+      subtitle: 'Copper wire, cable and conductor material',
+      description: 'Copper is widely used in electrical wiring because it conducts electricity well. Separating cable from other electronic components can help a recycler route the material into a suitable recovery stream.',
+      facts: [['Where found', 'Power and data cables'], ['Why it matters', 'A widely reused conductive metal'], ['Sorting note', 'Keep copper cable separate from batteries']],
+      safety: 'Do not burn cable insulation or handle unknown damaged electrical equipment while it is powered. Use an approved collection route.'
+    },
+    battery: {
+      title: 'Lithium-Ion Batteries', eyebrow: 'BATTERY COLLECTION STREAM', tag: 'LI-ION / CARE', icon: '▰',
+      image: 'https://www.swiss.tech/sites/default/files/styles/ratio_1_77_width_1980/public/2021-09/lithiumion_battery.jpeg?h=c7cedbee&itok=LEqAaHFU',
+      imageAlt: 'Industrial battery material in a lithium-ion battery recycling context',
+      creditText: 'Image source: SwissTech article on electric-vehicle battery recycling.',
+      creditUrl: 'https://www.swiss.tech/news/95-recycling-electric-car-batteries',
+      subtitle: 'Rechargeable cells and battery packs',
+      description: 'Lithium-ion batteries are found in phones, laptops, power tools and many other devices. They must be collected separately from general scrap and passed to suitable battery handlers because damaged cells can present fire and chemical hazards.',
+      facts: [['Where found', 'Phones, laptops and devices'], ['Why it matters', 'Battery materials may be recovered'], ['Sorting note', 'Keep batteries separate from metal scrap']],
+      safety: 'Never puncture, dismantle, heat or crush batteries. Do not place damaged or swollen cells into ordinary recycling bins; follow local battery collection guidance.'
+    },
+    pcb: {
+      title: 'Printed Circuit Boards', eyebrow: 'ELECTRONIC-COMPONENT STREAM', tag: 'PCB / BOARD', icon: '▦',
+      image: 'https://img.static-rmg.be/a/view/q75/w/h/5029971/7399001-jpg.jpg',
+      imageAlt: 'Discarded printed circuit boards with chips and electronic components',
+      creditText: 'Image source: Trends-Tendances report on rare earths and digitalisation.',
+      creditUrl: 'https://trends.levif.be/entreprises/la-bataille-des-terres-rares-la-face-cachee-de-la-digitalisation/',
+      subtitle: 'Boards, microchips, connectors and components',
+      description: 'Printed circuit boards connect and support electronic components. Their composition varies by device and manufacturer, so a generic image classifier can only suggest a broad category; material content must be verified through appropriate recycling processes.',
+      facts: [['Where found', 'Computers, phones and appliances'], ['Why it matters', 'Boards contain mixed material streams'], ['Sorting note', 'Avoid mixing boards with loose batteries']],
+      safety: 'Do not burn boards or attempt informal chemical recovery. Keep collection and downstream processing with authorised handlers.'
+    },
+    mixed: {
+      title: 'Mixed Electronic Waste', eyebrow: 'MANUAL-REVIEW STREAM', tag: 'E-WASTE / REVIEW', icon: '♻',
+      image: 'https://img.static-rmg.be/a/view/q75/w/h/5029971/7399001-jpg.jpg',
+      imageAlt: 'A collection of electronic circuit boards representing mixed electronic waste',
+      creditText: 'Image source: Trends-Tendances report on electronic materials.',
+      creditUrl: 'https://trends.levif.be/entreprises/la-bataille-des-terres-rares-la-face-cachee-de-la-digitalisation/',
+      subtitle: 'Unsorted electronic parts that need review',
+      description: 'Mixed e-waste can contain circuit boards, plastics, metals, cables and batteries. Separate identifiable battery packs and other special streams before a mixed batch proceeds through a collection workflow.',
+      facts: [['Where found', 'Mixed device collection boxes'], ['Why it matters', 'Different parts need different routes'], ['Sorting note', 'Use manual review when uncertain']],
+      safety: 'When the material cannot be identified confidently, choose manual review rather than forcing an AI label.'
+    }
+  };
+
+  const categoryToBin = {
+    pcb: 'PCB Safe-Box',
+    copper: 'Copper Bin',
+    battery: 'Lithium Cell Box',
+    gold: 'Gold Recovery Box',
+    mixed: 'Manual Review Bay'
+  };
+
+  const prompts = [
+    'a photograph of lithium-ion rechargeable battery cells or a battery pack',
+    'a photograph of copper electrical wire or stripped copper cable',
+    'a photograph of a printed circuit board with electronic chips and connectors',
+    'a photograph of gold-bearing electronic connector pins or gold-plated contacts on a circuit board',
+    'a photograph of mixed electronic waste and discarded computer components',
+    'a photograph of an unrelated non-electronic object, not electronic waste'
+  ];
+  const promptToCategory = new Map([
+    [prompts[0], 'battery'], [prompts[1], 'copper'], [prompts[2], 'pcb'],
+    [prompts[3], 'gold'], [prompts[4], 'mixed'], [prompts[5], 'other']
+  ]);
+
+  // Additive bin streams for categories introduced by the Gallery/AI scanner.
+  if (typeof itemsConfig !== 'undefined' && typeof binsConfig !== 'undefined') {
+    itemsConfig['Gold-bearing Components'] = { bin: 'Gold Recovery Box', icon: 'Au' };
+    itemsConfig['Mixed Electronic Waste'] = { bin: 'Manual Review Bay', icon: '♻' };
+    if (!binsConfig['Gold Recovery Box']) binsConfig['Gold Recovery Box'] = { level: 0, status: 'EMPTY', type: 'Gold-bearing Components' };
+    if (!binsConfig['Manual Review Bay']) binsConfig['Manual Review Bay'] = { level: 0, status: 'EMPTY', type: 'Mixed Electronic Waste' };
+  }
+
+  let collectionRecords = loadRecords();
+  restoreSavedBinLevels();
+
+  function loadRecords() {
+    try {
+      const rows = JSON.parse(localStorage.getItem('ecoextract_confirmed_records_v1') || '[]');
+      return Array.isArray(rows) ? rows.filter(row => row && row.id && row.category && Number.isFinite(Number(row.grams))) : [];
+    } catch (_) { return []; }
+  }
+
+  function saveRecords() {
+    try { localStorage.setItem('ecoextract_confirmed_records_v1', JSON.stringify(collectionRecords)); }
+    catch (_) { announce('Could not save records in this browser. Export the report to keep a copy.'); }
+  }
+
+  function restoreSavedBinLevels() {
+    if (typeof binsConfig === 'undefined') return;
+    try {
+      const saved = JSON.parse(localStorage.getItem('ecoextract_bin_levels_v1') || '{}');
+      Object.entries(saved || {}).forEach(([name, item]) => {
+        if (binsConfig[name] && item && Number.isFinite(Number(item.level))) {
+          binsConfig[name].level = Math.max(0, Math.min(100, Number(item.level)));
+          binsConfig[name].status = binsConfig[name].level === 0 ? 'EMPTY' : (binsConfig[name].level >= 90 ? 'NEARLY FULL' : 'READY');
+        }
+      });
+    } catch (_) {}
+  }
+
+  function saveBinLevels() {
+    if (typeof binsConfig === 'undefined') return;
+    const levels = {};
+    Object.entries(binsConfig).forEach(([name, item]) => { levels[name] = { level: Number(item.level) || 0 }; });
+    try { localStorage.setItem('ecoextract_bin_levels_v1', JSON.stringify(levels)); } catch (_) {}
+    if (typeof renderBins === 'function') renderBins();
+  }
+
+  function announce(message) {
+    const toast = byId('toast');
+    if (toast && typeof window.showToast === 'function') window.showToast(message);
+    else if (toast) { toast.textContent = message; toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 3200); }
+    else console.info(message);
+  }
+
+  function escapeHtml(value) {
+    return String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  }
+
+  function toggleGallery(force) {
+    if (!galleryMenu || !galleryToggle) return;
+    const open = typeof force === 'boolean' ? force : galleryMenu.hidden;
+    galleryMenu.hidden = !open;
+    galleryToggle.setAttribute('aria-expanded', String(open));
+    if (!open) $('.nav-links')?.classList.remove('mobile-open');
+  }
+
+  function routeHash(route, id) {
+    if (route === 'material') return '#material/' + encodeURIComponent(id || 'pcb');
+    if (route === 'scanner') return '#ai-scanner';
+    if (route === 'impact') return '#impact-lab';
+    if (route === 'tour') return '#demo-tour';
+    return '#home';
+  }
+
+  function stopCamera() {
+    if (cameraStream) {
+      cameraStream.getTracks().forEach(track => track.stop());
+      cameraStream = null;
+    }
+    const video = byId('cameraVideo');
+    if (video) { video.pause(); video.srcObject = null; video.hidden = true; }
+    const capture = byId('captureCameraBtn');
+    if (capture) capture.disabled = true;
+  }
+
+  function setRoute(route, materialId = currentMaterialId, pushHistory = true) {
+    if (route === 'material' && !materials[materialId]) materialId = 'pcb';
+    currentRoute = route;
+    if (route === 'material') currentMaterialId = materialId;
+    toggleGallery(false);
+
+    const mainNodes = $$('#app > header, #app > section, #app > footer');
+    mainNodes.forEach(node => {
+      if (route !== 'home') {
+        if (!Object.prototype.hasOwnProperty.call(node.dataset, 'featureOriginalDisplay')) node.dataset.featureOriginalDisplay = node.style.display || '';
+        node.style.display = 'none';
+      } else if (node.dataset.featureOriginalDisplay !== undefined) {
+        node.style.display = node.dataset.featureOriginalDisplay;
+        delete node.dataset.featureOriginalDisplay;
+      }
+    });
+
+    if (route === 'home') {
+      routeRoot.classList.remove('active');
+      routePanels.forEach(panel => panel.hidden = true);
+      stopCamera();
+      if (pushHistory && location.hash !== '#home') history.pushState({ ecoExtractRoute: 'home' }, '', '#home');
+      document.body.classList.remove('route-active');
+      return;
+    }
+
+    routeRoot.classList.add('active');
+    routePanels.forEach(panel => panel.hidden = true);
+    const panel = route === 'material' ? materialView : route === 'scanner' ? scannerView : route === 'impact' ? impactView : tourView;
+    if (panel) panel.hidden = false;
+    document.body.classList.add('route-active');
+    if (route === 'material') renderMaterial(materialId);
+    if (route === 'scanner') { renderRecords(); if (selectedScanFile) byId('analyseImageBtn').disabled = false; }
+    if (route === 'impact') renderImpact();
+    if (route === 'tour') renderTour();
+    if (pushHistory) history.pushState({ ecoExtractRoute: route, materialId }, '', routeHash(route, materialId));
+    stopCamera();
+    window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  }
+
+  function renderMaterial(id) {
+    const data = materials[id];
+    if (!data) return;
+    byId('materialEyebrow').textContent = data.eyebrow;
+    byId('materialTitle').textContent = data.title;
+    byId('materialPhotoTitle').textContent = data.title;
+    byId('materialPhotoSubtitle').textContent = data.subtitle;
+    byId('materialTag').textContent = data.tag;
+    byId('materialDescription').textContent = data.description;
+    byId('materialSafety').textContent = data.safety;
+    byId('materialFacts').innerHTML = data.facts.map(([label, detail]) => `<div class="material-fact"><b>${escapeHtml(label)}</b><span>${escapeHtml(detail)}</span></div>`).join('');
+    const image = byId('materialImage');
+    const fallback = byId('materialImageFallback');
+    image.style.display = 'block'; fallback.style.display = 'none';
+    image.alt = data.imageAlt; image.src = data.image;
+    image.onerror = () => { image.style.display = 'none'; fallback.style.display = 'grid'; fallback.textContent = data.icon; };
+    byId('materialCredit').innerHTML = `Photo reference: <a href="${escapeHtml(data.creditUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(data.creditText)}</a>. If the external host blocks the image, the category illustration is shown instead.`;
+    preferredMaterial = id;
+  }
+
+  function openMaterial(id) { setRoute('material', id); }
+  function openScanner(materialId = null) { preferredMaterial = materialId || null; setRoute('scanner'); if (preferredMaterial) byId('scannerProgressLabel').textContent = 'Gallery context: ' + materials[preferredMaterial].title + '. The model will still evaluate all categories.'; else byId('scannerProgressLabel').textContent = 'The model loads only after you click Analyse Image.'; }
+
+  // Gallery dropdown: every category opens a separate page-like view.
+  galleryToggle?.addEventListener('click', event => { event.stopPropagation(); toggleGallery(); });
+  $$('[data-open-material]').forEach(button => button.addEventListener('click', () => openMaterial(button.dataset.openMaterial)));
+  byId('mobileGalleryBtn')?.addEventListener('click', () => { const shouldOpen = galleryMenu.hidden; if (shouldOpen) $('.nav-links')?.classList.add('mobile-open'); toggleGallery(shouldOpen); });
+  document.addEventListener('click', event => { if (galleryMenu && !galleryMenu.contains(event.target) && !galleryToggle?.contains(event.target) && !byId('mobileGalleryBtn')?.contains(event.target)) toggleGallery(false); });
+  byId('mobileScannerBtn')?.addEventListener('click', () => openScanner());
+  byId('mobileTourBtn')?.addEventListener('click', () => setRoute('tour'));
+  byId('scannerNavLink')?.addEventListener('click', event => { event.preventDefault(); openScanner(); });
+  byId('impactNavLink')?.addEventListener('click', event => { event.preventDefault(); setRoute('impact'); });
+  byId('tourNavBtn')?.addEventListener('click', () => setRoute('tour'));
+  byId('startTourHeroBtn')?.addEventListener('click', () => setRoute('tour'));
+  $$('[data-go-home]').forEach(button => button.addEventListener('click', () => setRoute('home')));
+  byId('scanThisMaterial')?.addEventListener('click', () => openScanner(currentMaterialId));
+  byId('backToGallery')?.addEventListener('click', () => { setRoute('home'); if (window.matchMedia('(max-width: 800px)').matches) $('.nav-links')?.classList.add('mobile-open'); setTimeout(() => toggleGallery(true), 0); });
+  byId('openImpactFromScanner')?.addEventListener('click', () => setRoute('impact'));
+
+  // Keep the legacy dashboard button, but route it to the real image scanner instead of the old fake-delay scan.
+  // Capture phase prevents the previous simulated classification handler from running.
+  if (byId('dropBtn')) { byId('dropBtn').textContent = 'analayse the data and update the data →'; byId('dropBtn').title = 'update the data from the table; no category is guessed from the selected chip.'; }
+  if (byId('autoBtn')) { byId('autoBtn').textContent = 'Use Live Image →'; byId('autoBtn').title = 'Auto classification requires a live image frame. Opens the browser scanner.'; }
+  const kioskSubhead = $('#dashboard .kiosk-head > div > span');
+  if (kioskSubhead) kioskSubhead.textContent = 'Upload an image to run the browser AI model';
+  if (byId('dropBtn')) { byId('dropBtn').textContent = 'Upload Image & Run AI →'; byId('dropBtn').title = 'Opens the real image-analysis page; no category is guessed from the selected chip.'; }
+  if (byId('autoBtn')) { byId('autoBtn').textContent = 'Use Live Image →'; byId('autoBtn').title = 'Auto classification requires a live image frame. Opens the browser scanner.'; }
+  byId('dropBtn')?.addEventListener('click', event => {
+    event.preventDefault(); event.stopImmediatePropagation(); openScanner(selectedWaste === 'PCB' ? 'pcb' : selectedWaste === 'Copper Wires & Cables' ? 'copper' : 'battery');
+  }, true);
+  byId('autoBtn')?.addEventListener('click', event => {
+    event.preventDefault(); event.stopImmediatePropagation();
+    announce('Auto Run needs a live image stream. Upload a photo or use Camera to analyse an actual frame.');
+    openScanner();
+  }, true);
+
+  // Extend the original Admin actions so they manage the extra category bins too.
+  byId('emptySelectedBinBtn')?.addEventListener('click', event => {
+    event.preventDefault(); event.stopImmediatePropagation();
+    if (document.body.dataset.role !== 'admin') { announce('Admin access required.'); return; }
+    const config = itemsConfig[selectedWaste];
+    const binName = config && config.bin;
+    if (!binName || !binsConfig[binName]) { announce('No bin is configured for the current selection.'); return; }
+    if (!window.confirm(`Empty ${binName}? This changes its fill level to 0%.`)) return;
+    binsConfig[binName].level = 0; binsConfig[binName].status = 'EMPTY';
+    saveBinLevels();
+    if (typeof addTerminalLine === 'function') addTerminalLine(`ADMIN: ${binName} emptied and marked EMPTY.`);
+    announce(`${binName} is now empty.`);
+  }, true);
+  byId('resetBinsBtn')?.addEventListener('click', event => {
+    event.preventDefault(); event.stopImmediatePropagation();
+    if (document.body.dataset.role !== 'admin') { announce('Admin access required.'); return; }
+    if (!window.confirm('Reset every collection bin to its initial demo level? Confirmed collection records will remain saved.')) return;
+    const baseline = { 'PCB Safe-Box':32, 'Copper Bin':47, 'Lithium Cell Box':21, 'Gold Recovery Box':0, 'Manual Review Bay':0 };
+    Object.entries(binsConfig).forEach(([name, bin]) => {
+      bin.level = Object.prototype.hasOwnProperty.call(baseline, name) ? baseline[name] : 0;
+      bin.status = bin.level === 0 ? 'EMPTY' : name === 'Lithium Cell Box' ? 'SAFE' : 'READY';
+    });
+    saveBinLevels();
+    if (typeof addTerminalLine === 'function') addTerminalLine('ADMIN: all bin levels reset. Collection records retained.');
+    announce('All bin levels reset. Collection history was kept.');
+  }, true);
+
+  byId('chooseScanImage')?.addEventListener('click', () => byId('scanFileInput').click());
+  byId('scanFileInput')?.addEventListener('change', event => {
+    const file = event.target.files && event.target.files[0];
+    if (file) setSelectedImage(file);
+  });
+
+  function setSelectedImage(file) {
+    if (!file || !file.type || !file.type.startsWith('image/')) { announce('Please select a valid image file.'); return; }
+    if (file.size > 15 * 1024 * 1024) { announce('Please choose an image smaller than 15 MB.'); return; }
+    stopCamera();
+    if (selectedScanUrl) URL.revokeObjectURL(selectedScanUrl);
+    selectedScanFile = file;
+    selectedScanUrl = URL.createObjectURL(file);
+    currentModelResult = null;
+    const image = byId('scanPreview');
+    image.src = selectedScanUrl; image.hidden = false;
+    byId('scannerPrompt').hidden = true;
+    byId('cameraVideo').hidden = true;
+    byId('analyseImageBtn').disabled = false;
+    byId('confirmCollectionBtn').disabled = true;
+    byId('scannerResult').className = 'scanner-result-empty';
+    byId('scannerResult').innerHTML = '<div><div class="result-icon">⌁</div><strong>Image ready for analysis</strong><br />Click Analyse Image with AI. No classification is shown until the model responds.</div>';
+    byId('scannerProgressWrap').classList.remove('active');
+  }
+
+  byId('scannerDropzone')?.addEventListener('dragover', event => { event.preventDefault(); byId('scannerDropzone').style.borderColor = '#5fe0a0'; });
+  byId('scannerDropzone')?.addEventListener('dragleave', () => { byId('scannerDropzone').style.borderColor = ''; });
+  byId('scannerDropzone')?.addEventListener('drop', event => {
+    event.preventDefault(); byId('scannerDropzone').style.borderColor = '';
+    const file = event.dataTransfer?.files?.[0]; if (file) setSelectedImage(file);
+  });
+
+  byId('openCameraBtn')?.addEventListener('click', async () => {
+    if (!navigator.mediaDevices?.getUserMedia) { announce('Camera access requires a supported browser and a secure page (HTTPS or localhost).'); return; }
+    try {
+      stopCamera();
+      cameraStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: 'environment' } }, audio: false });
+      const video = byId('cameraVideo');
+      byId('scanPreview').hidden = true; byId('scannerPrompt').hidden = true;
+      video.srcObject = cameraStream; video.hidden = false; await video.play();
+      byId('captureCameraBtn').disabled = false;
+      announce('Camera ready. Capture a clear image of one item.');
+    } catch (error) {
+      stopCamera();
+      const msg = error && error.name === 'NotAllowedError' ? 'Camera permission was denied. Choose an image file instead.' : 'Camera could not start. Use Choose Image or check HTTPS permissions.';
+      announce(msg);
+    }
+  });
+
+  byId('captureCameraBtn')?.addEventListener('click', () => {
+    const video = byId('cameraVideo');
+    if (!cameraStream || !video.videoWidth || !video.videoHeight) { announce('Wait for the camera frame to be ready.'); return; }
+    const canvas = document.createElement('canvas');
+    canvas.width = video.videoWidth; canvas.height = video.videoHeight;
+    canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+    canvas.toBlob(blob => {
+      if (!blob) { announce('Could not capture this frame. Try a file upload.'); return; }
+      setSelectedImage(new File([blob], `ecoextract-camera-${Date.now()}.jpg`, { type: 'image/jpeg' }));
+      stopCamera();
+    }, 'image/jpeg', .92);
+  });
+
+  byId('clearScanBtn')?.addEventListener('click', () => {
+    stopCamera();
+    if (selectedScanUrl) URL.revokeObjectURL(selectedScanUrl);
+    selectedScanFile = null; selectedScanUrl = ''; currentModelResult = null;
+    byId('scanFileInput').value = ''; byId('scanPreview').removeAttribute('src'); byId('scanPreview').hidden = true;
+    byId('scannerPrompt').hidden = false; byId('analyseImageBtn').disabled = true; byId('confirmCollectionBtn').disabled = true;
+    byId('scannerProgressWrap').classList.remove('active'); byId('scannerProgressFill').style.width = '0%';
+    byId('scannerResult').className = 'scanner-result-empty';
+    byId('scannerResult').innerHTML = '<div><div class="result-icon">⌁</div><strong>Waiting for an image</strong><br />Choose a photo and run the analysis. No sample result is inserted automatically.</div>';
+  });
+
+  function updateProgress(message, percent) {
+    byId('scannerProgressWrap').classList.add('active');
+    if (message) byId('scannerProgressLabel').textContent = message;
+    if (Number.isFinite(percent)) {
+      const safe = Math.max(0, Math.min(100, percent));
+      byId('scannerProgressFill').style.width = safe + '%';
+      byId('scannerProgressPct').textContent = Math.round(safe) + '%';
+    } else byId('scannerProgressPct').textContent = '…';
+  }
+
+  async function getClassifier() {
+    if (classifier) return classifier;
+    if (!classifierPromise) {
+      classifierPromise = (async () => {
+        updateProgress('Loading browser AI library…', 2);
+        const library = await import('https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.2.0');
+        if (library.env) {
+          library.env.allowLocalModels = false;
+          library.env.useBrowserCache = true;
+        }
+        const pipelineOptions = {
+          progress_callback: progress => {
+            if (!progress || typeof progress !== 'object') return;
+            const name = progress.file || progress.name || progress.status || 'model assets';
+            if (Number.isFinite(progress.progress)) updateProgress('Loading ' + name + '…', progress.progress);
+            else if (progress.status === 'done') updateProgress('Loaded ' + name, 95);
+            else updateProgress('Preparing ' + name + '…', NaN);
+          }
+        };
+        updateProgress('Downloading model files (first run can take time)…', 4);
+        const pipeline = await library.pipeline('zero-shot-image-classification', 'Xenova/clip-vit-base-patch32', pipelineOptions);
+        classifier = pipeline;
+        updateProgress('AI model ready.', 100);
+        return classifier;
+      })().catch(error => { classifierPromise = null; throw error; });
+    }
+    return classifierPromise;
+  }
+
+  function categoryDetails(category) {
+    const table = {
+      battery: { title:'Lithium-Ion Battery', bin:'Lithium Cell Box', icon:'▰' },
+      copper: { title:'Copper Wires & Cables', bin:'Copper Bin', icon:'◎' },
+      pcb: { title:'Printed Circuit Board', bin:'PCB Safe-Box', icon:'▦' },
+      gold: { title:'Gold-bearing Components', bin:'Gold Recovery Box', icon:'Au' },
+      mixed: { title:'Mixed Electronic Waste', bin:'Manual Review Bay', icon:'♻' },
+      other: { title:'No supported e-waste category', bin:null, icon:'?' }
+    };
+    return table[category] || table.other;
+  }
+
+  byId('analyseImageBtn')?.addEventListener('click', async () => {
+    if (scanBusy) return;
+    if (!selectedScanFile || !byId('scanPreview').src) { announce('Choose or capture an image first.'); return; }
+    scanBusy = true;
+    currentModelResult = null;
+    byId('analyseImageBtn').disabled = true;
+    byId('confirmCollectionBtn').disabled = true;
+    byId('analyseImageBtn').textContent = 'Analysing image…';
+    byId('scannerResult').className = 'scanner-result-empty';
+    byId('scannerResult').innerHTML = '<div><div class="result-icon">⌁</div><strong>Running real model inference…</strong><br />The result will appear only after the model returns its labels.</div>';
+    try {
+      const image = byId('scanPreview');
+      if (image.decode) await image.decode();
+      const model = await getClassifier();
+      updateProgress('Comparing the image against material categories…', 96);
+      const output = await model(selectedScanUrl, prompts);
+      if (!Array.isArray(output) || !output.length || !output[0].label || !Number.isFinite(Number(output[0].score))) {
+        throw new Error('The model returned no usable classification.');
+      }
+      const sorted = output.slice().sort((a, b) => Number(b.score) - Number(a.score));
+      const top = sorted[0];
+      const category = promptToCategory.get(top.label) || 'other';
+      const secondScore = sorted[1] ? Number(sorted[1].score) : 0;
+      const score = Number(top.score);
+      const needsReview = category === 'other' || score < 0.27 || (score - secondScore) < 0.04;
+      currentModelResult = { category, label: top.label, score, secondScore, needsReview, fileName: selectedScanFile.name || 'camera-capture' };
+      renderModelResult(currentModelResult, sorted);
+      updateProgress('Model analysis completed.', 100);
+    } catch (error) {
+      const detail = error && error.message ? error.message : 'Unknown error';
+      byId('scannerResult').className = 'scanner-result-empty';
+      byId('scannerResult').innerHTML = `<div><div class="result-icon">!</div><strong>Real AI analysis could not complete</strong><p class="scanner-help" style="margin-top:10px;">No result was invented or substituted. Check your internet connection, try again, or use a supported browser. Technical detail: ${escapeHtml(detail.slice(0, 260))}</p></div>`;
+      updateProgress('Model failed to load or analyse the image. Retry when ready.', 0);
+      announce('AI scan failed; no classification was recorded.');
+    } finally {
+      scanBusy = false;
+      byId('analyseImageBtn').disabled = !selectedScanFile;
+      byId('analyseImageBtn').textContent = 'Analyse Image with AI →';
+    }
+  });
+
+  function renderModelResult(result, allResults) {
+    const data = categoryDetails(result.category);
+    const scorePct = Math.max(0, Math.min(100, result.score * 100));
+    const review = result.needsReview;
+    const topThree = allResults.slice(0, 3).map(row => `<div class="record-row"><div><strong>${escapeHtml(row.label)}</strong><small>Model-returned comparison label</small></div><span class="record-weight">${(Number(row.score) * 100).toFixed(1)}%</span></div>`).join('');
+    byId('scannerResult').className = '';
+    byId('scannerResult').innerHTML = `
+      <div class="result-icon">${escapeHtml(data.icon)}</div>
+      <div class="route-eyebrow">${review ? 'REVIEW REQUIRED' : 'MODEL SUGGESTION'}</div>
+      <div class="model-result-title">${escapeHtml(data.title)}</div>
+      <p class="model-result-sub">Model label: <strong>${escapeHtml(result.label)}</strong><br />Suggested destination: ${escapeHtml(data.bin || 'Manual review required')}</p>
+      <div class="score-row"><span>Model similarity score · not a probability</span><strong>${scorePct.toFixed(1)}%</strong></div>
+      <div class="score-track"><div class="score-fill" style="width:${scorePct.toFixed(2)}%"></div></div>
+      ${review ? '<div class="scan-warning">The model result may be ambiguous or outside supported categories. Verify the physical item and do not use this label as the only basis for routing.</div>' : '<div class="scan-warning">This is a general-purpose vision model, not a certified e-waste detector. Confirm the physical item before recording it.</div>'}
+      <details style="margin-top:16px;"><summary style="cursor:pointer;color:#79e5b0;font-size:11px;font-weight:800;">View top model comparisons</summary><div style="margin-top:8px;">${topThree}</div></details>`;
+    byId('confirmCollectionBtn').disabled = result.category === 'other';
+    byId('confirmCollectionBtn').textContent = result.category === 'other' ? 'Manual review required — cannot auto-route' : 'Confirm & Add to Collection';
+    if (result.category === 'other') announce('The model did not suggest a supported e-waste category. No collection can be auto-routed.');
+  }
+
+  byId('confirmCollectionBtn')?.addEventListener('click', () => {
+    if (!currentModelResult) { announce('Run an AI analysis before confirming a collection.'); return; }
+    if (currentModelResult.category === 'other') { announce('This image needs manual review and cannot be auto-routed.'); return; }
+    const grams = Number(byId('scanMassInput').value);
+    if (!Number.isFinite(grams) || grams <= 0 || grams > 1000000) { announce('Enter the actual measured mass in grams (between 1 and 1,000,000).'); byId('scanMassInput').focus(); return; }
+    if (typeof binsConfig === 'undefined') { announce('Bin data is unavailable. Please reload the site.'); return; }
+    const data = categoryDetails(currentModelResult.category);
+    if (!data.bin || !binsConfig[data.bin]) { announce('No collection bin is configured for this category; nothing was recorded.'); return; }
+    const now = new Date();
+    const record = {
+      id: (globalThis.crypto && crypto.randomUUID) ? crypto.randomUUID() : 'rec-' + now.getTime() + '-' + (collectionRecords.length + 1),
+      timestamp: now.toISOString(), category: currentModelResult.category,
+      material: data.title, bin: data.bin, grams,
+      modelLabel: currentModelResult.label, modelScore: currentModelResult.score,
+      imageName: selectedScanFile?.name || 'camera-capture',
+      signature: byId('scanSignatureInput').value.trim()
+    };
+    collectionRecords.unshift(record);
+    saveRecords();
+    const capacity = ({ 'PCB Safe-Box': 25000, 'Copper Bin': 30000, 'Lithium Cell Box': 15000, 'Gold Recovery Box': 8000, 'Manual Review Bay': 40000 })[data.bin] || 30000;
+    const bin = binsConfig[data.bin];
+    bin.level = Math.min(100, Math.max(0, Number(bin.level) || 0) + (grams / capacity) * 100);
+    bin.status = bin.level >= 90 ? 'NEARLY FULL' : bin.level === 0 ? 'EMPTY' : data.bin === 'Lithium Cell Box' ? 'SAFE' : 'READY';
+    saveBinLevels();
+    if (typeof addTerminalLine === 'function') addTerminalLine(`Confirmed collection: ${data.title}, ${grams} g → ${data.bin}`);
+    currentModelResult = null;
+    byId('confirmCollectionBtn').disabled = true;
+    byId('confirmCollectionBtn').textContent = 'Record saved ✓';
+    renderRecords(); renderImpact();
+    announce('Confirmed collection saved. Bin level and report data updated.');
+  });
+
+  function renderRecords() {
+    const list = byId('collectionRecordsList');
+    if (!list) return;
+    byId('collectionCount').textContent = `${collectionRecords.length} RECORD${collectionRecords.length === 1 ? '' : 'S'}`;
+    if (!collectionRecords.length) {
+      list.innerHTML = '<div class="records-empty">No confirmed records yet. Analyse an image and confirm a collection to create the first record.</div>';
+      return;
+    }
+    list.innerHTML = collectionRecords.slice(0, 50).map(record => {
+      const date = new Date(record.timestamp);
+      const dateText = Number.isNaN(date.getTime()) ? 'Date unavailable' : date.toLocaleString();
+      const signature = record.signature ? ` · ${escapeHtml(record.signature)}` : '';
+      return `<div class="record-row"><div><strong>${escapeHtml(record.material)}</strong><small>${escapeHtml(dateText)} · ${escapeHtml(record.bin)}${signature}<br />Model label: ${escapeHtml(record.modelLabel)}</small></div><span class="record-weight">${Number(record.grams).toLocaleString()} g</span></div>`;
+    }).join('');
+  }
+
+  function exportCsv() {
+    if (!collectionRecords.length) { announce('There are no confirmed collection records to export.'); return; }
+    const headers = ['timestamp','material','category','grams','bin','model_label','model_similarity_score','image_name','contributor'];
+    const escapeCell = value => '"' + String(value ?? '').replace(/"/g, '""') + '"';
+    const rows = collectionRecords.map(r => [r.timestamp,r.material,r.category,r.grams,r.bin,r.modelLabel,r.modelScore,r.imageName,r.signature]);
+    const csv = [headers.map(escapeCell).join(','), ...rows.map(row => row.map(escapeCell).join(','))].join('\r\n');
+    const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob); const a = document.createElement('a');
+    a.href = url; a.download = `ecoextract-collection-report-${new Date().toISOString().slice(0,10)}.csv`;
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+    announce('CSV report downloaded. It contains confirmed records only.');
+  }
+  byId('exportRecordsBtn')?.addEventListener('click', exportCsv);
+  byId('exportImpactBtn')?.addEventListener('click', exportCsv);
+
+  function summariseRecords() {
+    const gramsByCategory = {};
+    let totalGrams = 0;
+    collectionRecords.forEach(record => {
+      const grams = Number(record.grams);
+      if (!Number.isFinite(grams) || grams <= 0) return;
+      totalGrams += grams;
+      gramsByCategory[record.category] = (gramsByCategory[record.category] || 0) + grams;
+    });
+    return { gramsByCategory, totalGrams, count: collectionRecords.length };
+  }
+
+  function renderImpact() {
+    const summary = summariseRecords();
+    byId('impactRecordCount').textContent = String(summary.count);
+    byId('impactTotalKg').textContent = (summary.totalGrams / 1000).toFixed(3) + ' kg';
+    byId('impactCategoryCount').textContent = String(Object.keys(summary.gramsByCategory).length);
+    const breakdown = byId('impactBreakdown');
+    const items = Object.entries(summary.gramsByCategory).sort((a,b) => b[1]-a[1]);
+    if (!items.length) {
+      breakdown.innerHTML = '<div class="records-empty">No confirmed collection mass is available yet. Records appear here after the user confirms an AI scan.</div>';
+    } else {
+      const max = Math.max(...items.map(item => item[1]));
+      breakdown.innerHTML = items.map(([id, grams]) => {
+        const title = categoryDetails(id).title;
+        const percent = max ? grams / max * 100 : 0;
+        return `<div class="impact-bar-row"><span>${escapeHtml(title)}</span><div class="impact-bar-track"><div class="impact-bar-fill" style="width:${percent.toFixed(2)}%"></div></div><strong>${(grams/1000).toFixed(3)} kg</strong></div>`;
+      }).join('');
+    }
+    const result = byId('co2Result');
+    if (result && !byId('co2FactorInput').dataset.applied) result.textContent = 'No CO₂e estimate shown. Enter a source-backed factor to calculate an estimate.';
+  }
+
+  byId('calculateImpactBtn')?.addEventListener('click', () => {
+    const factor = Number(byId('co2FactorInput').value);
+    if (!Number.isFinite(factor) || factor <= 0 || factor > 1000000) { announce('Enter a positive emission factor from a source you can cite. No default is assumed.'); byId('co2FactorInput').focus(); return; }
+    const kg = summariseRecords().totalGrams / 1000;
+    const estimate = kg * factor;
+    byId('co2FactorInput').dataset.applied = 'true';
+    byId('co2Result').textContent = `Estimated result: ${estimate.toFixed(4)} kg CO₂e, calculated as ${kg.toFixed(3)} kg recorded e-waste × ${factor} kg CO₂e/kg. This is only as reliable as the emission factor and pathway assumptions you entered; cite that source in any presentation.`;
+  });
+  byId('co2FactorInput')?.addEventListener('input', () => { byId('co2FactorInput').dataset.applied = ''; });
+
+  const tourSteps = [
+    { title:'Explore materials', copy:'Open the Gallery dropdown and visit a dedicated material page. Each page has its own image, category context and handling notes.', action:'Open Lithium-Ion Gallery Page', run:() => openMaterial('battery') },
+    { title:'Run a real image analysis', copy:'Upload a photo or capture a frame. The browser model produces candidate labels from the provided pixels. The app does not pre-fill a result.', action:'Open AI Scanner', run:() => openScanner() },
+    { title:'Confirm the collection', copy:'Enter a measured mass and confirm the returned result only after checking the actual item. This creates the first record and updates the selected bin.', action:'Open Collection Workflow', run:() => openScanner() },
+    { title:'Review the material data', copy:'View totals and the category breakdown from confirmed collection records. With no records, the page shows zeros and an empty state.', action:'Open Impact Lab', run:() => setRoute('impact') },
+    { title:'Export a report', copy:'Download a CSV built from confirmed local records. If no record exists, the export button explains why there is nothing to export.', action:'Open Report & Impact Tools', run:() => setRoute('impact') }
+  ];
+  function renderTour() {
+    const step = tourSteps[currentTourStep];
+    byId('tourStepNumber').textContent = `STEP ${String(currentTourStep+1).padStart(2,'0')} / ${String(tourSteps.length).padStart(2,'0')}`;
+    byId('tourStepTitle').textContent = step.title;
+    byId('tourStepCopy').textContent = step.copy;
+    byId('tourActionBtn').textContent = step.action;
+    byId('tourPreviousBtn').disabled = currentTourStep === 0;
+    byId('tourNextBtn').textContent = currentTourStep === tourSteps.length - 1 ? 'Finish tour ✓' : 'Next step →';
+    $$('#tourProgress span').forEach((el,index) => el.classList.toggle('active', index <= currentTourStep));
+  }
+  byId('tourPreviousBtn')?.addEventListener('click', () => { currentTourStep = Math.max(0, currentTourStep - 1); renderTour(); });
+  byId('tourNextBtn')?.addEventListener('click', () => { if (currentTourStep === tourSteps.length - 1) { setRoute('home'); announce('Guided demo complete.'); } else { currentTourStep += 1; renderTour(); } });
+  byId('tourActionBtn')?.addEventListener('click', () => tourSteps[currentTourStep].run());
+
+  // Browser history makes feature views act like separate pages, while preserving the original one-file site.
+  window.addEventListener('popstate', () => {
+    const hash = location.hash || '#home';
+    if (hash.startsWith('#material/')) setRoute('material', decodeURIComponent(hash.slice('#material/'.length)), false);
+    else if (hash === '#ai-scanner') setRoute('scanner', null, false);
+    else if (hash === '#impact-lab') setRoute('impact', null, false);
+    else if (hash === '#demo-tour') setRoute('tour', null, false);
+    else setRoute('home', null, false);
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') toggleGallery(false);
+    if (event.altKey && event.key.toLowerCase() === 'g' && byId('app')?.style.display !== 'none') { event.preventDefault(); toggleGallery(); }
+    if (event.altKey && event.key.toLowerCase() === 's' && byId('app')?.style.display !== 'none') { event.preventDefault(); openScanner(); }
+  });
+
+  // Keep material/record numbers current if the old Admin actions change a bin.
+  if (typeof MutationObserver !== 'undefined') {
+    const binArea = byId('bins');
+    if (binArea) new MutationObserver(() => {
+      if (typeof binsConfig !== 'undefined') {
+        const levels = {};
+        Object.entries(binsConfig).forEach(([name,item]) => levels[name] = { level:Number(item.level)||0 });
+        try { localStorage.setItem('ecoextract_bin_levels_v1', JSON.stringify(levels)); } catch (_) {}
+      }
+    }).observe(binArea, { childList:true, subtree:true });
+  }
+
+  renderRecords();
+  renderImpact();
+
+  // Initialise as home without touching login/auth visibility; the original script controls auth.
+  routePanels.forEach(panel => panel.hidden = true);
+  routeRoot.classList.remove('active');
+})();
+</script>
+
 </body>
 </html>
