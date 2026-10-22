@@ -5816,6 +5816,7 @@
   // 1. Live counter — reflects real collection records
   function syncLiveStats() {
     const totalGrams = collectionRecords.reduce((s, r) => s + Number(r.grams || 0), 0);
+    if (totalGrams === 0) return;   // ← ADD THIS LINE
     const totalKg = totalGrams / 1000;
 
     const diverted = document.querySelector('.stat-card .counter[data-target="45.6"]');
