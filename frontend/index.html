@@ -4967,7 +4967,7 @@
 
   // Keep the legacy dashboard button, but route it to the real image scanner instead of the old fake-delay scan.
   // Capture phase prevents the previous simulated classification handler from running.
-  if (byId('dropBtn')) { byId('dropBtn').textContent = 'Upload Image & Run AI →'; byId('dropBtn').title = 'Opens the real image-analysis page; no category is guessed from the selected chip.'; }
+  if (byId('dropBtn')) { byId('dropBtn').textContent = 'analayse the data and update the data →'; byId('dropBtn').title = 'update the data from the table; no category is guessed from the selected chip.'; }
   if (byId('autoBtn')) { byId('autoBtn').textContent = 'Use Live Image →'; byId('autoBtn').title = 'Auto classification requires a live image frame. Opens the browser scanner.'; }
   const kioskSubhead = $('#dashboard .kiosk-head > div > span');
   if (kioskSubhead) kioskSubhead.textContent = 'Upload an image to run the browser AI model';
