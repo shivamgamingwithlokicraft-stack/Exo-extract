@@ -2615,6 +2615,67 @@
       #featureRouteViews *, .material-photo-frame::after, .scanner-prompt .upload-orb { animation-duration:.01ms !important; animation-iteration-count:1 !important; scroll-behavior:auto !important; }
     }
 
+    /* ============ THEME TOGGLE ============ */
+    html[data-theme="light"] { color-scheme: light; }
+    html[data-theme="dark"]  { color-scheme: dark; }
+
+    html[data-theme="dark"] body {
+      background: #07100c !important;
+      color: #edf7f0;
+    }
+    html[data-theme="dark"] .navbar { background: rgba(7,16,12,.85) !important; border-color: rgba(255,255,255,.08) !important; }
+    html[data-theme="dark"] .brand { color: #fff !important; }
+    html[data-theme="dark"] .nav-links a,
+    html[data-theme="dark"] .logout,
+    html[data-theme="dark"] .gallery-toggle,
+    html[data-theme="dark"] .nav-feature-button { color: #a7bcb0 !important; }
+    html[data-theme="dark"] .eyebrow,
+    html[data-theme="dark"] .stat-card,
+    html[data-theme="dark"] .value-card,
+    html[data-theme="dark"] .feature-card,
+    html[data-theme="dark"] .accordion,
+    html[data-theme="dark"] .about-card,
+    html[data-theme="dark"] .impact-card,
+    html[data-theme="dark"] .showcase-data-note {
+      background: #0d1a13 !important;
+      border-color: rgba(255,255,255,.08) !important;
+    }
+    html[data-theme="dark"] .hero-text,
+    html[data-theme="dark"] .section-copy,
+    html[data-theme="dark"] .value-card p,
+    html[data-theme="dark"] .feature-card p,
+    html[data-theme="dark"] .about-card p,
+    html[data-theme="dark"] .impact-card span,
+    html[data-theme="dark"] .guide-note,
+    html[data-theme="dark"] .estimate-note { color: #91a69a !important; }
+    html[data-theme="dark"] .btn-secondary,
+    html[data-theme="dark"] .filter-btn { background: #0d1a13 !important; color: #c9dbd0 !important; border-color: rgba(255,255,255,.08) !important; }
+    html[data-theme="dark"] .accordion-head { color: #fff !important; }
+    html[data-theme="dark"] .accordion-body-inner { color: #91a69a !important; }
+    html[data-theme="dark"] .about-card h3 { color: #fff !important; }
+    html[data-theme="dark"] .material-icon,
+    html[data-theme="dark"] .feature-icon,
+    html[data-theme="dark"] .impact-icon { background: #12251b !important; }
+    html[data-theme="dark"] .section-title { color: #f3fff8 !important; }
+    html[data-theme="dark"] .filter-btn.active,
+    html[data-theme="dark"] .filter-btn:hover { background: var(--green) !important; color: #fff !important; }
+
+    html[data-theme="light"] body {
+      background:
+        radial-gradient(circle at 10% 0%, rgba(33,129,93,.07), transparent 28%),
+        radial-gradient(circle at 90% 10%, rgba(180,98,47,.07), transparent 25%),
+        #f5f7f2 !important;
+      color: #14261e;
+    }
+    html[data-theme="light"] .navbar { background: rgba(245,247,242,.85) !important; }
+    html[data-theme="light"] .eyebrow,
+    html[data-theme="light"] .stat-card,
+    html[data-theme="light"] .value-card,
+    html[data-theme="light"] .feature-card,
+    html[data-theme="light"] .accordion,
+    html[data-theme="light"] .about-card,
+    html[data-theme="light"] .impact-card { background: #ffffff !important; border-color: #d9e0d8 !important; }
+
   </style>
 </head>
 
@@ -2737,6 +2798,7 @@
           <button type="button" class="nav-feature-button" id="scannerNavLink">AI Scanner</button>
           <button type="button" class="nav-feature-button" id="impactNavLink">Impact Lab</button>
           <button type="button" class="nav-feature-button" id="tourNavBtn">Demo Tour</button>
+          <button type="button" class="nav-feature-button" id="themeToggleBtn" aria-pressed="false" title="Toggle light / dark theme">☾ Dark</button>
         </div>
 
         <div class="session">
@@ -3246,6 +3308,7 @@
                 <span id="detectionStatus">
                   READY
                 </span>
+
               </div>
 
               <div class="camera">
@@ -4643,6 +4706,7 @@
 
         link.style.color =
           "var(--green)";
+
       });
 
     });
@@ -4694,7 +4758,8 @@
    - Real local-browser image inference (Transformers.js + CLIP)
    - Camera input, confirmed collection records, CSV export
    - Record-based impact calculator, responsive controls, demo tour
-   Existing website sections remain in place.
+   - Dashboard "Drop" writes directly to the data table (no forced scanner)
+   - Persisted light / dark theme toggle
 ============================================================== */
 (() => {
   'use strict';
@@ -4965,22 +5030,101 @@
   byId('backToGallery')?.addEventListener('click', () => { setRoute('home'); if (window.matchMedia('(max-width: 800px)').matches) $('.nav-links')?.classList.add('mobile-open'); setTimeout(() => toggleGallery(true), 0); });
   byId('openImpactFromScanner')?.addEventListener('click', () => setRoute('impact'));
 
-  // Keep the legacy dashboard button, but route it to the real image scanner instead of the old fake-delay scan.
-  // Capture phase prevents the previous simulated classification handler from running.
-  if (byId('dropBtn')) { byId('dropBtn').textContent = 'analayse the data and update the data →'; byId('dropBtn').title = 'update the data from the table; no category is guessed from the selected chip.'; }
-  if (byId('autoBtn')) { byId('autoBtn').textContent = 'Use Live Image →'; byId('autoBtn').title = 'Auto classification requires a live image frame. Opens the browser scanner.'; }
-  const kioskSubhead = $('#dashboard .kiosk-head > div > span');
-  if (kioskSubhead) kioskSubhead.textContent = 'Upload an image to run the browser AI model';
-  if (byId('dropBtn')) { byId('dropBtn').textContent = 'Upload Image & Run AI →'; byId('dropBtn').title = 'Opens the real image-analysis page; no category is guessed from the selected chip.'; }
-  if (byId('autoBtn')) { byId('autoBtn').textContent = 'Use Live Image →'; byId('autoBtn').title = 'Auto classification requires a live image frame. Opens the browser scanner.'; }
+  // Dashboard "Drop" now writes directly to the data table.
+  // We intercept in the capture phase so the legacy 1.2s "fake scan" handler
+  // in the original script does not also fire.
+  const wasteTypeMap = {
+    'PCB': { category: 'pcb', label: 'Printed Circuit Board', bin: 'PCB Safe-Box' },
+    'Copper Wires & Cables': { category: 'copper', label: 'Copper Wires & Cables', bin: 'Copper Bin' },
+    'Lithium-Ion Battery': { category: 'battery', label: 'Lithium-Ion Battery', bin: 'Lithium Cell Box' }
+  };
+
+  function commitKioskDeposit() {
+    if (typeof binsConfig === 'undefined') { announce('Bin data is unavailable.'); return; }
+    const selected = wasteTypeMap[selectedWaste] || wasteTypeMap['PCB'];
+    const grams = Number(byId('mass')?.value);
+    if (!Number.isFinite(grams) || grams <= 0 || grams > 1000000) {
+      announce('Enter a valid item mass in grams.');
+      byId('mass')?.focus();
+      return;
+    }
+    const bin = binsConfig[selected.bin];
+    if (!bin) { announce('No bin configured for this category.'); return; }
+
+    const capacity = ({ 'PCB Safe-Box': 25000, 'Copper Bin': 30000, 'Lithium Cell Box': 15000 })[selected.bin] || 30000;
+    bin.level = Math.min(100, Math.max(0, Number(bin.level) || 0) + (grams / capacity) * 100);
+    bin.status = bin.level >= 90 ? 'NEARLY FULL' : bin.level === 0 ? 'EMPTY' : (selected.bin === 'Lithium Cell Box' ? 'SAFE' : 'READY');
+
+    const vision = byId('visionStatus');
+    const detection = byId('detectionStatus');
+    if (vision) vision.textContent = 'DETECTED';
+    if (detection) detection.textContent = 'SORT DECISION READY';
+
+    saveBinLevels();
+    if (typeof renderBins === 'function') renderBins();
+
+    const signature = (byId('signature')?.value || '').trim();
+    const now = new Date();
+    const record = {
+      id: (globalThis.crypto && crypto.randomUUID) ? crypto.randomUUID() : 'rec-' + now.getTime(),
+      timestamp: now.toISOString(),
+      category: selected.category,
+      material: selected.label,
+      bin: selected.bin,
+      grams,
+      modelLabel: 'Manual dashboard entry',
+      modelScore: null,
+      imageName: '',
+      signature
+    };
+    collectionRecords.unshift(record);
+    saveRecords();
+    renderRecords();
+    renderImpact();
+
+    if (typeof addTerminalLine === 'function') {
+      addTerminalLine(`Dashboard entry: ${selected.label}, ${grams} g → ${selected.bin}`);
+      if (signature) addTerminalLine('Contributor: ' + signature);
+    }
+    announce(`${selected.label} (${grams} g) recorded in the data table.`);
+
+    setTimeout(() => {
+      if (vision) vision.textContent = 'SCANNING';
+      if (detection) detection.textContent = 'READY';
+    }, 1600);
+  }
+
   byId('dropBtn')?.addEventListener('click', event => {
-    event.preventDefault(); event.stopImmediatePropagation(); openScanner(selectedWaste === 'PCB' ? 'pcb' : selectedWaste === 'Copper Wires & Cables' ? 'copper' : 'battery');
+    event.preventDefault(); event.stopImmediatePropagation();
+    commitKioskDeposit();
   }, true);
+
   byId('autoBtn')?.addEventListener('click', event => {
     event.preventDefault(); event.stopImmediatePropagation();
-    announce('Auto Run needs a live image stream. Upload a photo or use Camera to analyse an actual frame.');
-    openScanner();
+    const btn = byId('autoBtn');
+    if (btn.classList.toggle('active')) {
+      btn.textContent = 'Auto Run: Active';
+      announce('Auto Run activated — committing dashboard entries.');
+      commitKioskDeposit();
+      btn._autoTimer = setInterval(commitKioskDeposit, 3500);
+    } else {
+      btn.textContent = 'Auto Run: Off';
+      clearInterval(btn._autoTimer);
+      announce('Auto Run paused.');
+    }
   }, true);
+
+  // Update button labels so they describe the new behaviour.
+  if (byId('dropBtn')) {
+    byId('dropBtn').textContent = 'Drop Item & Update Data →';
+    byId('dropBtn').title = 'Adds the selected item and mass to the dashboard data table.';
+  }
+  if (byId('autoBtn')) {
+    byId('autoBtn').textContent = 'Auto Run: Off';
+    byId('autoBtn').title = 'Repeatedly commits dashboard entries using the current mass.';
+  }
+  const kioskSubhead = $('#dashboard .kiosk-head > div > span');
+  if (kioskSubhead) kioskSubhead.textContent = 'Selected category, mass and signature are written to the data table';
 
   // Extend the original Admin actions so they manage the extra category bins too.
   byId('emptySelectedBinBtn')?.addEventListener('click', event => {
@@ -5277,7 +5421,7 @@
     const breakdown = byId('impactBreakdown');
     const items = Object.entries(summary.gramsByCategory).sort((a,b) => b[1]-a[1]);
     if (!items.length) {
-      breakdown.innerHTML = '<div class="records-empty">No confirmed collection mass is available yet. Records appear here after the user confirms an AI scan.</div>';
+      breakdown.innerHTML = '<div class="records-empty">No confirmed collection mass is available yet. Records appear here after the user confirms an AI scan or a dashboard entry.</div>';
     } else {
       const max = Math.max(...items.map(item => item[1]));
       breakdown.innerHTML = items.map(([id, grams]) => {
@@ -5355,6 +5499,45 @@
   // Initialise as home without touching login/auth visibility; the original script controls auth.
   routePanels.forEach(panel => panel.hidden = true);
   routeRoot.classList.remove('active');
+
+  /* ================= THEME TOGGLE ================= */
+  (function initTheme() {
+    const root = document.documentElement;
+    const btn = byId('themeToggleBtn');
+    const STORAGE_KEY = 'ecoextract_theme';
+    const media = window.matchMedia('(prefers-color-scheme: dark)');
+
+    function systemTheme() { return media.matches ? 'dark' : 'light'; }
+
+    function applyTheme(theme, persist) {
+      const value = theme === 'dark' ? 'dark' : 'light';
+      root.setAttribute('data-theme', value);
+      if (btn) {
+        btn.textContent = value === 'dark' ? '☀ Light' : '☾ Dark';
+        btn.setAttribute('aria-pressed', String(value === 'dark'));
+        btn.title = value === 'dark' ? 'Switch to light theme' : 'Switch to dark theme';
+      }
+      if (persist) {
+        try { localStorage.setItem(STORAGE_KEY, value); } catch (_) {}
+      }
+    }
+
+    let saved = null;
+    try { saved = localStorage.getItem(STORAGE_KEY); } catch (_) {}
+    applyTheme(saved || systemTheme(), false);
+
+    media.addEventListener?.('change', event => {
+      let stored = null;
+      try { stored = localStorage.getItem(STORAGE_KEY); } catch (_) {}
+      if (!stored) applyTheme(event.matches ? 'dark' : 'light', false);
+    });
+
+    btn?.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      applyTheme(next, true);
+      announce(next === 'dark' ? 'Dark theme enabled.' : 'Light theme enabled.');
+    });
+  })();
 })();
 </script>
 
